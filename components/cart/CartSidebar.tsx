@@ -71,9 +71,9 @@ const CartSidebar = () => {
                         animate={{ x: 0 }}
                         exit={{ x: '100%' }}
                         transition={{ duration: 0.2 }}
-                        className="fixed right-0 h-full w-[300px] md:w-[440px] bg-white p-4 md:p-6 z-50 shadow-md"
+                        className="fixed top-0 right-0 h-full w-[300px] md:w-[360px] xl:w-[440px] bg-white p-4 xl:p-6 z-50 shadow-md"
                     >
-                        <h3 className="font-bold md:text-lg">My Shopping Cart ({cartItems.length})</h3>
+                        <h3 className="font-bold xl:text-lg">My Shopping Cart ({cartItems.length})</h3>
                         {
                             cartItems.length === 0 ? (
                                 <div className="h-full flex flex-col items-center justify-center">
@@ -87,7 +87,7 @@ const CartSidebar = () => {
                                 </div>
                             ) : (
                                 <div className="h-full flex flex-col justify-between">
-                                    <div className="flex flex-col overflow-y-auto scrollbar-hide gap-y-8 mt-8 md:mt-12">
+                                    <div className="flex flex-col overflow-y-auto scrollbar-hide gap-y-8 mt-8 xl:mt-12">
                                         {
                                             cartItems.map((item, i) => (
                                                 <CartItem
@@ -100,7 +100,7 @@ const CartSidebar = () => {
                                             ))
                                         }
                                     </div>
-                                    <div className="flex gap-4 my-4 md:my-6">
+                                    <div className="flex gap-4 my-4 xl:my-6">
                                         <Button
                                             label={`View Cart (${cartItems.length})`}
                                             type="secondary"

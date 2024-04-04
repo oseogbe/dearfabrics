@@ -12,7 +12,7 @@ const Logo = () => {
             alt="dear fabrics logo"
             height={100}
             width={100}
-            className="cursor-pointer h-9 md:h-12 w-auto"
+            className="cursor-pointer h-9 md:h-10 xl:h-12 w-auto"
             onClick={() => router.push('/')}
         />
     )

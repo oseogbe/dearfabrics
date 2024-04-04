@@ -66,7 +66,7 @@ export default function RootLayout({
           <Navbar />
           <CartSidebar />
         </ClientOnly>
-        <div>
+        <div className="mt-[129px]">
           {children}
         </div>
       </body>

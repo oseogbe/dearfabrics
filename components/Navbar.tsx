@@ -1,23 +1,23 @@
-"use client";
+"use client"
 
-import Container from "./Container";
-import Announcement from "./navbar/Announcement";
-import Logo from "./navbar/Logo";
-import Search from "./navbar/Search";
-import AccountButton from "./navbar/AccountButton";
-import CartButton from "./navbar/CartButton";
+import Container from "./Container"
+import Announcement from "./navbar/Announcement"
+import Logo from "./navbar/Logo"
+import Search from "./navbar/Search"
+import AccountButton from "./navbar/AccountButton"
+import CartButton from "./navbar/CartButton"
 
 interface NavbarProps {
-    currentUser?: null;
+    currentUser?: null
 }
 
 const Navbar: React.FC<NavbarProps> = ({
     currentUser
 }) => {
     return (
-        <div className="fixed w-full bg-white z-10 shadow-sm">
+        <div className="fixed top-0 w-full bg-white z-10 shadow-sm">
             <Announcement />
-            <div className="py-4 border-b-[1px]">
+            <div className="py-4 border-b">
                 <Container>
                     <div
                         className="flex flex-row items-center justify-between gap-3 md:gap-0"
