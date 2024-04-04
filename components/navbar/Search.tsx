@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useSearchParams } from "next/navigation";
-import { IoSearch } from "react-icons/io5";
+import { useSearchParams } from "next/navigation"
+import { IoSearch } from "react-icons/io5"
 
 const Search = () => {
-    const params = useSearchParams();
+    const params = useSearchParams()
 
     return (
         <div>
@@ -18,10 +18,10 @@ const Search = () => {
                 <IoSearch className="absolute top-3.5 left-5 w-5 h-5 text-[#807D7E]" />
             </div>
             <div
-                className="xl:hidden p-3 md:p-4 bg-[#F6F6F6] rounded-lg cursor-pointer"
+                className="xl:hidden p-3 bg-[#F6F6F6] rounded-lg cursor-pointer"
                 onClick={() => { }}
             >
-                <IoSearch className="w-4 h-4 md:w-5 md:h-5 text-[#807D7E]" />
+                <IoSearch className="w-4 h-4 text-[#807D7E]" />
             </div>
         </div>
     )
