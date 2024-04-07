@@ -1,6 +1,7 @@
 import AdCard from "@/components/AdCard"
 import ClientOnly from "@/components/ClientOnly"
 import Container from "@/components/Container"
+import FlashSales from "@/components/FlashSales"
 import Hero from "@/components/Hero"
 
 const HomePage = () => {
@@ -69,7 +70,7 @@ const HomePage = () => {
           <div className="hidden xl:col-span-1 xl:grid gap-4 pt-5 xl:pt-10">
             {
               menuItems.map(item => (
-                <div className="text-lg font-medium" key={item.label}>{item.label}</div>
+                <div className="text-lg font-medium cursor-pointer" key={item.label}>{item.label}</div>
               ))
             }
           </div>
@@ -77,7 +78,7 @@ const HomePage = () => {
             <Hero />
           </div>
         </div>
-        <div className="w-full flex flex-col md:flex-row gap-4 xl:gap-8 mt-6 xl:mt-12">
+        <div className="w-full flex flex-col md:flex-row gap-4 xl:gap-8 mt-6 md:mt-12 xl:mt-[54px]">
           {
             adCardItems.map(item => (
               <AdCard
@@ -92,8 +93,9 @@ const HomePage = () => {
               />
             ))
           }
-
         </div>
+        <hr className="w-[95%] mx-auto my-6 md:my-12 xl:my-[54px]" />
+        <FlashSales />
       </Container>
     </ClientOnly>
   )

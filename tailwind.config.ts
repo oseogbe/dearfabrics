@@ -14,7 +14,8 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       colors: {
-        "df-yellow": "#e9ac2d"
+        "df-yellow": "#e9ac2d",
+        "df-gray": "#f5f5f5"
       },
       fontFamily: {
         avenir: ['var(--font-metropolis)']
