@@ -1,8 +1,10 @@
-import AdCard from "@/components/AdCard"
 import ClientOnly from "@/components/ClientOnly"
 import Container from "@/components/Container"
 import FlashSales from "@/components/FlashSales"
 import Hero from "@/components/Hero"
+import AdCard from "@/components/AdCard"
+import AnkaraCard from "@/components/AnkaraCard"
+import Categories from "@/components/Categories"
 
 const HomePage = () => {
   const menuItems = [
@@ -61,12 +63,56 @@ const HomePage = () => {
     }
   ]
 
+  const categoriesForWomen = [
+    {
+      title: "Fabrics",
+      link: "#",
+      image: "/img/aa.png"
+    },
+    {
+      title: "Jewelry",
+      link: "#",
+      image: "/img/aa.png"
+    },
+    {
+      title: "Dresses",
+      link: "#",
+      image: "/img/bb.png"
+    },
+    {
+      title: "Shoes",
+      link: "#",
+      image: "/img/cc.png"
+    },
+  ]
+
+  const categoriesForMen = [
+    {
+      title: "Fabrics",
+      link: "#",
+      image: "/img/dd.png"
+    },
+    {
+      title: "Casuals",
+      link: "#",
+      image: "/img/ee.png"
+    },
+    {
+      title: "Shoes",
+      link: "#",
+      image: "/img/ff.png"
+    },
+    {
+      title: "Accessories",
+      link: "#",
+      image: "/img/gg.png"
+    },
+  ]
+
   return (
     <ClientOnly>
       <Container>
-        <div
-          className="grid grid-cols-6"
-        >
+        <div className="grid grid-cols-6">
           <div className="hidden xl:col-span-1 xl:grid gap-4 pt-5 xl:pt-10">
             {
               menuItems.map(item => (
@@ -95,7 +141,18 @@ const HomePage = () => {
           }
         </div>
         <hr className="w-[95%] mx-auto my-6 md:my-12 xl:my-[54px]" />
-        <FlashSales />
+        <div className="flex flex-col gap-12 md:gap-16 xl:gap-24">
+          <FlashSales />
+          <AnkaraCard />
+          <Categories
+            name="Categories For Women"
+            categories={categoriesForWomen}
+          />
+          <Categories
+            name="Categories For Men"
+            categories={categoriesForMen}
+          />
+        </div>
       </Container>
     </ClientOnly>
   )

@@ -91,13 +91,13 @@ const FlashSales: React.FC<FlashSalesProps> = ({
     }
 
     return (
-        <>
+        <div>
             <div className="grid grid-cols-6 grid-rows-2">
                 <div className="row-start-1 col-start-1 row-end-1 row-span-full pl-3 border-l-4 border-df-yellow text-df-yellow font-bold text-sm md:text-base xl:text-xl self-center">
                     Today&apos;s
                 </div>
                 <div className="row-start-2 col-start-1 col-span-full mt-2 xl:mt-4 flex items-center justify-between md:justify-start gap-[44px] xl:gap-[88px]">
-                    <div className="flex-shrink-0 font-extrabold text-xl md:text-2xl xl:text-4xl">Flash Sales</div>
+                    <h3 className="flex-shrink-0 font-bold text-xl md:text-2xl xl:text-4xl">Flash Sales</h3>
                     <div className="flex gap-2">
                         <div className="flex flex-col items-center">
                             <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Days</div>
@@ -156,7 +156,7 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                     ))
                 }
             </div>
-        </>
+        </div>
     )
 }
 
