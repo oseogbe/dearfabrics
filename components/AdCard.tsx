@@ -11,6 +11,7 @@ interface AdCardProps {
     actionLink: string
     backgroundImageUrl: string
     imageUrl: string
+    imageSize: number
 }
 
 const AdCard: React.FC<AdCardProps> = ({
@@ -20,7 +21,8 @@ const AdCard: React.FC<AdCardProps> = ({
     actionLabel,
     actionLink,
     backgroundImageUrl,
-    imageUrl
+    imageUrl,
+    imageSize
 }) => {
     const router = useRouter()
 
@@ -40,7 +42,7 @@ const AdCard: React.FC<AdCardProps> = ({
                 alt="dear fabrics ad-card image"
                 width={500}
                 height={500}
-                className="absolute h-full xl:h-[120%] bottom-0 right-0 pl-28 xl:pl-14 object-contain"
+                className={`absolute h-full xl:h-[${imageSize}%] bottom-0 right-0 pl-28 xl:pl-14 object-contain`}
             />
         </div>
     )
