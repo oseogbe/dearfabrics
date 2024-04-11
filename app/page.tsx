@@ -5,6 +5,9 @@ import Hero from "@/components/Hero"
 import AdCard from "@/components/AdCard"
 import AnkaraCard from "@/components/AnkaraCard"
 import Categories from "@/components/Categories"
+import NewArrival from "@/components/NewArrival"
+import Testimonials from "@/components/Testimonials"
+import Footer from "@/components/Footer"
 
 const HomePage = () => {
   const menuItems = [
@@ -51,6 +54,7 @@ const HomePage = () => {
       actionLink: "#",
       backgroundImageUrl: "/img/adcard-bg-0.svg",
       imageUrl: "/img/adcard-pic-0.svg",
+      imageSize: 120
     },
     {
       heading: "Best Quality",
@@ -59,7 +63,8 @@ const HomePage = () => {
       actionLabel: "Explore Items",
       actionLink: "#",
       backgroundImageUrl: "/img/adcard-bg-1.svg",
-      imageUrl: "/img/adcard-pic-0.svg",
+      imageUrl: "/img/adcard-pic-1.png",
+      imageSize: 110
     }
   ]
 
@@ -67,7 +72,7 @@ const HomePage = () => {
     {
       title: "Fabrics",
       link: "#",
-      image: "/img/aa.png"
+      image: "/img/jj_0.png"
     },
     {
       title: "Jewelry",
@@ -77,12 +82,12 @@ const HomePage = () => {
     {
       title: "Dresses",
       link: "#",
-      image: "/img/bb.png"
+      image: "/img/kk_0.png"
     },
     {
       title: "Shoes",
       link: "#",
-      image: "/img/cc.png"
+      image: "/img/assets/heels-0.png"
     },
   ]
 
@@ -90,22 +95,55 @@ const HomePage = () => {
     {
       title: "Fabrics",
       link: "#",
-      image: "/img/dd.png"
+      image: "/img/assets/agbada-3.png"
     },
     {
       title: "Casuals",
       link: "#",
-      image: "/img/ee.png"
+      image: "/img/assets/men-shirt-and-jeans-1.png"
     },
     {
       title: "Shoes",
       link: "#",
-      image: "/img/ff.png"
+      image: "/img/assets/men-shoes-0.png"
     },
     {
       title: "Accessories",
       link: "#",
-      image: "/img/gg.png"
+      image: "/img/assets/men-accessories-0.png"
+    },
+  ]
+
+  const testimonials = [
+    {
+      commenter: "Favour Emmanuel",
+      comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed cum aut est nostrum aliquid adipisci, esse eos similique? Corporis dolorum tenetur consequatur esse eum nostrum est voluptas animi id eveniet!",
+      image: "",
+      rating: 5,
+    },
+    {
+      commenter: "Jacob Benson",
+      comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit odit rem veritatis alias beatae vel. Nemo similique optio, velit deleniti recusandae rerum perspiciatis labore, laudantium nisi hic inventore, officiis sequi.",
+      image: "",
+      rating: 5,
+    },
+    {
+      commenter: "Anne Eghosa",
+      comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, sed amet eos harum explicabo architecto, soluta ducimus aspernatur perspiciatis eum quis omnis quaerat ut molestias eius, odio pariatur quasi sunt.",
+      image: "",
+      rating: 5,
+    },
+    {
+      commenter: "Blessing Daniel",
+      comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias debitis harum recusandae illo maiores consequuntur praesentium qui! Repellat beatae facere corrupti quasi ex, velit voluptatem dolor? Dicta, iusto illum. Nobis.",
+      image: "",
+      rating: 5,
+    },
+    {
+      commenter: "Funke Agunjobi",
+      comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi blanditiis soluta quia, fugiat explicabo sint dicta eveniet eum corrupti architecto obcaecati libero dolore recusandae rem! Consequuntur placeat quae labore ipsam.",
+      image: "",
+      rating: 5,
     },
   ]
 
@@ -136,6 +174,7 @@ const HomePage = () => {
                 actionLink={item.actionLink}
                 backgroundImageUrl={item.backgroundImageUrl}
                 imageUrl={item.imageUrl}
+                imageSize={item.imageSize}
               />
             ))
           }
@@ -152,8 +191,15 @@ const HomePage = () => {
             name="Categories For Men"
             categories={categoriesForMen}
           />
+          <NewArrival
+
+          />
+          <Testimonials
+            testimonials={testimonials}
+          />
         </div>
       </Container>
+      <Footer />
     </ClientOnly>
   )
 }
