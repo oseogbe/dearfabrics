@@ -9,7 +9,7 @@ const Logo = () => {
     return (
         <Image
             src="/img/dfng-logo.png"
-            alt="dear fabrics logo"
+            alt="dearfabrics.ng logo"
             height={100}
             width={100}
             className="cursor-pointer h-9 md:h-10 xl:h-12 w-auto"
