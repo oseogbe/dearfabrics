@@ -7,7 +7,6 @@ import AnkaraCard from "@/components/AnkaraCard"
 import Categories from "@/components/Categories"
 import NewArrival from "@/components/NewArrival"
 import Testimonials from "@/components/Testimonials"
-import Footer from "@/components/Footer"
 
 const HomePage = () => {
   const menuItems = [
@@ -199,7 +198,6 @@ const HomePage = () => {
           />
         </div>
       </Container>
-      <Footer />
     </ClientOnly>
   )
 }

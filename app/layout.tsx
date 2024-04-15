@@ -1,9 +1,11 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
+import { Toaster } from "sonner"
 
 import ClientOnly from "@/components/ClientOnly"
 import Navbar from "@/components/Navbar"
 import CartSidebar from "@/components/cart/CartSidebar"
+import Footer from "@/components/Footer"
 
 import "./globals.css"
 
@@ -65,10 +67,14 @@ export default function RootLayout({
         <ClientOnly>
           <Navbar />
           <CartSidebar />
+          <Toaster position="top-right" richColors expand />
         </ClientOnly>
         <div className="mt-[129px]">
           {children}
         </div>
+        <ClientOnly>
+          <Footer />
+        </ClientOnly>
       </body>
     </html>
   )
