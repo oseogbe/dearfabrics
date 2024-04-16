@@ -10,46 +10,53 @@ import useCartSidebar from "@/hooks/useCartSidebar"
 import CartItem from "./CartItem"
 import Button from "../Button"
 
+type CartItemType = {
+    name: string
+    price: number
+    quantity: number
+    image: string
+}
+
 const CartSidebar = () => {
     const cartSidebar = useCartSidebar()
 
-    const cartItems = [
-        {
-            name: 'Peruvian Gold Lace with Light Net',
-            price: 100000,
-            quantity: 1,
-            image: '/img/products/fabric-1.png'
-        },
-        {
-            name: 'Ankara with Pattern',
-            price: 25000,
-            quantity: 2,
-            image: '/img/products/fabric-2.png'
-        },
-        {
-            name: 'George Fabric',
-            price: 65000,
-            quantity: 1,
-            image: '/img/products/fabric-3.png'
-        },
-        {
-            name: 'Aso-oke Fabric',
-            price: 100000,
-            quantity: 1,
-            image: '/img/products/fabric-4.png'
-        },
-        {
-            name: 'Aso-oke Fabric',
-            price: 120000,
-            quantity: 2,
-            image: '/img/products/fabric-5.png'
-        },
-        {
-            name: 'Blue Ankara Print',
-            price: 65000,
-            quantity: 1,
-            image: '/img/products/fabric-6.png'
-        },
+    const cartItems: CartItemType[] = [
+        // {
+        //     name: 'Peruvian Gold Lace with Light Net',
+        //     price: 100000,
+        //     quantity: 1,
+        //     image: '/img/products/fabric-1.png'
+        // },
+        // {
+        //     name: 'Ankara with Pattern',
+        //     price: 25000,
+        //     quantity: 2,
+        //     image: '/img/products/fabric-2.png'
+        // },
+        // {
+        //     name: 'George Fabric',
+        //     price: 65000,
+        //     quantity: 1,
+        //     image: '/img/products/fabric-3.png'
+        // },
+        // {
+        //     name: 'Aso-oke Fabric',
+        //     price: 100000,
+        //     quantity: 1,
+        //     image: '/img/products/fabric-4.png'
+        // },
+        // {
+        //     name: 'Aso-oke Fabric',
+        //     price: 120000,
+        //     quantity: 2,
+        //     image: '/img/products/fabric-5.png'
+        // },
+        // {
+        //     name: 'Blue Ankara Print',
+        //     price: 65000,
+        //     quantity: 1,
+        //     image: '/img/products/fabric-6.png'
+        // },
     ]
 
     const sidebarRef = useRef<HTMLDivElement>(null)
@@ -83,7 +90,7 @@ const CartSidebar = () => {
                                     >
                                         <FaRegSadTear size={28} />
                                     </motion.div>
-                                    <p className="text-lg mt-4">Your cart is empty</p>
+                                    <p className="text-base md:text-lg mt-4">Your cart is empty</p>
                                 </div>
                             ) : (
                                 <div className="h-full flex flex-col justify-between">
