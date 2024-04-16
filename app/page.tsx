@@ -149,7 +149,7 @@ const HomePage = () => {
   return (
     <ClientOnly>
       <Container>
-        <div className="grid grid-cols-6">
+        {/* <div className="grid grid-cols-6">
           <div className="hidden xl:col-span-1 xl:grid gap-4 pt-5 xl:pt-10">
             {
               menuItems.map(item => (
@@ -160,6 +160,9 @@ const HomePage = () => {
           <div className="col-span-full xl:col-span-5 pt-5 xl:pt-10 xl:pl-10 xl:border-l">
             <Hero />
           </div>
+        </div> */}
+        <div className="pt-5 xl:pt-10">
+          <Hero />
         </div>
         <div className="w-full flex flex-col md:flex-row gap-4 xl:gap-8 mt-6 md:mt-12 xl:mt-[54px]">
           {

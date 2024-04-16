@@ -14,6 +14,41 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({
     currentUser
 }) => {
+    const menuItems = [
+        {
+            label: "Fabrics",
+            link: ""
+        },
+        {
+            label: "Accessories",
+            link: ""
+        },
+        {
+            label: "Men Fashion",
+            link: ""
+        },
+        {
+            label: "Dresses",
+            link: ""
+        },
+        {
+            label: "Sunglasses",
+            link: ""
+        },
+        {
+            label: "Shoes",
+            link: ""
+        },
+        {
+            label: "Bags",
+            link: ""
+        },
+        {
+            label: "Kids",
+            link: ""
+        },
+    ]
+
     return (
         <div className="fixed top-0 w-full bg-white z-20 shadow-sm">
             <Announcement />
@@ -23,6 +58,13 @@ const Navbar: React.FC<NavbarProps> = ({
                         className="flex flex-row items-center justify-between gap-3 md:gap-0"
                     >
                         <Logo />
+                        <ul className="hidden xl:flex gap-8">
+                            {
+                                menuItems.map(item => (
+                                    <li key={item.label} className="cursor-pointer transition-all duration-300 hover:text-df-yellow">{item.label}</li>
+                                ))
+                            }
+                        </ul>
                         <div className="flex flex-row items-center gap-3 xl:gap-9">
                             <Search />
                             <div className="flex flex-row gap-3">
