@@ -4,46 +4,11 @@ import FlashSales from "@/components/FlashSales"
 import Hero from "@/components/Hero"
 import AdCard from "@/components/AdCard"
 import AnkaraCard from "@/components/AnkaraCard"
-import Categories from "@/components/Categories"
+import FeaturedCategories from "@/components/Categories"
 import NewArrival from "@/components/NewArrival"
 import Testimonials from "@/components/Testimonials"
 
 const HomePage = () => {
-  const menuItems = [
-    {
-      label: "Fabrics",
-      link: ""
-    },
-    {
-      label: "Accessories",
-      link: ""
-    },
-    {
-      label: "Men Fashion",
-      link: ""
-    },
-    {
-      label: "Dresses",
-      link: ""
-    },
-    {
-      label: "Sunglasses",
-      link: ""
-    },
-    {
-      label: "Shoes",
-      link: ""
-    },
-    {
-      label: "Bags",
-      link: ""
-    },
-    {
-      label: "Kids",
-      link: ""
-    },
-  ]
-
   const adCardItems = [
     {
       heading: "Affordable Prices",
@@ -185,11 +150,11 @@ const HomePage = () => {
         <div className="flex flex-col gap-12 md:gap-16 xl:gap-24">
           <FlashSales />
           <AnkaraCard />
-          <Categories
+          <FeaturedCategories
             name="Categories For Women"
             categories={categoriesForWomen}
           />
-          <Categories
+          <FeaturedCategories
             name="Categories For Men"
             categories={categoriesForMen}
           />

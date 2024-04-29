@@ -1,7 +1,6 @@
 "use client"
 
 import Image from "next/image"
-import { motion } from "framer-motion"
 
 import AddToCart from "./AddToCart"
 import ProductStars from "./ProductStars"

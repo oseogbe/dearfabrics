@@ -28,7 +28,7 @@ const AdCard: React.FC<AdCardProps> = ({
 
     return (
         <div
-            className={`relative w-full h-[350px] flex flex-col justify-center p-6 xl:p-12 bg-no-repeat bg-cover text-white rounded-xl`}
+            className="relative w-full h-[350px] flex flex-col justify-center p-6 xl:p-12 bg-no-repeat bg-cover text-white rounded-xl"
             style={{
                 backgroundImage: `url(${backgroundImageUrl})`
             }}

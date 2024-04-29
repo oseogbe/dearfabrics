@@ -14,7 +14,7 @@ interface CategoriesProps {
     }[]
 }
 
-const Categories: React.FC<CategoriesProps> = ({
+const FeaturedCategories: React.FC<CategoriesProps> = ({
     name,
     categories
 }) => {
@@ -52,4 +52,4 @@ const Categories: React.FC<CategoriesProps> = ({
     )
 }
 
-export default Categories
+export default FeaturedCategories
