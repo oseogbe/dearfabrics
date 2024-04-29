@@ -1,5 +1,8 @@
 "use client"
 
+import Link from "next/link"
+import { usePathname } from "next/navigation"
+
 import Container from "./Container"
 import Announcement from "./navbar/Announcement"
 import Logo from "./navbar/Logo"
@@ -14,38 +17,40 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({
     currentUser
 }) => {
+    const pathname = usePathname()
+
     const menuItems = [
         {
             label: "Fabrics",
-            link: ""
+            link: "/collections/fabrics"
         },
         {
             label: "Accessories",
-            link: ""
+            link: "/collections/accessories"
         },
         {
             label: "Men Fashion",
-            link: ""
+            link: "/collections/men-fashion"
         },
         {
             label: "Dresses",
-            link: ""
+            link: "/collections/dresses"
         },
         {
             label: "Sunglasses",
-            link: ""
+            link: "/collections/sunglasses"
         },
         {
             label: "Shoes",
-            link: ""
+            link: "/collections/shoes"
         },
         {
             label: "Bags",
-            link: ""
+            link: "/collections/bags"
         },
         {
             label: "Kids",
-            link: ""
+            link: "/collections/kids"
         },
     ]
 
@@ -61,7 +66,19 @@ const Navbar: React.FC<NavbarProps> = ({
                         <ul className="hidden xl:flex gap-8">
                             {
                                 menuItems.map(item => (
-                                    <li key={item.label} className="cursor-pointer transition-all duration-300 hover:text-df-yellow">{item.label}</li>
+                                    <Link
+                                        key={item.label}
+                                        href={item.link}
+                                        className={`
+                                            cursor-pointer 
+                                            transition-all 
+                                            duration-300 
+                                            hover:text-df-yellow
+                                            ${pathname === item.link ? 'text-df-yellow' : ''}
+                                        `}
+                                    >
+                                        {item.label}
+                                    </Link>
                                 ))
                             }
                         </ul>
