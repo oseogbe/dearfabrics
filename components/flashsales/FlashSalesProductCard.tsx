@@ -2,26 +2,26 @@
 
 import Image from "next/image"
 
-import AddToCart from "./AddToCart"
-import ProductStars from "./ProductStars"
-import ViewProduct from "./ViewProduct"
+import AddToCart from "../product/AddToCart"
+import ProductStars from "../product/ProductStars"
+import ViewProduct from "../product/ViewProduct"
 
-interface ProductCardProps {
+interface FlashSalesProductCardProps {
     name: string
     discountPrice?: number | null
     price: number
     image: string
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({
+const FlashSalesProductCard: React.FC<FlashSalesProductCardProps> = ({
     name,
     discountPrice,
     price,
     image
 }) => {
     return (
-        <div className="group w-[230px] md:w-[250px] xl:w-auto flex-shrink-0">
-            <div className="relative h-[250px] md:h-[270px] xl:h-[320px] w-full rounded bg-df-gray">
+        <div className="group w-[230px] md:w-[250px] flex-shrink-0">
+            <div className="relative h-[250px] md:h-[270px] w-full rounded bg-df-gray">
                 <div className="absolute top-3 left-3 px-3 py-1 bg-df-yellow text-white text-xs rounded">-40%</div>
                 <Image
                     src={image}
@@ -49,4 +49,4 @@ const ProductCard: React.FC<ProductCardProps> = ({
     )
 }
 
-export default ProductCard
+export default FlashSalesProductCard

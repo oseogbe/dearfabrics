@@ -3,9 +3,9 @@
 import { useRef } from "react"
 import Image from "next/image"
 
-import ProductCard from "./product/ProductCard"
-import ArrowLeft from "./ArrowLeft"
-import ArrowRight from "./ArrowRight"
+import ProductCard from "./FlashSalesProductCard"
+import ArrowLeft from "../ArrowLeft"
+import ArrowRight from "../ArrowRight"
 
 interface FlashSalesProps {
 

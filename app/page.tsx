@@ -1,6 +1,6 @@
 import ClientOnly from "@/components/ClientOnly"
 import Container from "@/components/Container"
-import FlashSales from "@/components/FlashSales"
+import FlashSales from "@/components/flashsales/FlashSales"
 import Hero from "@/components/Hero"
 import AdCard from "@/components/AdCard"
 import AnkaraCard from "@/components/AnkaraCard"
