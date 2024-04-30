@@ -26,7 +26,7 @@ const Search = () => {
             <div className="hidden xl:block relative">
                 <input
                     type="search"
-                    className="w-80 ps-14 pe-5 py-3 bg-[#F6F6F6] text-[#807D7E] rounded-lg focus-visible:outline-none"
+                    className="w-80 ps-14 pe-5 py-3 bg-[#F6F6F6] text-[#807D7E] rounded-lg border-none focus-visible:outline-none"
                     placeholder="Search"
                     onChange={(e) => {
                         handleSearch(e.target.value)
