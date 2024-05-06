@@ -13,7 +13,7 @@ interface TestimonialsProps {
         commenter: string
         comment: string
         image: string
-        rating: number
+        stars: number
     }[]
 }
 
@@ -53,7 +53,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
                                     commenter={testimonial.commenter}
                                     comment={testimonial.comment}
                                     image={testimonial.image}
-                                    rating={testimonial.rating}
+                                    stars={testimonial.stars}
                                 />
                             </SwiperSlide>
                         ))

@@ -11,24 +11,27 @@ interface ProductCardProps {
     discountPrice?: number | null
     price: number
     image: string
+    stars: number
+    ratings: number
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({
     name,
     discountPrice,
     price,
-    image
+    image,
+    stars,
+    ratings
 }) => {
     return (
-        <div className="group w-[230px] md:w-[250px] xl:w-auto flex-shrink-0">
-            <div className="relative h-[250px] md:h-[270px] xl:h-[320px] w-full rounded bg-df-gray">
+        <div className="group w-full">
+            <div className="relative h-[250px] md:h-[270px] xl:h-[320px] w-full rounded">
                 <div className="absolute top-3 left-3 px-3 py-1 bg-df-yellow text-white text-xs rounded">-40%</div>
                 <Image
                     src={image}
                     alt={`${image}'s picture`}
-                    width={500}
-                    height={500}
-                    className="p-8"
+                    fill
+                    className="object-contain -z-10"
                 />
                 <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="flex items-center gap-[10px] transition-transform duration-300 transform-gpu translate-y-full group-hover:translate-y-0">
@@ -43,7 +46,10 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     <div className="bg-df-gray p-2 rounded-lg font-bold">N{discountPrice || price}</div>
                     {discountPrice && <div className="line-through">N{price}</div>}
                 </div>
-                <ProductStars />
+                <ProductStars
+                    stars={stars}
+                    ratings={ratings}
+                />
             </div>
         </div>
     )

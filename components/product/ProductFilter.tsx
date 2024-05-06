@@ -97,7 +97,7 @@ const ProductFilter = () => {
                             subCategories.map(category => (
                                 <div key={category} className='flex justify-between'>
                                     <h6 className='text-[#3C4242] font-semibold'>{category}</h6>
-                                    <input type="checkbox" className="shrink-0 border-gray-200 rounded !text-df-yellow focus:ring-df-yellow/80" />
+                                    <input type="checkbox" className="shrink-0 border-gray-400 rounded !text-df-yellow focus:ring-df-yellow/80" />
                                 </div>
                             ))
                         }

@@ -6,14 +6,14 @@ interface TestimonialCardProps {
     commenter: string
     comment: string
     image: string
-    rating: number
+    stars: number
 }
 
 const TestimonialCard: React.FC<TestimonialCardProps> = ({
     commenter,
     comment,
     image,
-    rating
+    stars
 }) => {
     return (
         <div className="mb-12 md:mb-0 p-12 border shadow-md rounded-lg xl:rounded-xl">

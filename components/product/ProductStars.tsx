@@ -4,11 +4,13 @@ import { FaStarHalfAlt } from "react-icons/fa"
 import { FaRegStar, FaStar } from "react-icons/fa6"
 
 interface ProductStarsProps {
-    rating?: number
+    stars: number
+    ratings: number
 }
 
 const ProductStars: React.FC<ProductStarsProps> = ({
-    rating
+    stars,
+    ratings
 }) => {
     return (
         <div className="flex items-center gap-1 md:gap-2">
@@ -51,7 +53,7 @@ const ProductStars: React.FC<ProductStarsProps> = ({
                     </svg>
                 </label>
             </div>
-            <div className="text-sm">(0)</div>
+            <div className="text-sm">({ratings})</div>
         </div>
     )
 }
