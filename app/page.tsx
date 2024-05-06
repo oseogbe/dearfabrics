@@ -83,31 +83,31 @@ const HomePage = () => {
       commenter: "Favour Emmanuel",
       comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed cum aut est nostrum aliquid adipisci, esse eos similique? Corporis dolorum tenetur consequatur esse eum nostrum est voluptas animi id eveniet!",
       image: "",
-      rating: 5,
+      stars: 5,
     },
     {
       commenter: "Jacob Benson",
       comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit odit rem veritatis alias beatae vel. Nemo similique optio, velit deleniti recusandae rerum perspiciatis labore, laudantium nisi hic inventore, officiis sequi.",
       image: "",
-      rating: 5,
+      stars: 5,
     },
     {
       commenter: "Anne Eghosa",
       comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, sed amet eos harum explicabo architecto, soluta ducimus aspernatur perspiciatis eum quis omnis quaerat ut molestias eius, odio pariatur quasi sunt.",
       image: "",
-      rating: 5,
+      stars: 5,
     },
     {
       commenter: "Blessing Daniel",
       comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias debitis harum recusandae illo maiores consequuntur praesentium qui! Repellat beatae facere corrupti quasi ex, velit voluptatem dolor? Dicta, iusto illum. Nobis.",
       image: "",
-      rating: 5,
+      stars: 5,
     },
     {
       commenter: "Funke Agunjobi",
       comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi blanditiis soluta quia, fugiat explicabo sint dicta eveniet eum corrupti architecto obcaecati libero dolore recusandae rem! Consequuntur placeat quae labore ipsam.",
       image: "",
-      rating: 5,
+      stars: 5,
     },
   ]
 

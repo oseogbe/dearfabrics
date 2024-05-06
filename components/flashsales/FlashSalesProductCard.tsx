@@ -11,13 +11,17 @@ interface FlashSalesProductCardProps {
     discountPrice?: number | null
     price: number
     image: string
+    stars: number
+    ratings: number
 }
 
 const FlashSalesProductCard: React.FC<FlashSalesProductCardProps> = ({
     name,
     discountPrice,
     price,
-    image
+    image,
+    stars,
+    ratings
 }) => {
     return (
         <div className="group w-[230px] md:w-[250px] flex-shrink-0">
@@ -43,7 +47,10 @@ const FlashSalesProductCard: React.FC<FlashSalesProductCardProps> = ({
                     <div className="bg-df-gray p-2 rounded-lg font-bold">N{discountPrice || price}</div>
                     {discountPrice && <div className="line-through">N{price}</div>}
                 </div>
-                <ProductStars />
+                <ProductStars
+                    stars={stars}
+                    ratings={ratings}
+                />
             </div>
         </div>
     )
