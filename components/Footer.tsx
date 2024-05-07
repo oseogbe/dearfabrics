@@ -6,7 +6,7 @@ import Container from "./Container"
 
 const Footer = () => {
     return (
-        <footer className="w-full bg-black mt-12 md:mt-[120px] py-20">
+        <footer className="w-full bg-black mt-12 md:mt-20 py-20">
             <Container>
                 <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-2 gap-12 md:gap-0 px-4 md:px-0">
                     <div className="md:col-span-1">
