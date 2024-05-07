@@ -31,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
                     src={image}
                     alt={`${image}'s picture`}
                     fill
-                    className="object-contain -z-10"
+                    className="object-cover -z-10"
                 />
                 <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="flex items-center gap-[10px] transition-transform duration-300 transform-gpu translate-y-full group-hover:translate-y-0">
