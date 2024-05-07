@@ -5,7 +5,7 @@ import clsx from "clsx"
 
 interface ButtonProps {
     label: string
-    type?: "primary" | "secondary"
+    type?: "primary" | "secondary" | "outline"
     onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
     icon?: IconType
     disabled?: boolean
@@ -25,6 +25,7 @@ const Button: React.FC<ButtonProps> = ({
                     {
                         "bg-black text-white": type === "primary",
                         "bg-[#dddddd] text-black": type === "secondary",
+                        "border border-black": type === "outline"
                     }
                 )
             }
