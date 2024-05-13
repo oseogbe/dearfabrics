@@ -43,8 +43,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
             <div className="py-4 flex flex-col gap-2">
                 <h4 className="text-sm md:text-base font-bold">{name}</h4>
                 <div className="flex items-center gap-2 text-sm md:text-base">
-                    <div className="bg-df-gray p-2 rounded-lg font-bold">N{discountPrice || price}</div>
-                    {discountPrice && <div className="line-through">N{price}</div>}
+                    <div className="bg-df-gray p-2 rounded-lg font-bold">₦{discountPrice || price}</div>
+                    {discountPrice && <div className="line-through">₦{price}</div>}
                 </div>
                 <ProductStars
                     stars={stars}

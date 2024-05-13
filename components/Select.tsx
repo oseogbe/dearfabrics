@@ -18,7 +18,7 @@ const CustomSelect: React.FC<SelectProps> = ({
 }) => {
     return (
         <Select>
-            <SelectTrigger className="w-[180px] focus:ring-df-gray">
+            <SelectTrigger className="w-28 md:w-[180px] h-8 md:h-10 focus:ring-df-gray">
                 <SelectValue placeholder="Default sorting" />
             </SelectTrigger>
             <SelectContent>
