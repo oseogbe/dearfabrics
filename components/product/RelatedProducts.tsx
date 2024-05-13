@@ -10,7 +10,7 @@ interface RelatedProductsProps {
         name: string
         slug: string
         image: string
-        discountPrice: number
+        discountPrice: number | null
         price: number
         stars: number
         ratings: number
