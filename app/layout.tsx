@@ -3,6 +3,7 @@ import localFont from "next/font/local"
 import { Toaster } from "sonner"
 
 import ClientOnly from "@/components/ClientOnly"
+import ComingSoon from "@/components/ComingSoon"
 import Navbar from "@/components/Navbar"
 import CartSidebar from "@/components/cart/CartSidebar"
 import Footer from "@/components/Footer"
@@ -61,20 +62,37 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const stillDeveloping = true
+
   return (
     <html lang="en" className={`${metropolis.variable} font-avenir`}>
       <body>
-        <ClientOnly>
-          <Navbar />
-          <CartSidebar />
-          <Toaster position="top-right" richColors expand />
-        </ClientOnly>
-        <div className="mt-[129px]">
-          {children}
-        </div>
-        <ClientOnly>
-          <Footer />
-        </ClientOnly>
+        {
+          !stillDeveloping && (
+            <>
+              <ClientOnly>
+                <Navbar />
+                <CartSidebar />
+                <Toaster position="top-right" richColors expand />
+              </ClientOnly>
+              <div className="mt-[129px]">
+                {children}
+              </div>
+              <ClientOnly>
+                <Footer />
+              </ClientOnly>
+            </>
+          )}
+
+        {
+          stillDeveloping && (
+            <ClientOnly>
+              <div className="relative h-screen bg-black">
+                <ComingSoon />
+              </div>
+            </ClientOnly>
+          )
+        }
       </body>
     </html>
   )
