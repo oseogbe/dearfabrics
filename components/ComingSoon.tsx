@@ -6,7 +6,7 @@ import Container from "./Container"
 const ComingSoon = () => {
     return (
         <Container>
-            <div className="pt-28 md:pt-36 xl:pt-24">
+            <div className="pt-16 md:pt-24">
                 <Image
                     src="/img/dfng-logo-alt.svg"
                     alt="dearfabrics.ng logo"
