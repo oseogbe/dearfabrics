@@ -1,5 +1,7 @@
 "use server"
 
+import fs from "fs"
+import path from "path"
 import { Resend } from "resend"
 import * as z from "zod"
 
@@ -14,7 +16,7 @@ const ContactFormSchema = z.object({
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
-export const sendEmail = async (data: ContactFormInputs) => {
+const sendEmail = async (data: ContactFormInputs) => {
     const result = ContactFormSchema.safeParse(data)
 
     if (result.success) {
@@ -36,4 +38,31 @@ export const sendEmail = async (data: ContactFormInputs) => {
     if (result.error) {
         return { success: false, error: result.error.format() }
     }
+}
+
+const filePath = path.resolve('waitinglist.txt')
+// const filePath = path.join(process.cwd(), 'waitinglist.txt')
+
+const doesEmailExist = async (email: string) => {
+    const fileContent = fs.readFileSync(filePath, 'utf-8')
+    const emailExists = fileContent.split('\n').map(e => e.trim()).filter(Boolean).includes(email)
+    return emailExists
+}
+
+const addToWaitingList = async (email: string) => {
+    return new Promise((resolve, reject) => {
+        fs.appendFile(filePath, `${email}\n`, (err) => {
+            if (err) {
+                reject(err)
+            } else {
+                resolve('Successfully subscribed!')
+            }
+        })
+    })
+}
+
+export {
+    sendEmail,
+    doesEmailExist,
+    addToWaitingList
 }
