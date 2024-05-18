@@ -87,6 +87,7 @@ export default function RootLayout({
         {
           stillDeveloping && (
             <ClientOnly>
+              <Toaster position="bottom-center" richColors expand />
               <div className="relative h-screen bg-black">
                 <ComingSoon />
               </div>

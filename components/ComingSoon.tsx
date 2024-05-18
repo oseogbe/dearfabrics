@@ -1,9 +1,34 @@
 "use client"
 
+import { FormEvent, useState } from "react"
 import Image from "next/image"
+import { toast } from "sonner"
+
 import Container from "./Container"
 
+import { addToWaitingList, doesEmailExist } from "@/app/_actions"
+
 const ComingSoon = () => {
+    const [email, setEmail] = useState('')
+
+    const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault()
+
+        try {
+            const emailExists = await doesEmailExist(email)
+            if (emailExists) {
+                toast.error('This email has already subscribed.')
+                return
+            }
+
+            const res = await addToWaitingList(email)
+            toast.success(res as string)
+            setEmail('')
+        } catch (err) {
+            toast.error('Failed to subscribe. Please try again.')
+        }
+    }
+
     return (
         <Container>
             <div className="pt-16 md:pt-24">
@@ -29,15 +54,25 @@ const ComingSoon = () => {
                     <div className="mb-5">
                         <h2 className="font-extralight text-center text-xl md:text-3xl md:leading-tight text-slate-100">Join the waiting list so you can be notified when we go live!</h2>
                     </div>
-                    <form>
+                    <form onSubmit={handleSubscribe}>
                         <div className="mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
                             <div className="w-full">
-                                <label htmlFor="hero-input" className="sr-only">Subscribe</label>
-                                <input type="text" id="hero-input" name="hero-input" className="py-4 px-3 md:py-5 md:px-4 block w-full border-gray-200 rounded-lg text-base md:text-xl focus:border-black focus:ring-2 focus:ring-df-yellow ring-offset-2 text-slate-900 font-medium placeholder:text-black disabled:opacity-50 disabled:pointer-events-none" placeholder="enter your email" />
+                                <label htmlFor="email-address" className="sr-only">Subscribe</label>
+                                <input
+                                    type="email"
+                                    id="email-address"
+                                    className="py-4 px-3 md:py-5 md:px-4 block w-full border-gray-200 rounded-lg text-base md:text-xl focus:border-black focus:ring-2 focus:ring-df-yellow ring-offset-2 text-slate-900 font-medium placeholder:text-black disabled:opacity-50 disabled:pointer-events-none"
+                                    placeholder="enter your email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    required
+                                />
                             </div>
-                            <a className="w-full sm:w-auto whitespace-nowrap py-4 px-3 md:py-5 md:px-4 inline-flex justify-center items-center gap-x-2 text-base md:text-xl font-semibold rounded-lg border border-transparent bg-df-yellow/80 text-white hover:bg-df-yellow focus:ring-2 focus:ring-df-yellow ring-offset-2 disabled:opacity-50 disabled:pointer-events-none" href="#">
+                            <button
+                                type="submit"
+                                className="w-full sm:w-auto whitespace-nowrap py-4 px-3 md:py-5 md:px-4 inline-flex justify-center items-center gap-x-2 text-base md:text-xl font-semibold rounded-lg border border-transparent bg-df-yellow/80 text-white hover:bg-df-yellow focus:ring-2 focus:ring-df-yellow ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">
                                 subscribe
-                            </a>
+                            </button>
                         </div>
                     </form>
                 </div>
