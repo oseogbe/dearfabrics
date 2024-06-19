@@ -8,6 +8,8 @@ import { toast } from "sonner"
 import ProductStars from "@/components/product/ProductStars"
 import Tabs from "@/components/Tabs"
 
+import { cn } from "@/lib/utils"
+
 import { FaMinus, FaPlus } from "react-icons/fa6"
 import { IoCartOutline } from "react-icons/io5"
 import { FaRegHeart } from "react-icons/fa"
@@ -151,20 +153,10 @@ const ProductClient: React.FC<ProductClientProps> = ({
                             {product.sizes.map(size => (
                                 <div
                                     key={size}
-                                    className={`
-                                        h-8
-                                        xl:h-10 
-                                        aspect-square 
-                                        flex 
-                                        items-center 
-                                        justify-center 
-                                        text-sm 
-                                        ${selectedSize === size ? 'bg-df-gray' : ''} 
-                                        text-[#3C4242] 
-                                        border 
-                                        rounded-md 
-                                        cursor-pointer
-                                    `}
+                                    className={cn(
+                                        "h-8 xl:h-10 aspect-square flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
+                                        selectedSize === size && 'bg-df-gray'
+                                    )}
                                     onClick={() => setSelectedSize(size)}
                                 >{size}</div>
                             ))}
