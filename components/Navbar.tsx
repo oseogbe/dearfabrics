@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
+import { cn } from "@/lib/utils"
+
 import Container from "./Container"
 import Announcement from "./navbar/Announcement"
 import Logo from "./navbar/Logo"
@@ -69,13 +71,10 @@ const Navbar: React.FC<NavbarProps> = ({
                                     <Link
                                         key={item.label}
                                         href={item.link}
-                                        className={`
-                                            cursor-pointer 
-                                            transition-all 
-                                            duration-300 
-                                            hover:text-df-yellow
-                                            ${pathname === item.link ? 'text-df-yellow' : ''}
-                                        `}
+                                        className={cn(
+                                            "cursor-pointer transition-all duration-300 hover:text-df-yellow",
+                                            pathname === item.link && 'text-df-yellow'
+                                        )}
                                     >
                                         {item.label}
                                     </Link>

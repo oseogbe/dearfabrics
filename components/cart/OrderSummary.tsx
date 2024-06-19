@@ -1,5 +1,7 @@
 "use client"
 
+import { useRouter } from "next/navigation"
+
 import { formatAmount } from "@/lib/utils"
 
 interface OrderSummaryProps {
@@ -17,6 +19,8 @@ interface OrderSummaryProps {
 const OrderSummary: React.FC<OrderSummaryProps> = ({
     products
 }) => {
+    const router = useRouter()
+
     const subtotal = products.flatMap((product) => product.price * product.quantity).reduce((total, price) => total + price, 0)
     const shipping = 5000
     const tax = 8000
@@ -62,7 +66,9 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                     <p className="font-semibold text-xl leading-8 text-df-yellow">N{formatAmount(total)}</p>
                 </div>
                 <button
-                    className="w-full text-center bg-df-yellow rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-df-yellow/80">Checkout</button>
+                    className="w-full text-center bg-df-yellow rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-df-yellow/80"
+                    onClick={() => router.push('/checkout')}
+                >Checkout</button>
             </div>
         </div>
     )
