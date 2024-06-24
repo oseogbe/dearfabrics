@@ -8,7 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 
-import { formatAmount } from "@/lib/utils"
+import { formatCurrency } from "@/lib/utils"
 
 interface CheckoutClientProps {
     countries: ICountry[]
@@ -103,7 +103,7 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({
 
     return (
         <div className="relative w-full max-w-7xl mx-auto py-24 px-4 md:px-5 lg-6">
-            <h2 className="font-manrope font-bold text-3xl sm:text-4xl leading-10 text-black mb-11">
+            <h2 className="font-bold text-3xl sm:text-4xl leading-10 text-black mb-11">
                 Checkout
             </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="px-4 2xl:px-0">
@@ -320,7 +320,7 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({
                                         <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
                                             <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7 7V5" />
                                         </svg>
-                                        Add new address
+                                        Use a different billing address
                                     </button>
                                 </div>
                             </div>
@@ -440,27 +440,27 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({
                             <div className="-my-3 divide-y divide-gray-200">
                                 <dl className="flex items-center justify-between gap-4 py-3">
                                     <dt className="text-base font-normal text-gray-500">Subtotal</dt>
-                                    <dd className="text-base font-medium text-gray-900">N{formatAmount(subtotal)}</dd>
+                                    <dd className="text-base font-medium text-gray-900">{formatCurrency(subtotal)}</dd>
                                 </dl>
 
                                 <dl className="flex items-center justify-between gap-4 py-3">
                                     <dt className="text-base font-normal text-gray-500">Shipping</dt>
-                                    <dd className="text-base font-medium text-gray-900">N{formatAmount(shipping)}</dd>
+                                    <dd className="text-base font-medium text-gray-900">{formatCurrency(shipping)}</dd>
                                 </dl>
 
                                 <dl className="flex items-center justify-between gap-4 py-3">
                                     <dt className="text-base font-normal text-gray-500">Tax</dt>
-                                    <dd className="text-base font-medium text-gray-900">N{formatAmount(tax)}</dd>
+                                    <dd className="text-base font-medium text-gray-900">{formatCurrency(tax)}</dd>
                                 </dl>
 
                                 <dl className="flex items-center justify-between gap-4 py-3">
                                     <dt className="text-base font-normal text-gray-500">Discount</dt>
-                                    <dd className="text-base font-medium text-df-yellow">N{formatAmount(discount)}</dd>
+                                    <dd className="text-base font-medium text-df-yellow">{formatCurrency(discount)}</dd>
                                 </dl>
 
                                 <dl className="flex items-center justify-between gap-4 py-3">
                                     <dt className="text-base font-bold text-gray-900">Total</dt>
-                                    <dd className="text-base font-bold text-gray-900">N{formatAmount(total)}</dd>
+                                    <dd className="text-base font-bold text-gray-900">{formatCurrency(total)}</dd>
                                 </dl>
                             </div>
                         </div>

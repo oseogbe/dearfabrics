@@ -2,47 +2,35 @@
 
 import { useRouter } from "next/navigation"
 
-import { formatAmount } from "@/lib/utils"
+import { useShoppingCart } from "use-shopping-cart"
 
-interface OrderSummaryProps {
-    products: {
-        id: string
-        name: string
-        slug: string
-        category: string
-        price: number
-        quantity: number
-        image: string
-    }[]
-}
+import { formatCurrency } from "@/lib/utils"
 
-const OrderSummary: React.FC<OrderSummaryProps> = ({
-    products
-}) => {
+const OrderSummary = () => {
     const router = useRouter()
+    const { cartCount, totalPrice, formattedTotalPrice } = useShoppingCart()
 
-    const subtotal = products.flatMap((product) => product.price * product.quantity).reduce((total, price) => total + price, 0)
     const shipping = 5000
     const tax = 8000
-    const total = subtotal + shipping + tax
+    const total = totalPrice as number + shipping + tax
 
     return (
         <div className="col-span-12 xl:col-span-4 bg-gray-50 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:px-8 py-24">
-            <h2 className="font-manrope font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">
+            <h2 className="font-bold text-3xl leading-10 text-black pb-8 border-b border-gray-300">
                 Order Summary
             </h2>
             <div className="mt-8">
                 <div className="flex items-center justify-between pb-6">
                     <p className="font-normal text-lg leading-8 text-gray-700">Subtotal</p>
-                    <p className="font-medium text-lg leading-8 text-black">N{formatAmount(subtotal)}</p>
+                    <p className="font-medium text-lg leading-8 text-black">{formatCurrency(totalPrice as number)}</p>
                 </div>
                 <div className="flex items-center justify-between pb-6">
                     <p className="font-normal text-lg leading-8 text-gray-700">Shipping estimate</p>
-                    <p className="font-medium text-lg leading-8 text-black">N{formatAmount(shipping)}</p>
+                    <p className="font-medium text-lg leading-8 text-black">{formatCurrency(shipping)}</p>
                 </div>
                 <div className="flex items-center justify-between pb-6">
                     <p className="font-normal text-lg leading-8 text-gray-700">Tax estimate</p>
-                    <p className="font-medium text-lg leading-8 text-black">N{formatAmount(tax)}</p>
+                    <p className="font-medium text-lg leading-8 text-black">{formatCurrency(tax)}</p>
                 </div>
                 <form>
                     <label className="flex items-center mb-1.5 text-gray-400 text-sm font-medium">Promo Code</label>
@@ -62,8 +50,8 @@ const OrderSummary: React.FC<OrderSummaryProps> = ({
                     </div>
                 </form>
                 <div className="flex items-center justify-between py-8">
-                    <p className="font-medium text-xl leading-8 text-black">{products.length} Items</p>
-                    <p className="font-semibold text-xl leading-8 text-df-yellow">N{formatAmount(total)}</p>
+                    <p className="font-medium text-xl leading-8 text-black">{cartCount} Items</p>
+                    <p className="font-semibold text-xl leading-8 text-df-yellow">{formatCurrency(total)}</p>
                 </div>
                 <button
                     className="w-full text-center bg-df-yellow rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-df-yellow/80"
