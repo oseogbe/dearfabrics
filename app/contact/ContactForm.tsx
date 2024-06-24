@@ -29,7 +29,7 @@ const ContactForm = () => {
         const result = await sendEmail(data)
 
         if (result?.success) {
-            console.log({ data: result.data })
+            // console.log({ data: result.data })
             toast.success('Your message has been delivered!')
             reset()
             return

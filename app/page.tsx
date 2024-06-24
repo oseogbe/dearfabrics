@@ -1,4 +1,4 @@
-import ClientOnly from "@/components/ClientOnly"
+// import ClientOnly from "@/components/ClientOnly"
 import Container from "@/components/Container"
 import FlashSales from "@/components/flashsales/FlashSales"
 import Hero from "@/components/Hero"
@@ -112,9 +112,8 @@ const HomePage = () => {
   ]
 
   return (
-    <ClientOnly>
-      <Container>
-        {/* <div className="grid grid-cols-6">
+    <Container>
+      {/* <div className="grid grid-cols-6">
           <div className="hidden xl:col-span-1 xl:grid gap-4 pt-5 xl:pt-10">
             {
               menuItems.map(item => (
@@ -126,47 +125,46 @@ const HomePage = () => {
             <Hero />
           </div>
         </div> */}
-        <div className="pt-5 xl:pt-10">
-          <Hero />
-        </div>
-        <div className="w-full flex flex-col md:flex-row gap-4 xl:gap-8 mt-6 md:mt-12 xl:mt-[54px]">
-          {
-            adCardItems.map(item => (
-              <AdCard
-                key={item.title}
-                heading={item.heading}
-                title={item.title}
-                offerLabel={item.offerLabel}
-                actionLabel={item.actionLabel}
-                actionLink={item.actionLink}
-                backgroundImageUrl={item.backgroundImageUrl}
-                imageUrl={item.imageUrl}
-                imageSize={item.imageSize}
-              />
-            ))
-          }
-        </div>
-        <hr className="w-[95%] mx-auto my-6 md:my-12 xl:my-[54px]" />
-        <div className="flex flex-col gap-12 md:gap-16 xl:gap-24">
-          <FlashSales />
-          <AnkaraCard />
-          <FeaturedCategories
-            name="Categories For Women"
-            categories={categoriesForWomen}
-          />
-          <FeaturedCategories
-            name="Categories For Men"
-            categories={categoriesForMen}
-          />
-          <NewArrival
+      <div className="pt-5 xl:pt-10">
+        <Hero />
+      </div>
+      <div className="w-full flex flex-col md:flex-row gap-4 xl:gap-8 mt-6 md:mt-12 xl:mt-[54px]">
+        {
+          adCardItems.map(item => (
+            <AdCard
+              key={item.title}
+              heading={item.heading}
+              title={item.title}
+              offerLabel={item.offerLabel}
+              actionLabel={item.actionLabel}
+              actionLink={item.actionLink}
+              backgroundImageUrl={item.backgroundImageUrl}
+              imageUrl={item.imageUrl}
+              imageSize={item.imageSize}
+            />
+          ))
+        }
+      </div>
+      <hr className="w-[95%] mx-auto my-6 md:my-12 xl:my-[54px]" />
+      <div className="flex flex-col gap-12 md:gap-16 xl:gap-24">
+        <FlashSales />
+        <AnkaraCard />
+        <FeaturedCategories
+          name="Categories For Women"
+          categories={categoriesForWomen}
+        />
+        <FeaturedCategories
+          name="Categories For Men"
+          categories={categoriesForMen}
+        />
+        <NewArrival
 
-          />
-          <Testimonials
-            testimonials={testimonials}
-          />
-        </div>
-      </Container>
-    </ClientOnly>
+        />
+        <Testimonials
+          testimonials={testimonials}
+        />
+      </div>
+    </Container>
   )
 }
 
