@@ -3,6 +3,8 @@
 import { useCallback, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
+
+import { useShoppingCart } from "use-shopping-cart"
 import { toast } from "sonner"
 
 import ProductStars from "@/components/product/ProductStars"
@@ -13,42 +15,24 @@ import { cn } from "@/lib/utils"
 import { FaMinus, FaPlus } from "react-icons/fa6"
 import { IoCartOutline } from "react-icons/io5"
 import { FaRegHeart } from "react-icons/fa"
+import { ProductType } from "@/typings"
 
-interface ProductClientProps {
-    product: {
-        id: string
-        name: string
-        description: string
-        category: string
-        images: string[]
-        discountPrice?: number
-        price: number
-        inStock: boolean
-        colors: {
-            name: string
-            code: string
-        }[]
-        sizes: string[]
-        stars: number
-        ratings: number
-        relatedProducts: any[]
-    }
-}
-
-const ProductClient: React.FC<ProductClientProps> = ({
+const ProductClient = ({
     product
+}: {
+    product: ProductType
 }) => {
     const [selectedImage, setSelectedImage] = useState(product.images[0])
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes[0])
+    const [selectedSize, setSelectedSize] = useState(product.sizes ? product.sizes[0] : "")
     const [quantity, setQuantity] = useState(0)
 
-    const addToCart = useCallback((productId: string) => {
-        // productId, quantity
-        toast.success('Added to cart', {
-            position: 'bottom-left',
-        })
-    }, [])
+    const shoppingCart = useShoppingCart()
+
+    const handleAddItem = useCallback(() => {
+        shoppingCart.setItemQuantity(product.sku, quantity)
+        toast("Added to cart")
+    }, [product.sku, quantity, shoppingCart])
 
     return (
         <>
@@ -148,42 +132,53 @@ const ProductClient: React.FC<ProductClientProps> = ({
                         </div>
                     </div>
                     <div className="mt-8">
-                        <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size:</span> {selectedSize}</div>
-                        <div className="mt-3 flex items-center gap-4">
-                            {product.sizes.map(size => (
-                                <div
-                                    key={size}
-                                    className={cn(
-                                        "h-8 xl:h-10 aspect-square flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
-                                        selectedSize === size && 'bg-df-gray'
-                                    )}
-                                    onClick={() => setSelectedSize(size)}
-                                >{size}</div>
-                            ))}
-                        </div>
+                        {
+                            product.sizes && (
+                                <>
+                                    <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size:</span> {selectedSize}</div>
+                                    <div className="mt-3 flex items-center gap-4">
+                                        {product.sizes.map(size => (
+                                            <div
+                                                key={size}
+                                                className={cn(
+                                                    "h-8 xl:h-10 aspect-square flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
+                                                    selectedSize === size && 'bg-df-gray'
+                                                )}
+                                                onClick={() => setSelectedSize(size)}
+                                            >{size}</div>
+                                        ))}
+                                    </div>
+                                </>
+                            )
+                        }
                     </div>
                     <Link href="#" className="block mt-6 text-[#3C4242] text-sm md:text-base xl:text-lg underline">View Size Guide</Link>
                     <div className="mt-6 flex items-center gap-5">
                         <div className="flex">
-                            <div className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer"
+                            <div
+                                className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer"
                                 onClick={() => {
                                     if (quantity === 0) {
                                         return
                                     }
                                     setQuantity(current => current - 1)
-                                }}>
+                                }}
+                            >
                                 <FaMinus />
                             </div>
                             <div className="w-12 xl:w-14 h-10 xl:h-12 flex items-center justify-center border">
                                 {quantity}
                             </div>
-                            <div className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer" onClick={() => setQuantity(current => current + 1)}>
+                            <div
+                                className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer"
+                                onClick={() => setQuantity(current => current + 1)}
+                            >
                                 <FaPlus />
                             </div>
                         </div>
                         <button
                             className="w-[210px] h-10 xl:h-12 flex items-center justify-center gap-4 bg-black text-white text-xs md:text-sm font-light uppercase"
-                            onClick={() => addToCart(product.id)}
+                            onClick={handleAddItem}
                         >
                             Add to cart <IoCartOutline size={18} />
                         </button>
