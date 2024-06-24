@@ -10,22 +10,13 @@ import Select from "@/components/Select"
 import Pagination from "@/components/Pagination"
 
 import { IoClose } from "react-icons/io5"
-
-interface ProductsClientProps {
-    products: {
-        name: string
-        slug: string
-        discountPrice: number | null
-        price: number
-        image: string
-        stars: number
-        ratings: number
-    }[]
-}
+import { ProductType } from '@/typings'
 
 const ProductsClient = ({
     products
-}: ProductsClientProps) => {
+}: {
+    products: ProductType[]
+}) => {
     const searchParams = useSearchParams()
     const { replace } = useRouter()
     const pathname = usePathname()
@@ -211,16 +202,10 @@ const ProductsClient = ({
                 <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 md:gap-6 xl:gap-8 mt-8">
                     {
                         products.map(product => (
-                            <div key={product.name}>
-                                <ProductCard
-                                    name={product.name}
-                                    discountPrice={product.discountPrice}
-                                    price={product.price}
-                                    image={product.image}
-                                    stars={product.stars}
-                                    ratings={product.ratings}
-                                />
-                            </div>
+                            <ProductCard
+                                key={product.name}
+                                product={product}
+                            />
                         ))
                     }
                 </div>

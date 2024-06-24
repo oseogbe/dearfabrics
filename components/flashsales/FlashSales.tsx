@@ -7,6 +7,8 @@ import ProductCard from "./FlashSalesProductCard"
 import ArrowLeft from "../ArrowLeft"
 import ArrowRight from "../ArrowRight"
 
+import { products } from "@/lib/products"
+
 interface FlashSalesProps {
 
 }
@@ -15,89 +17,6 @@ const FlashSales: React.FC<FlashSalesProps> = ({
 
 }) => {
     const saleProductsRef = useRef<HTMLDivElement>(null)
-
-    const products = [
-        {
-            name: "Damask Fabric 1",
-            discountPrice: 20000,
-            price: 25000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Gold Necklace",
-            discountPrice: 55000,
-            price: 65000,
-            image: '/img/products/gold-necklace.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 2",
-            discountPrice: 18000,
-            price: 21000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 3",
-            discountPrice: 23000,
-            price: 27000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 4",
-            discountPrice: null,
-            price: 20000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 5",
-            discountPrice: 28000,
-            price: 33000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 6",
-            discountPrice: 24000,
-            price: 28000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 7",
-            discountPrice: null,
-            price: 25000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 8",
-            discountPrice: 30000,
-            price: 35000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-        {
-            name: "Damask Fabric 9",
-            discountPrice: 25000,
-            price: 29000,
-            image: '/img/products/fabric-7.png',
-            stars: 0,
-            ratings: 0,
-        },
-    ]
 
     const handleScroll = (direction: 'left' | 'right') => {
         const container = saleProductsRef.current
@@ -167,13 +86,8 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                 {
                     products.map(product => (
                         <ProductCard
-                            key={product.name}
-                            name={product.name}
-                            discountPrice={product.discountPrice}
-                            price={product.price}
-                            image={product.image}
-                            stars={product.stars}
-                            ratings={product.ratings}
+                            key={product.sku}
+                            product={product}
                         />
                     ))
                 }
