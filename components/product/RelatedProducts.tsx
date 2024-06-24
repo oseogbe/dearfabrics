@@ -1,25 +1,18 @@
 "use client"
 
+import { useRef } from "react"
+
+import { ProductType } from "@/typings"
+
 import ProductCard from "./ProductCard"
 import ArrowLeft from "../ArrowLeft"
 import ArrowRight from "../ArrowRight"
-import { useRef } from "react"
-
-interface RelatedProductsProps {
-    products: {
-        name: string
-        slug: string
-        image: string
-        discountPrice: number | null
-        price: number
-        stars: number
-        ratings: number
-    }[]
-}
 
 const RelatedProducts = ({
     products
-}: RelatedProductsProps) => {
+}: {
+    products: ProductType[]
+}) => {
     const saleProductsRef = useRef<HTMLDivElement>(null)
 
     const handleScroll = (direction: 'left' | 'right') => {
@@ -49,16 +42,11 @@ const RelatedProducts = ({
                     {
                         products.map(product => (
                             <div
-                                key={product.name}
+                                key={product.sku}
                                 className="w-[230px] md:w-[250px] flex-shrink-0"
                             >
                                 <ProductCard
-                                    name={product.name}
-                                    discountPrice={product.discountPrice}
-                                    price={product.price}
-                                    image={product.image}
-                                    stars={product.stars}
-                                    ratings={product.ratings}
+                                    product={product}
                                 />
                             </div>
                         ))
