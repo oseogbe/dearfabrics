@@ -1,63 +1,24 @@
 "use client"
 
 import { useRef } from "react"
+import { useRouter } from "next/navigation"
+import { useShoppingCart } from "use-shopping-cart"
 import { motion, AnimatePresence } from "framer-motion"
 import useOnClickOutside from "use-onclickoutside"
-import { FaLongArrowAltRight, FaRegSadTear } from "react-icons/fa"
 
 import useCartSidebar from "@/hooks/useCartSidebar"
 
 import CartItem from "./CartItem"
 import Button from "../Button"
 
-type CartItemType = {
-    name: string
-    price: number
-    quantity: number
-    image: string
-}
+import { FaLongArrowAltRight, FaRegSadTear } from "react-icons/fa"
 
 const CartSidebar = () => {
     const cartSidebar = useCartSidebar()
 
-    const cartItems: CartItemType[] = [
-        // {
-        //     name: 'Peruvian Gold Lace with Light Net',
-        //     price: 100000,
-        //     quantity: 1,
-        //     image: '/img/products/fabric-1.png'
-        // },
-        // {
-        //     name: 'Ankara with Pattern',
-        //     price: 25000,
-        //     quantity: 2,
-        //     image: '/img/products/fabric-2.png'
-        // },
-        // {
-        //     name: 'George Fabric',
-        //     price: 65000,
-        //     quantity: 1,
-        //     image: '/img/products/fabric-3.png'
-        // },
-        // {
-        //     name: 'Aso-oke Fabric',
-        //     price: 100000,
-        //     quantity: 1,
-        //     image: '/img/products/fabric-4.png'
-        // },
-        // {
-        //     name: 'Aso-oke Fabric',
-        //     price: 120000,
-        //     quantity: 2,
-        //     image: '/img/products/fabric-5.png'
-        // },
-        // {
-        //     name: 'Blue Ankara Print',
-        //     price: 65000,
-        //     quantity: 1,
-        //     image: '/img/products/fabric-6.png'
-        // },
-    ]
+    const { cartDetails, cartCount } = useShoppingCart()
+
+    const router = useRouter()
 
     const sidebarRef = useRef<HTMLDivElement>(null)
 
@@ -80,9 +41,9 @@ const CartSidebar = () => {
                         transition={{ duration: 0.2 }}
                         className="fixed top-0 right-0 h-full w-[300px] md:w-[360px] xl:w-[440px] bg-white p-4 xl:p-6 z-50 shadow-md"
                     >
-                        <h3 className="font-bold xl:text-lg">My Shopping Cart ({cartItems.length})</h3>
+                        <h3 className="font-bold xl:text-lg">My Shopping Cart ({cartCount})</h3>
                         {
-                            cartItems.length === 0 ? (
+                            cartCount === 0 ? (
                                 <div className="h-full flex flex-col items-center justify-center">
                                     <motion.div
                                         animate={{ rotate: [-10, 10, -10] }}
@@ -96,27 +57,24 @@ const CartSidebar = () => {
                                 <div className="h-full flex flex-col justify-between">
                                     <div className="flex flex-col overflow-y-auto scrollbar-hide gap-y-8 mt-8 xl:mt-12">
                                         {
-                                            cartItems.map((item, i) => (
+                                            cartDetails && Object.keys(cartDetails).map(key => (
                                                 <CartItem
-                                                    key={i}
-                                                    name={item.name}
-                                                    price={item.price}
-                                                    quantity={item.quantity}
-                                                    image={item.image}
+                                                    key={cartDetails[key].id}
+                                                    sku={cartDetails[key].id}
                                                 />
                                             ))
                                         }
                                     </div>
                                     <div className="flex gap-4 my-4 xl:my-6">
                                         <Button
-                                            label={`View Cart (${cartItems.length})`}
+                                            label={`View Cart (${cartCount})`}
                                             type="secondary"
-                                            onClick={() => { }}
+                                            onClick={() => router.push('/cart')}
                                         />
                                         <Button
                                             label="Checkout"
                                             icon={FaLongArrowAltRight}
-                                            onClick={() => { }}
+                                            onClick={() => router.push('/checkout')}
                                         />
                                     </div>
                                 </div>
