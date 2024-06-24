@@ -51,7 +51,7 @@ const Hero = () => {
                 {
                     slides.map((slide, i) => (
                         <SwiperSlide key={i}>
-                            <div className="grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 xl:grid-cols-2">
+                            <div className="relative grid grid-rows-2 md:grid-rows-1 md:grid-cols-2 xl:grid-cols-2">
                                 <div className="grid grid-cols-5 md:grid-cols-6 xl:grid-cols-4">
                                     <div className="col-start-2 col-span-3 md:col-start-2 md:col-span-4 xl:col-start-2 xl:col-span-2 flex flex-col gap-6 text-center text-white my-12">
                                         <h5 className="text-sm md:text-base xl:text-left xl:text-lg font-semibold">{slide.category}</h5>
@@ -69,6 +69,7 @@ const Hero = () => {
                                     src={slide.image}
                                     alt={slide.text}
                                     fill
+                                    priority
                                     className="object-contain object-bottom md:object-right xl:-ml-[12%]"
                                 />
                             </div>

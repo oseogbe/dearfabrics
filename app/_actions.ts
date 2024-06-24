@@ -1,7 +1,5 @@
 "use server"
 
-import fs from "fs"
-import path from "path"
 import { Resend } from "resend"
 import * as z from "zod"
 
@@ -40,29 +38,6 @@ const sendEmail = async (data: ContactFormInputs) => {
     }
 }
 
-const filePath = path.resolve('waitinglist.txt')
-// const filePath = path.join(process.cwd(), 'waitinglist.txt')
-
-const doesEmailExist = async (email: string) => {
-    const fileContent = fs.readFileSync(filePath, 'utf-8')
-    const emailExists = fileContent.split('\n').map(e => e.trim()).filter(Boolean).includes(email)
-    return emailExists
-}
-
-const addToWaitingList = async (email: string) => {
-    return new Promise((resolve, reject) => {
-        fs.appendFile(filePath, `${email}\n`, (err) => {
-            if (err) {
-                reject(err)
-            } else {
-                resolve('Successfully subscribed!')
-            }
-        })
-    })
-}
-
 export {
     sendEmail,
-    doesEmailExist,
-    addToWaitingList
 }

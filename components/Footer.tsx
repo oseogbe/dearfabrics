@@ -3,6 +3,7 @@
 import Image from "next/image"
 
 import Container from "./Container"
+import Link from "next/link"
 
 const Footer = () => {
     return (
@@ -68,7 +69,7 @@ const Footer = () => {
                                 <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Frequently Asked Questions</a>
                                 <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Returns & Exchanges</a>
                                 <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Terms & Conditions</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Contact Us</a>
+                                <Link href="/contact-us" className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Contact Us</Link>
                             </div>
                         </div>
                         <div>

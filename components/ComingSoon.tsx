@@ -2,11 +2,8 @@
 
 import { FormEvent, useState } from "react"
 import Image from "next/image"
-import { toast } from "sonner"
 
 import Container from "./Container"
-
-import { addToWaitingList, doesEmailExist } from "@/app/_actions"
 
 const ComingSoon = () => {
     const [email, setEmail] = useState('')
@@ -14,19 +11,7 @@ const ComingSoon = () => {
     const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        try {
-            const emailExists = await doesEmailExist(email)
-            if (emailExists) {
-                toast.error('This email has already subscribed.')
-                return
-            }
-
-            const res = await addToWaitingList(email)
-            toast.success(res as string)
-            setEmail('')
-        } catch (err) {
-            toast.error('Failed to subscribe. Please try again.')
-        }
+        console.log(email)
     }
 
     return (
