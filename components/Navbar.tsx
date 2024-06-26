@@ -1,5 +1,6 @@
 "use client"
 
+import { Suspense } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 
@@ -82,7 +83,9 @@ const Navbar: React.FC<NavbarProps> = ({
                             }
                         </ul>
                         <div className="flex flex-row items-center gap-3 xl:gap-9">
-                            <Search />
+                            <Suspense>
+                                <Search />
+                            </Suspense>
                             <div className="flex flex-row gap-3">
                                 <AccountButton />
                                 <CartButton />
