@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useState } from "react"
+import { useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -29,10 +29,19 @@ const ProductClient = ({
 
     const shoppingCart = useShoppingCart()
 
-    const handleAddItem = useCallback(() => {
-        shoppingCart.setItemQuantity(product.sku, quantity)
+    const handleAddItem = () => {
+        if (quantity === 0) return
+        shoppingCart.addItem(
+            product,
+            {
+                count: quantity,
+                product_metadata: {
+                    color: selectedColor,
+                    size: selectedSize
+                }
+            })
         toast("Added to cart")
-    }, [product.sku, quantity, shoppingCart])
+    }
 
     return (
         <>
@@ -179,6 +188,7 @@ const ProductClient = ({
                         <button
                             className="w-[210px] h-10 xl:h-12 flex items-center justify-center gap-4 bg-black text-white text-xs md:text-sm font-light uppercase"
                             onClick={handleAddItem}
+                            disabled={!quantity}
                         >
                             Add to cart <IoCartOutline size={18} />
                         </button>
