@@ -1,3 +1,5 @@
+import { Suspense } from "react"
+
 import Container from "@/components/Container"
 import ProductsClient from "./ProductsClient"
 
@@ -19,12 +21,12 @@ const CollectionPage = ({
     params,
     searchParams
 }: CollectionsProps) => {
-
-
     return (
         <Container>
             <div className="pt-5 flex xl:gap-8 xl:pt-10">
-                <ProductsClient products={products} />
+                <Suspense>
+                    <ProductsClient products={products} />
+                </Suspense>
             </div>
         </Container>
     )
