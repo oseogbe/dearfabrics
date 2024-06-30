@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 import { useShoppingCart } from 'use-shopping-cart'
 import { motion } from "framer-motion"
@@ -79,15 +80,22 @@ const CartPage = () => {
                                                 alt={product.name as string}
                                                 height={250}
                                                 width={250}
-                                                className="mx-auto md:w-[170px] md:h-[170px]"
+                                                className="mx-auto md:w-[170px] md:h-[170px] object-cover"
                                             />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-4 w-full">
                                             <div className="md:col-span-2 md:py-4">
                                                 <div className="flex flex-col max-[500px]:items-center gap-3">
-                                                    <h6 className="font-semibold text-base leading-7 text-black">{product.name}</h6>
+                                                    <Link
+                                                        href={`/${product.category}/${product.slug}`}
+                                                        className="font-semibold text-base leading-7 text-black hover:cursor-pointer group-hover:text-df-yellow"
+                                                    >
+                                                        {product.name}
+                                                    </Link>
                                                     <h6 className="font-normal text-base leading-7 text-gray-500 capitalize">{product.category}</h6>
-                                                    <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-df-yellow">{formatCurrency(product.price)}</h6>
+                                                    <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-df-yellow">
+                                                        {formatCurrency(product.price)}
+                                                    </h6>
                                                     <div className='flex items-center gap-x-2 text-sm text-gray-500 mt-4 xl:mt-12'>
                                                         {product?.inStock && (
                                                             <><CheckCircleIcon size={18} className='text-green-500' /> In stock</>
