@@ -14,12 +14,13 @@ const ViewProduct = ({
     const router = useRouter()
 
     return (
-        <div
-            className="bg-white p-4 rounded-full shadow-md cursor-pointer"
+        <button
+            type="button"
+            className="bg-white p-3 rounded-full shadow-md cursor-pointer"
             onClick={() => router.push(`/${product.category}/${product.slug}`)}
         >
-            <FaRegEye className="text-df-yellow hover:text-black transition-all duration-300" />
-        </div>
+            <FaRegEye size={21} className="text-black" />
+        </button>
     )
 }
 

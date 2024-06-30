@@ -40,7 +40,7 @@ const ProductClient = ({
                     size: selectedSize
                 }
             })
-        toast("Added to cart")
+        toast("Added to cart", { duration: 1500 })
     }
 
     return (
