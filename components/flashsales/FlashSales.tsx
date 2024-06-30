@@ -3,7 +3,7 @@
 import { useRef } from "react"
 import Image from "next/image"
 
-import ProductCard from "./FlashSalesProductCard"
+import ProductCard from "../product/ProductCard"
 import ArrowLeft from "../ArrowLeft"
 import ArrowRight from "../ArrowRight"
 

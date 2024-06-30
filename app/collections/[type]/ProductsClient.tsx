@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 
 import ProductFilter from "@/components/product/ProductFilter"
 import FilterModal from "@/components/product/FilterModal"
-import ProductCard from "@/components/product/ProductCard"
+import ProductCard from '@/components/product/ProductCard'
 import Select from "@/components/Select"
 import Pagination from "@/components/Pagination"
 
