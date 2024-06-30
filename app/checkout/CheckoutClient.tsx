@@ -2,11 +2,12 @@
 
 import { useEffect, useState } from "react"
 
-import { Country, ICountry, IState, State } from "country-state-city"
-
 import { SubmitHandler, useForm } from "react-hook-form"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Country, ICountry, IState, State } from "country-state-city"
+
+import { Switch } from "@/components/ui/switch"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -22,20 +23,6 @@ interface CheckoutClientProps {
     total: number
 }
 
-const CheckoutSchema = z.object({
-    name: z.string().min(2),
-    email: z.string().email(),
-    streetAddress: z.string().min(2),
-    city: z.string().min(2),
-    countryCode: z.string(),
-    stateCode: z.string(),
-    zipCode: z.coerce.number().optional(),
-    phoneCode: z.string().optional(),
-    phoneNo: z.coerce.number().min(8)
-})
-
-type CheckoutSchemaType = z.infer<typeof CheckoutSchema>
-
 const CheckoutClient: React.FC<CheckoutClientProps> = ({
     countries,
     country,
@@ -47,6 +34,32 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({
     discount,
     total
 }) => {
+    const [selectedCountry, setSelectedCountry] = useState(country)
+    const [countryStates, setCountryStates] = useState<IState[]>(states)
+    const [selectedState, setSelectedState] = useState(state)
+    const [showPhonecodeDropdown, setShowPhonecodeDropdown] = useState(false)
+    const [selectedPhoneCode, setSelectedPhoneCode] = useState("+234")
+    const [showBillingAddress, setShowBillingAddress] = useState(false)
+    const [selectedBillingCountry, setSelectedBillingCountry] = useState(country)
+    const [selectedBillingState, setSelectedBillingState] = useState(state)
+
+    const CheckoutSchema = z.object({
+        name: z.string().min(2),
+        email: z.string().email(),
+        streetAddress: z.string().min(2),
+        city: z.string().min(2),
+        countryCode: z.string(),
+        stateCode: z.string(),
+        zipCode: z.coerce.number().optional(),
+        phoneCode: z.string().optional(),
+        phoneNo: z.coerce.number().min(8),
+        billingStreetAddress: showBillingAddress ? z.string().min(2) : z.string().nullable(),
+        billingCity: showBillingAddress ? z.string().min(2) : z.string().optional(),
+        billingCountryCode: showBillingAddress ? z.string() : z.string().optional(),
+        billingStateCode: showBillingAddress ? z.string() : z.string().optional(),
+        billingZipCode: showBillingAddress ? z.coerce.number().optional() : z.string().optional(),
+    })
+
     const {
         register,
         handleSubmit,
@@ -57,11 +70,7 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({
         resolver: zodResolver(CheckoutSchema),
     })
 
-    const [selectedCountry, setSelectedCountry] = useState(country)
-    const [countryStates, setCountryStates] = useState<IState[]>(states)
-    const [selectedState, setSelectedState] = useState(state)
-    const [showPhonecodeDropdown, setShowPhonecodeDropdown] = useState(false)
-    const [selectedPhoneCode, setSelectedPhoneCode] = useState("+234")
+    type CheckoutSchemaType = z.infer<typeof CheckoutSchema>
 
     setValue('phoneCode', selectedPhoneCode)
 
@@ -82,7 +91,6 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({
     }
 
     const onSubmit: SubmitHandler<CheckoutSchemaType> = (values) => {
-
         console.log({
             ...values,
             country: Country.getCountryByCode(values.countryCode)?.name,
@@ -314,17 +322,113 @@ const CheckoutClient: React.FC<CheckoutClientProps> = ({
                                         </div>
                                     </div>
                                 </div>
-
-                                <div className="sm:col-span-2">
-                                    <button type="submit" className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100 disabled:cursor-not-allowed" disabled>
-                                        <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
-                                            <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7 7V5" />
-                                        </svg>
-                                        Use a different billing address
-                                    </button>
-                                </div>
+                                {
+                                    !showBillingAddress && (
+                                        <div className="sm:col-span-2">
+                                            <button
+                                                type="button"
+                                                onClick={() => setShowBillingAddress(true)}
+                                                className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-sm font-medium text-gray-900 hover:bg-gray-100 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-100"
+                                            >
+                                                <svg className="h-5 w-5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                                                    <path stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 12h14m-7 7V5" />
+                                                </svg>
+                                                Use a different billing address
+                                            </button>
+                                        </div>
+                                    )
+                                }
+                                {
+                                    showBillingAddress && (
+                                        <div className="flex items-center gap-x-4">
+                                            <Switch checked={showBillingAddress} onCheckedChange={() => setShowBillingAddress(false)} /> Remove different billing address?
+                                        </div>
+                                    )
+                                }
                             </div>
                         </div>
+                        {
+                            showBillingAddress && (
+                                <div className="space-y-4">
+                                    <h2 className="text-xl font-semibold text-gray-900">Billing Address</h2>
+
+                                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                        <div>
+                                            <label htmlFor="billing-street-address" className="mb-2 block text-sm font-medium text-gray-900"> Street address* </label>
+                                            <input
+                                                type="text"
+                                                id="billing-street-address"
+                                                className={`block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black ${errors.billingStreetAddress && 'border-red-500'}`}
+                                                placeholder=""
+                                                {...register('billingStreetAddress')}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="billing-city" className="mb-2 block text-sm font-medium text-gray-900"> Town / City* </label>
+                                            <input
+                                                type="text"
+                                                id="billing-city"
+                                                className={`block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black ${errors.billingCity && 'border-red-500'}`}
+                                                placeholder=""
+                                                {...register('billingCity')}
+                                            />
+                                        </div>
+
+                                        <div>
+                                            <div className="mb-2 flex items-center gap-2">
+                                                <label htmlFor="select-billing-country" className="block text-sm font-medium text-gray-900"> Country* </label>
+                                            </div>
+                                            <select
+                                                id="select-billing-country"
+                                                className={`block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black ${errors.billingCountryCode && 'border-red-500'}`}
+                                                {...register('billingCountryCode')}
+                                                defaultValue={selectedBillingCountry}
+                                                onChange={(e) => setSelectedBillingCountry(e.target.value)}
+                                                required
+                                            >
+                                                {
+                                                    countries.map(country => (
+                                                        <option key={country.isoCode} value={country.isoCode}>{country.name}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <div className="mb-2 flex items-center gap-2">
+                                                <label htmlFor="select-billing-state" className="block text-sm font-medium text-gray-900"> State* </label>
+                                            </div>
+                                            <select
+                                                id="select-billing-state"
+                                                className={`block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black ${errors.billingStateCode && 'border-red-500'}`}
+                                                {...register('billingStateCode')}
+                                                defaultValue={selectedBillingState}
+                                                onChange={(e) => setSelectedBillingState(e.target.value)}
+                                                required
+                                            >
+                                                {
+                                                    countryStates.map(state => (
+                                                        <option key={state.isoCode} value={state.isoCode}>{state.name}</option>
+                                                    ))
+                                                }
+                                            </select>
+                                        </div>
+
+                                        <div>
+                                            <label htmlFor="billing_zip_code" className="mb-2 block text-sm font-medium text-gray-900"> Zip / Postal code </label>
+                                            <input
+                                                type="text"
+                                                id="billing_zip_code"
+                                                className={`block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black ${errors.billingZipCode && 'border-red-500'}`}
+                                                placeholder=""
+                                                {...register('billingZipCode')}
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        }
 
                         <div className="space-y-4">
                             <h3 className="text-xl font-semibold text-gray-900">Payment</h3>
