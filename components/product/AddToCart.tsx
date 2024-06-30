@@ -18,8 +18,9 @@ const AddToCart: React.FC<AddToCartProps> = ({
     const shoppingCart = useShoppingCart()
 
     const handleAddItem = () => {
+        // TODO: this can't work cuz I'm not specifying the product color or size
         shoppingCart.addItem(product)
-        toast("Added to cart")
+        toast("Added to cart", { duration: 1500 })
     }
 
     return (
