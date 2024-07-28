@@ -10,7 +10,7 @@ import { toast } from "sonner"
 import ProductStars from "@/components/product/ProductStars"
 import Tabs from "@/components/Tabs"
 
-import { cn } from "@/lib/utils"
+import { cn, formatCurrency } from "@/lib/utils"
 
 import { FaMinus, FaPlus } from "react-icons/fa6"
 import { IoCartOutline } from "react-icons/io5"
@@ -103,11 +103,11 @@ const ProductClient = ({
                     <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] text-3xl text-[#3C4242] font-medium">
                         {product.oldPrice ? (
                             <div>
-                                {`₦${product.price}`}
-                                <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `₦${product.oldPrice}` }}></span>
+                                {`${formatCurrency(product.price)}`}
+                                <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `${formatCurrency(product.oldPrice)}` }}></span>
                             </div>
                         ) : (
-                            `₦${product.price}`
+                            `${formatCurrency(product.price)}`
                         )}
                     </div>
                     <div className="mt-4 flex items-center">
