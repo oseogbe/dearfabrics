@@ -60,14 +60,14 @@ const product = defineType({
             group: 'product',
         }),
         defineField({
-            name: 'price',
-            title: 'Price',
+            name: 'oldPrice',
+            title: 'Old Price (Optional)',
             type: 'number',
             group: 'product',
         }),
         defineField({
-            name: 'discountPrice',
-            title: 'Discount Price (Optional)',
+            name: 'price',
+            title: 'Price',
             type: 'number',
             group: 'product',
         }),
@@ -77,12 +77,12 @@ const product = defineType({
             type: 'string',
             group: 'product',
         }),
-        defineField({
-            name: 'quantity',
-            title: 'Quantity',
-            type: 'number',
-            group: 'product',
-        }),
+        // defineField({
+        //     name: 'quantity',
+        //     title: 'Quantity',
+        //     type: 'number',
+        //     group: 'product',
+        // }),
         defineField({
             name: 'images',
             title: 'Images',
@@ -116,14 +116,14 @@ const product = defineType({
                                     name: 'value',
                                     title: 'Value',
                                     type: 'string',
-                                })
-                            ]
-                        })
+                                }),
+                            ],
+                        }),
                     ],
                     preview: {
                         select: {
                             title: 'name',
-                            subtitle: 'values'
+                            subtitle: 'values',
                         },
                         prepare(selection) {
                             const { title, subtitle } = selection
@@ -131,12 +131,12 @@ const product = defineType({
                             return {
                                 title: title,
                                 subtitle: valuesString,
-                                icon: ControlsIcon
+                                icon: ControlsIcon,
                             }
-                        }
-                    }
+                        },
+                    },
                 }),
-            ]
+            ],
         }),
         defineField({
             name: 'variants',
@@ -158,7 +158,8 @@ const product = defineType({
                         defineField({
                             name: 'options',
                             title: 'Variant Options',
-                            description: 'Avoid editing these directly. They are generated from the product options. If you need to change them, edit the product options instead and generate a new set.',
+                            description:
+                                'Avoid editing these directly. They are generated from the product options. If you need to change them, edit the product options instead and generate a new set.',
                             type: 'array',
                             of: [
                                 defineArrayMember({
@@ -175,50 +176,50 @@ const product = defineType({
                                             name: 'value',
                                             title: 'Value',
                                             type: 'string',
-                                        })
+                                        }),
                                     ],
                                     preview: {
                                         select: {
                                             title: 'name',
-                                            subtitle: 'value'
+                                            subtitle: 'value',
                                         },
                                         prepare(selection) {
                                             const { title, subtitle } = selection
                                             return {
                                                 title: `${title}: ${subtitle}`,
-                                                icon: ControlsIcon
+                                                icon: ControlsIcon,
                                             }
-                                        }
-                                    }
-                                })
-                            ]
+                                        },
+                                    },
+                                }),
+                            ],
                         }),
                         defineField({
                             name: 'quantity',
                             title: 'Stock',
                             description: 'Set the quantity of available stock for this variant',
                             type: 'number',
-                            initialValue: 0
-                        })
+                            initialValue: 0,
+                        }),
                     ],
                     preview: {
                         select: {
                             title: 'variantName',
-                            subtitle: 'quantity'
+                            subtitle: 'quantity',
                         },
                         prepare(selection) {
                             const { title, subtitle } = selection
                             return {
                                 title: title,
                                 subtitle: subtitle !== null ? `Stock: ${subtitle}` : 'No stock info',
-                                icon: TagIcon
+                                icon: TagIcon,
                             }
-                        }
+                        },
                     },
-                })
+                }),
             ],
         }),
-    ]
+    ],
 })
 
 export default product

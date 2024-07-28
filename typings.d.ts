@@ -4,7 +4,7 @@ export type ProductType = {
     description?: string
     sku: string
     category: string
-    discountPrice?: number
+    oldPrice?: number
     price: number
     currency: string
     quantity?: number
@@ -22,4 +22,4 @@ export type ProductType = {
     relatedProducts: string[]
 }
 
-// export type RelatedProductType = Pick<ProductType, "name" | "slug" | "image" | "discountPrice" | "price" | "stars" | "ratings">
+// export type RelatedProductType = Pick<ProductType, "name" | "slug" | "image" | "oldPrice" | "price" | "stars" | "ratings">

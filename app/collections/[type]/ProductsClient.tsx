@@ -24,9 +24,7 @@ const ProductsClient = ({
     const [selectedColors, setSelectedColors] = useState<string[]>([])
     const [selectedSizes, setSelectedSizes] = useState<string[]>([])
 
-    const productPrices = products.flatMap(product => {
-        return product.discountPrice ? product.discountPrice : product.price
-    })
+    const productPrices = products.flatMap(product => product.price)
 
     const formatPrice = (num: number, upOrDown: 'up' | 'down') => {
         const magnitude = Math.floor(Math.log10(num))
