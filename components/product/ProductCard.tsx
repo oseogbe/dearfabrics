@@ -19,9 +19,9 @@ const ProductCard = ({
     return (
         <div className="max-w-[230px] md:max-w-[250px] flex-shrink-0">
             <div className="relative h-[200px] md:h-[280px] overflow-y-clip w-full rounded group">
-                {product.discountPrice && (
+                {product.oldPrice && (
                     <div className="absolute top-3 left-3 px-3 py-1 bg-df-yellow text-white text-xs rounded">
-                        {percentageDiscount(product.price, product.discountPrice)}% off
+                        {percentageDiscount(product.oldPrice, product.price)}% off
                     </div>
                 )}
                 <Image
@@ -45,8 +45,8 @@ const ProductCard = ({
                         {product.name}
                     </h4>
                     <div className="flex items-center gap-2 text-sm md:text-base">
-                        <div className="bg-df-gray p-2 rounded-lg font-bold">N{product.discountPrice || product.price}</div>
-                        {product.discountPrice && <div className="line-through">N{product.price}</div>}
+                        <div className="bg-df-gray p-2 rounded-lg font-bold">N{product.price}</div>
+                        {product.oldPrice && <div className="line-through">N{product.oldPrice}</div>}
                     </div>
                 </Link>
                 <div className="mt-2">

@@ -8,15 +8,15 @@ export function cn(...inputs: ClassValue[]) {
 export function formatCurrency(amount: number) {
   // if (!value) return ''
   // return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  return new Intl.NumberFormat('en-NG', {
+  return new Intl.NumberFormat('en-US', {
     style: 'currency',
-    currency: 'NGN'
+    currency: 'USD'
   }).format(amount)
 }
 
-export function percentageDiscount(price: number, discountPrice: number) {
-  if (discountPrice) {
-    return Math.round((price - discountPrice) / price * 100)
+export function percentageDiscount(oldPrice: number, price: number) {
+  if (price) {
+    return Math.round((oldPrice - price) / oldPrice * 100)
   }
   return 0
 }

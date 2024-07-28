@@ -25,12 +25,11 @@ const ProductClient = ({
     const [selectedImage, setSelectedImage] = useState(product.images[0])
     const [selectedColor, setSelectedColor] = useState(product.colors[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes ? product.sizes[0] : "")
-    const [quantity, setQuantity] = useState(0)
+    const [quantity, setQuantity] = useState(1)
 
     const shoppingCart = useShoppingCart()
 
     const handleAddItem = () => {
-        if (quantity === 0) return
         shoppingCart.addItem(
             product,
             {
@@ -40,6 +39,7 @@ const ProductClient = ({
                     size: selectedSize
                 }
             })
+        setQuantity(1)
         toast("Added to cart", { duration: 1500 })
     }
 
@@ -101,10 +101,10 @@ const ProductClient = ({
                     <div className="text-xs xl:text-base text-[#807D7E]">{product.category}</div>
                     <div className="mt-4 md:mt-8 text-xl md:text-2xl xl:text-4xl text-[#3C4242] font-bold">{product.name}</div>
                     <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] text-3xl text-[#3C4242] font-medium">
-                        {product.discountPrice ? (
+                        {product.oldPrice ? (
                             <div>
-                                {`₦${product.discountPrice}`}
-                                <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `₦${product.price}` }}></span>
+                                {`₦${product.price}`}
+                                <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `₦${product.oldPrice}` }}></span>
                             </div>
                         ) : (
                             `₦${product.price}`
@@ -167,10 +167,9 @@ const ProductClient = ({
                             <div
                                 className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer"
                                 onClick={() => {
-                                    if (quantity === 0) {
-                                        return
+                                    if (quantity > 1) {
+                                        setQuantity(current => current - 1)
                                     }
-                                    setQuantity(current => current - 1)
                                 }}
                             >
                                 <FaMinus />
@@ -188,7 +187,6 @@ const ProductClient = ({
                         <button
                             className="w-[210px] h-10 xl:h-12 flex items-center justify-center gap-4 bg-black text-white text-xs md:text-sm font-light uppercase"
                             onClick={handleAddItem}
-                            disabled={!quantity}
                         >
                             Add to cart <IoCartOutline size={18} />
                         </button>
