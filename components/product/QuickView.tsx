@@ -8,7 +8,7 @@ import { useShoppingCart } from "use-shopping-cart"
 import { toast } from "sonner"
 
 import { ProductType } from "@/typings"
-import { cn } from "@/lib/utils"
+import { cn, formatCurrency } from "@/lib/utils"
 
 import { Dialog, DialogContent, DialogTrigger } from "../ui/dialog"
 import ProductStars from "./ProductStars"
@@ -75,11 +75,11 @@ const QuickView = ({
                             <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] text-3xl text-[#3C4242] font-medium">
                                 {product.oldPrice ? (
                                     <div>
-                                        {`₦${product.price}`}
-                                        <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `₦${product.oldPrice}` }}></span>
+                                        {`${formatCurrency(product.price)}`}
+                                        <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `${formatCurrency(product.oldPrice)}` }}></span>
                                     </div>
                                 ) : (
-                                    `₦${product.price}`
+                                    `${formatCurrency(product.price)}`
                                 )}
                             </div>
                             <div className="mt-4 flex items-center">

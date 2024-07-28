@@ -1,5 +1,6 @@
 "use client"
 
+import { formatCurrency } from '@/lib/utils'
 import { Dispatch, SetStateAction } from 'react'
 import RangeSlider from 'react-range-slider-input'
 import 'react-range-slider-input/dist/style.css'
@@ -123,7 +124,7 @@ const ProductFilter = ({
             </div>
             <div className='flex flex-col gap-4'>
                 <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Price</h4>
-                <div className='text-sm xl:text-base'>₦{price[0]} - ₦{price[1]}</div>
+                <div className='text-sm xl:text-base'>{formatCurrency(price[0])} - {formatCurrency(price[1])}</div>
                 <RangeSlider
                     id="range-slider-yellow"
                     min={minPrice}

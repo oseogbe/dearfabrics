@@ -11,6 +11,7 @@ import Pagination from "@/components/Pagination"
 
 import { IoClose } from "react-icons/io5"
 import { ProductType } from '@/typings'
+import { formatCurrency } from '@/lib/utils'
 
 const ProductsClient = ({
     products
@@ -157,7 +158,7 @@ const ProductsClient = ({
                                     <div
                                         className="shrink-0 flex items-center px-2.5 py-1.5 bg-df-gray"
                                     >
-                                        ₦{price[0]} - ₦{price[1]}
+                                        {formatCurrency(price[0])} - {formatCurrency(price[1])}
                                         <IoClose
                                             className="pl-3 text-3xl cursor-pointer"
                                             onClick={() => setPrice([minPrice, maxPrice])}
