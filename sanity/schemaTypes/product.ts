@@ -22,6 +22,10 @@ const product = defineType({
             name: 'inventory',
             title: 'Inventory',
         },
+        {
+            name: 'related',
+            title: 'Related Products',
+        },
     ],
     fields: [
         defineField({
@@ -31,8 +35,8 @@ const product = defineType({
             group: 'product',
         }),
         defineField({
-            title: 'Slug',
             name: 'slug',
+            title: 'Slug',
             type: 'slug',
             group: 'product',
             options: {
@@ -72,6 +76,25 @@ const product = defineType({
             group: 'product',
         }),
         defineField({
+            name: 'inStock',
+            title: 'In Stock or Dropshipped?',
+            type: 'boolean',
+            description: 'Indicate whether the product is in stock (on) or dropshipped (off)',
+            options: {
+                layout: 'switch', // Optional: 'switch' is another option for boolean
+            },
+            initialValue: false, // Set the default value
+            group: 'product',
+        }),
+        defineField({
+            name: 'delivery',
+            title: 'Delivery',
+            type: 'string',
+            description: 'ex. item ships within 8 days',
+            hidden: ({ parent }) => parent.inStock === true,
+            group: 'product',
+        }),
+        defineField({
             name: 'priceId',
             title: 'Stripe Product Price Id',
             type: 'string',
@@ -103,7 +126,7 @@ const product = defineType({
                     fields: [
                         defineField({
                             name: 'name',
-                            description: 'Size, color, etc.',
+                            description: 'size, color, etc.',
                             title: 'Option Name',
                             type: 'string',
                         }),
@@ -141,8 +164,8 @@ const product = defineType({
         defineField({
             name: 'variants',
             title: 'Variants',
-            group: 'inventory',
             type: 'array',
+            group: 'inventory',
             components: { input: GenerateVariants },
             of: [
                 defineArrayMember({
@@ -218,6 +241,14 @@ const product = defineType({
                     },
                 }),
             ],
+        }),
+        defineField({
+            name: 'relatedProducts',
+            title: 'Related Products',
+            type: 'array',
+            of: [{ type: 'reference', to: { type: 'product' } }],
+            description: 'Select related products for this product',
+            group: 'related'
         }),
     ],
 })
