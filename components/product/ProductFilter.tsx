@@ -102,6 +102,18 @@ const ProductFilter = ({
         "4XL"
     ]
 
+    const step = (maxPrice: number) => {
+        if (maxPrice <= 1000) {
+            return 100
+        } else if (maxPrice <= 10000) {
+            return 1000
+        } else if (maxPrice <= 100000) {
+            return 10000
+        } else {
+            return 100000
+        }
+    }
+
     return (
         <div className='space-y-10'>
             <div className='flex flex-col gap-4'>
@@ -129,7 +141,7 @@ const ProductFilter = ({
                     id="range-slider-yellow"
                     min={minPrice}
                     max={maxPrice}
-                    step={10000}
+                    step={step(maxPrice)}
                     defaultValue={[minPrice, maxPrice]}
                     onInput={onPriceChange}
                 />
