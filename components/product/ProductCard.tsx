@@ -6,7 +6,7 @@ import Link from "next/link"
 import ProductStars from "./ProductStars"
 // import ViewProduct from "./ViewProduct"
 
-import { percentageDiscount } from "@/lib/utils"
+import { formatCurrency, percentageDiscount } from "@/lib/utils"
 import { ProductType } from "@/typings"
 import QuickView from "./QuickView"
 import AddToFavorite from "./AddToFavorite"
@@ -45,8 +45,8 @@ const ProductCard = ({
                         {product.name}
                     </h4>
                     <div className="flex items-center gap-2 text-sm md:text-base">
-                        <div className="bg-df-gray p-2 rounded-lg font-bold">N{product.price}</div>
-                        {product.oldPrice && <div className="line-through">N{product.oldPrice}</div>}
+                        <div className="bg-df-gray p-2 rounded-lg font-bold">{formatCurrency(product.price)}</div>
+                        {product.oldPrice && <div className="line-through">{formatCurrency(product.oldPrice)}</div>}
                     </div>
                 </Link>
                 <div className="mt-2">
