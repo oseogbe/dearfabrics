@@ -3,6 +3,8 @@
 import { useRef } from "react"
 import Image from "next/image"
 
+import Countdown, { zeroPad } from 'react-countdown'
+
 import ProductCard from "../product/ProductCard"
 import ArrowLeft from "../ArrowLeft"
 import ArrowRight from "../ArrowRight"
@@ -29,6 +31,57 @@ const FlashSales: React.FC<FlashSalesProps> = ({
         }
     }
 
+    type rendererValues = {
+        days: number
+        hours: number
+        minutes: number
+        seconds: number
+    }
+
+    const renderer = ({ days, hours, minutes, seconds }: rendererValues) => {
+        return (
+            <>
+                <div className="flex flex-col items-center">
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Days</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(days)}</div>
+                </div>
+                <Image
+                    src="/img/semicolon.svg"
+                    alt=""
+                    width="5"
+                    height="5"
+                    className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
+                />
+                <div className="flex flex-col items-center">
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Hours</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(hours)}</div>
+                </div>
+                <Image
+                    src="/img/semicolon.svg"
+                    alt=""
+                    width="5"
+                    height="5"
+                    className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
+                />
+                <div className="flex flex-col items-center">
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Minutes</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(minutes)}</div>
+                </div>
+                <Image
+                    src="/img/semicolon.svg"
+                    alt=""
+                    width="5"
+                    height="5"
+                    className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
+                />
+                <div className="flex flex-col items-center">
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Seconds</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(seconds)}</div>
+                </div>
+            </>
+        )
+    }
+
     return (
         <div>
             <div className="grid grid-cols-6 grid-rows-2">
@@ -38,43 +91,10 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                 <div className="row-start-2 col-start-1 col-span-full mt-2 xl:mt-4 flex items-center justify-between md:justify-start gap-[44px] xl:gap-[88px]">
                     <h3 className="flex-shrink-0 font-bold text-xl md:text-2xl xl:text-4xl">Flash Sales</h3>
                     <div className="flex gap-2">
-                        <div className="flex flex-col items-center">
-                            <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Days</div>
-                            <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">03</div>
-                        </div>
-                        <Image
-                            src="/img/semicolon.svg"
-                            alt=""
-                            width="5"
-                            height="5"
-                            className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
+                        <Countdown
+                            date={new Date('2024-08-31 23:59:59').getTime()}
+                            renderer={renderer}
                         />
-                        <div className="flex flex-col items-center">
-                            <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Hours</div>
-                            <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">23</div>
-                        </div>
-                        <Image
-                            src="/img/semicolon.svg"
-                            alt=""
-                            width="5"
-                            height="5"
-                            className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
-                        />
-                        <div className="flex flex-col items-center">
-                            <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Minutes</div>
-                            <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">19</div>
-                        </div>
-                        <Image
-                            src="/img/semicolon.svg"
-                            alt=""
-                            width="5"
-                            height="5"
-                            className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
-                        />
-                        <div className="flex flex-col items-center">
-                            <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Seconds</div>
-                            <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">56</div>
-                        </div>
                     </div>
                 </div>
                 <div className="flex items-center justify-end gap-2 row-start-1 md:row-start-2 col-start-6">
