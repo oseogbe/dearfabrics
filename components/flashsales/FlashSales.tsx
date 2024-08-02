@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 
 import Countdown, { zeroPad } from 'react-countdown'
@@ -18,7 +18,17 @@ interface FlashSalesProps {
 const FlashSales: React.FC<FlashSalesProps> = ({
 
 }) => {
+    const [hasMounted, setHasMounted] = useState(false)
+
     const saleProductsRef = useRef<HTMLDivElement>(null)
+
+    useEffect(() => {
+        setHasMounted(true)
+    }, [])
+
+    if (!hasMounted) {
+        return null
+    }
 
     const handleScroll = (direction: 'left' | 'right') => {
         const container = saleProductsRef.current
