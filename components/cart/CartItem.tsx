@@ -6,6 +6,7 @@ import { useShoppingCart } from "use-shopping-cart"
 
 import { FaPlus, FaMinus, FaX } from "react-icons/fa6"
 import { formatCurrency } from "@/lib/utils"
+import { urlFor } from "@/lib/sanity"
 
 const CartItem = ({
     sku
@@ -24,12 +25,12 @@ const CartItem = ({
         >
             <div className="relative w-[120px] md:w-[160px] h-full">
                 <Image
-                    src={cartItem.image as string}
+                    src={urlFor(cartItem.images[0] as string).width(200).url()}
                     fill
                     priority
                     sizes="(max-width: 160px) 160px, 160px"
                     className="object-cover"
-                    alt={cartItem.image as string}
+                    alt={cartItem.name}
                 />
             </div>
             <div className="flex flex-col justify-between w-full h-full pl-4 md:pl-6 pb-4">
