@@ -10,14 +10,17 @@ import { formatCurrency, percentageDiscount } from "@/lib/utils"
 import { ProductType } from "@/typings"
 import QuickView from "./QuickView"
 import AddToFavorite from "./AddToFavorite"
+import { urlFor } from "@/lib/sanity"
 
 const ProductCard = ({
+    containerStyles,
     product
 }: {
+    containerStyles: string,
     product: ProductType
 }) => {
     return (
-        <div className="max-w-[230px] md:max-w-[250px] flex-shrink-0">
+        <div className={`${containerStyles}`}>
             <div className="relative h-[200px] md:h-[280px] overflow-y-clip w-full rounded group">
                 {product.oldPrice && (
                     <div className="absolute top-3 left-3 px-3 py-1 bg-df-yellow text-white text-xs rounded">
@@ -25,7 +28,7 @@ const ProductCard = ({
                     </div>
                 )}
                 <Image
-                    src={product.image}
+                    src={urlFor(product.images[0]).width(500).url()}
                     alt={product.name}
                     width={500}
                     height={500}
