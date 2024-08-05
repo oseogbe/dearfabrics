@@ -10,12 +10,11 @@ import { motion } from "framer-motion"
 import Container from '@/components/Container'
 import OrderSummary from '@/components/cart/OrderSummary'
 
-import { products } from '@/lib/products'
-
 import { CheckCircleIcon, Clock3Icon } from 'lucide-react'
 import { FaRegSadTear } from 'react-icons/fa'
 import { formatCurrency } from '@/lib/utils'
 import { ProductType } from '@/typings'
+import { urlFor } from '@/lib/sanity'
 
 const CartPage = () => {
     const { cartDetails, cartCount, incrementItem, decrementItem, removeItem } = useShoppingCart()
@@ -23,8 +22,7 @@ const CartPage = () => {
 
     useEffect(() => {
         if (!cartDetails) return
-        const productIds = Object.keys(cartDetails).map(key => cartDetails[key].id)
-        const filteredProducts = products.filter(product => productIds.includes(product.sku))
+        const filteredProducts = Object.values(cartDetails).flatMap(product => product.product_data as ProductType)
         setCartProducts(filteredProducts)
     }, [cartDetails, cartCount])
 
@@ -71,28 +69,28 @@ const CartPage = () => {
                             cartProducts.map(product => {
                                 return (
                                     <div
-                                        key={product.sku}
+                                        key={product.id}
                                         className="relative flex flex-col min-[500px]:flex-row min-[500px]:items-start gap-5 py-6 border-b border-gray-200 group"
                                     >
                                         <div className="w-full md:max-w-[210px] flex items-center aspect-square bg-df-gray">
                                             <Image
-                                                src={product.image as string}
+                                                src={urlFor(product.images[0] as string).width(300).url()}
                                                 alt={product.name as string}
-                                                height={250}
-                                                width={250}
-                                                className="mx-auto md:w-[170px] md:h-[170px] object-cover"
+                                                height={300}
+                                                width={300}
+                                                className="w-full h-full object-cover"
                                             />
                                         </div>
                                         <div className="grid grid-cols-1 md:grid-cols-4 w-full">
                                             <div className="md:col-span-2 md:py-4">
                                                 <div className="flex flex-col max-[500px]:items-center gap-3">
                                                     <Link
-                                                        href={`/${product.category}/${product.slug}`}
+                                                        href={`/${product.categories[0]}/${product.slug}`}
                                                         className="font-semibold text-base leading-7 text-black hover:cursor-pointer group-hover:text-df-yellow"
                                                     >
                                                         {product.name}
                                                     </Link>
-                                                    <h6 className="font-normal text-base leading-7 text-gray-500 capitalize">{product.category}</h6>
+                                                    <h6 className="font-normal text-base leading-7 text-gray-500 uppercase">{product.categories[0]}</h6>
                                                     <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300 group-hover:text-df-yellow">
                                                         {formatCurrency(product.price)}
                                                     </h6>
@@ -111,7 +109,7 @@ const CartPage = () => {
                                                     <div className="flex items-start h-full">
                                                         <button
                                                             className="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
-                                                            onClick={() => decrementItem(product.sku)}
+                                                            onClick={() => decrementItem(product.id)}
                                                         >
                                                             <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                                                 xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -126,10 +124,10 @@ const CartPage = () => {
                                                         </button>
                                                         <input type="text"
                                                             className="border-y border-gray-200 outline-none text-gray-900 font-semibold text-lg w-full max-w-[73px] min-w-[60px] placeholder:text-gray-900 py-[15px] text-center bg-transparent focus:border-gray-200 focus:outline-none focus:ring-0"
-                                                            value={cartDetails && cartDetails[product.sku] ? cartDetails[product.sku].quantity : ''} disabled />
+                                                            value={cartDetails && cartDetails[product.id] ? cartDetails[product.id].quantity : ''} disabled />
                                                         <button
                                                             className="group rounded-r-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
-                                                            onClick={() => incrementItem(product.sku)}
+                                                            onClick={() => incrementItem(product.id)}
                                                         >
                                                             <svg className="stroke-gray-900 transition-all duration-500 group-hover:stroke-black"
                                                                 xmlns="http://www.w3.org/2000/svg" width="22" height="22"
@@ -144,7 +142,7 @@ const CartPage = () => {
                                                         </button>
                                                     </div>
                                                     {/* remove cart item */}
-                                                    <div className='text-sm underline cursor-pointer' onClick={() => removeItem(product.sku)}>remove</div>
+                                                    <div className='text-sm underline cursor-pointer' onClick={() => removeItem(product.id)}>remove</div>
                                                 </div>
 
                                             </div>

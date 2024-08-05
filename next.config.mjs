@@ -7,6 +7,12 @@ const nextConfig = {
                 hostname: 'mdbcdn.b-cdn.net',
                 port: '',
                 pathname: '/img/Photos/**',
+            },
+            {
+                protocol: 'https',
+                hostname: 'cdn.sanity.io',
+                port: '',
+                pathname: '/images/**',
             }
         ]
     }
