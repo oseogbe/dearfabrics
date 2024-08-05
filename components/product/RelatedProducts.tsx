@@ -42,11 +42,12 @@ const RelatedProducts = ({
                     {
                         products.map(product => (
                             <div
-                                key={product.sku}
+                                key={product._id}
                                 className="w-[230px] md:w-[250px] flex-shrink-0"
                             >
                                 <ProductCard
                                     product={product}
+                                    containerStyles=""
                                 />
                             </div>
                         ))

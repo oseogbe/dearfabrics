@@ -4,7 +4,8 @@ import Container from "@/components/Container"
 import ProductClient from "./ProductClient"
 import RelatedProducts from "@/components/product/RelatedProducts"
 
-import { products } from "@/lib/products"
+import { fetchSingleProduct } from "@/lib/sanity"
+
 import { ProductType } from "@/typings"
 
 interface ProductPageProps {
@@ -14,16 +15,14 @@ interface ProductPageProps {
     }
 }
 
-const ProductPage = ({
+const ProductPage = async ({
     params
 }: ProductPageProps) => {
-    const selectedProduct = products.find(product => product.slug === params.product)
+    const selectedProduct = await fetchSingleProduct(params.product)
 
     if (!selectedProduct) {
         notFound()
     }
-
-    const relatedProducts = selectedProduct.relatedProducts.map(relatedProduct => products.find(product => product.sku === relatedProduct))
 
     return (
         <Container>
@@ -35,7 +34,7 @@ const ProductPage = ({
                 </div>
                 <div className="mt-20">
                     <RelatedProducts
-                        products={relatedProducts as ProductType[]}
+                        products={selectedProduct.relatedProducts as ProductType[]}
                     />
                 </div>
             </div>

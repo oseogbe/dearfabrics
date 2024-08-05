@@ -96,16 +96,16 @@ const QuickView = ({
                             </div>
                             <div className="hidden lg:block mt-8 text-sm xl:text-base text-[#3C4242]">{product.description}</div>
                             <div className="mt-8">
-                                <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Color:</span> {selectedColor.name}</div>
+                                <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Color:</span> {selectedColor}</div>
                                 <div className="mt-3 flex items-center gap-4">
                                     {product.colors.map(color => (
                                         <div
-                                            key={color.code}
+                                            key={color}
                                             className="w-5 h-5 xl:h-6 xl:w-6 rounded-full cursor-pointer"
                                             style={{
-                                                backgroundColor: color.code,
+                                                backgroundColor: color,
                                                 borderWidth: '2px',
-                                                boxShadow: selectedColor.code === color.code ? `0 0 0 1px ${color.code}` : '',
+                                                boxShadow: selectedColor === color ? `0 0 0 1px ${color}` : '',
                                             }}
                                             onClick={() => setSelectedColor(color)}
                                         ></div>
@@ -122,7 +122,7 @@ const QuickView = ({
                                                     <div
                                                         key={size}
                                                         className={cn(
-                                                            "h-8 xl:h-10 aspect-square flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
+                                                            "px-3 py-2 flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
                                                             selectedSize === size && 'bg-df-gray'
                                                         )}
                                                         onClick={() => setSelectedSize(size)}
