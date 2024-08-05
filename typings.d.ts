@@ -1,4 +1,5 @@
 export type ProductType = {
+    _id: string
     name: string
     slug: string
     description?: string
@@ -10,10 +11,7 @@ export type ProductType = {
     quantity?: number
     image: string
     images: string[]
-    colors: {
-        name: string
-        code: string
-    }[]
+    colors: string[]
     sizes?: string[]
     stars: number
     ratings: number
