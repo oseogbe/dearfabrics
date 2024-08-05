@@ -34,10 +34,7 @@ const QuickView = ({
             product,
             {
                 count: quantity,
-                product_metadata: {
-                    color: selectedColor,
-                    size: selectedSize
-                }
+                product_metadata: product
             })
         setQuantity(1)
         toast("Added to cart", { duration: 1500 })
