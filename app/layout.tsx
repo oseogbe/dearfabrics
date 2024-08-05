@@ -10,6 +10,8 @@ import { Toaster } from "@/components/ui/sonner"
 
 import "./globals.css"
 
+import { fetchCategories } from "@/lib/sanity"
+
 export const metadata: Metadata = {
   title: "DearFabrics.ng",
   description: "...your fabrics and jewelry brand",
@@ -57,17 +59,19 @@ const metropolis = localFont({
   variable: '--font-metropolis'
 })
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
 
+  const navItems = await fetchCategories()
+
   return (
     <html lang="en" className={`${metropolis.variable} font-avenir`}>
       <body>
         <MyCartProvider>
-          <Navbar />
+          <Navbar menuItems={navItems} />
           <CartSidebar />
           {/* <Toaster position="top-right" richColors expand /> */}
           <Toaster />
