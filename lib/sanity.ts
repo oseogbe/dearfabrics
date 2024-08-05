@@ -72,12 +72,14 @@ async function fetchProductsByCategory(categorySlug: string, page: number, pageS
   try {
     const productsQuery = `*[_type == 'product' && references(*[_type == 'category' && slug.current == '${categorySlug}']._id)] 
     | order(_created_at desc) [${skip}...${skip + pageSize}] {
-      _id,
+      "id": _id,
       name,
       "slug": slug.current,
+      "categories": categories[]->slug.current,
       "images": images[].asset->url,
       oldPrice,
       price,
+      "currency": "USD",
       inStock,
       "sizes": options[name=='sizes'].values[],
       "colors": options[name=='colors'].values[]
@@ -102,19 +104,16 @@ async function fetchSingleProduct(productSlug: string) {
 
   try {
     const query = `*[_type == 'product' && slug.current == '${productSlug}'][0] {
-      _id,
+      "id": _id,
       name,
       "slug": slug.current,
       description,
       "images": images[].asset->url,
       oldPrice,
       price,
-      price_id,
+      "currency": "USD",
       "slug": slug.current,
-      "categories": categories[]->{
-        name,
-        "slug": slug.current
-      },
+      "categories": categories[]->slug.current,
       inStock,
       delivery,
       "sizes": options[name=='Size'].values[],
@@ -123,9 +122,10 @@ async function fetchSingleProduct(productSlug: string) {
         _id,
         name,
         "slug": slug.current,
+        "categories": categories[]->slug.current,
         oldPrice,
         price,
-        images,
+        "images": images[].asset->url,
         "sizes": options[name=='Size'].values[],
         "colors": options[name=='Colour'].values[]
       }
@@ -143,13 +143,14 @@ async function fetchSaleData(sale: string) {
 
   try {
     const query = `*[_type == 'sale' && name == '${sale}'][0] {
-      _id,
+      "id": _id,
       name,
       startDate,
       endDate,
       "products": products[]->{
         name,
         "slug": slug.current,
+        "categories": categories[]->slug.current,
         "images": images[].asset->url,
         oldPrice,
         price,
