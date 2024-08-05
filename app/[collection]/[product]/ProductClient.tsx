@@ -16,6 +16,7 @@ import { FaRegHeart } from "react-icons/fa"
 
 import { cn, formatCurrency } from "@/lib/utils"
 import { ProductType } from "@/typings"
+import { urlFor } from "@/lib/sanity"
 
 const ProductClient = ({
     product
@@ -34,10 +35,7 @@ const ProductClient = ({
             product,
             {
                 count: quantity,
-                product_metadata: {
-                    color: selectedColor,
-                    size: selectedSize
-                }
+                product_metadata: product
             })
         setQuantity(1)
         toast("Added to cart", { duration: 1500 })
@@ -51,7 +49,7 @@ const ProductClient = ({
                         {product.images.map((image, i) => (
                             <div key={i} className="h-20 md:h-auto aspect-square border-2 border-df-gray cursor-pointer">
                                 <Image
-                                    src={image}
+                                    src={urlFor(image).width(200).url()}
                                     alt={product.name}
                                     width={200}
                                     height={200}
@@ -98,7 +96,7 @@ const ProductClient = ({
             </div>
             <div className="flex-1">
                 <div className="mt-8">
-                    <div className="text-xs xl:text-base text-[#807D7E]">{product.category}</div>
+                    <div className="text-xs xl:text-base text-[#807D7E] uppercase">{product.categories[0]}</div>
                     <div className="mt-4 md:mt-8 text-xl md:text-2xl xl:text-4xl text-[#3C4242] font-bold">{product.name}</div>
                     <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] text-3xl text-[#3C4242] font-medium">
                         {product.oldPrice ? (
