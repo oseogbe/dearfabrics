@@ -40,9 +40,9 @@ const RelatedProducts = ({
             <div className="mt-6 md:mt-8 xl:mt-10">
                 <div ref={saleProductsRef} className="mt-10 flex overflow-x-scroll gap-6 scrollbar-hide">
                     {
-                        products.map(product => (
+                        products?.map(product => (
                             <div
-                                key={product._id}
+                                key={product.id}
                                 className="w-[230px] md:w-[250px] flex-shrink-0"
                             >
                                 <ProductCard

@@ -131,7 +131,7 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                 {
                     saleData.products.map(product => (
                         <ProductCard
-                            key={product._id}
+                            key={product.id}
                             product={product}
                             containerStyles="w-[230px] md:w-[270px] flex-shrink-0"
                         />
