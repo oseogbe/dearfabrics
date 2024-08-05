@@ -17,7 +17,7 @@ const ViewProduct = ({
         <button
             type="button"
             className="bg-white p-3 rounded-full shadow-md cursor-pointer"
-            onClick={() => router.push(`/${product.category}/${product.slug}`)}
+            onClick={() => router.push(`/${product.categories[0]}/${product.slug}`)}
         >
             <FaRegEye size={21} className="text-black" />
         </button>
