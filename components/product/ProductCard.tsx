@@ -43,7 +43,7 @@ const ProductCard = ({
                 </div>
             </div>
             <div className="mt-3">
-                <Link href={`/${product.category}/${product.slug}`} className="flex flex-col gap-2">
+                <Link href={`/${product.categories[0]}/${product.slug}`} className="flex flex-col gap-2">
                     <h4 className="text-sm md:text-base font-bold">
                         {product.name}
                     </h4>
