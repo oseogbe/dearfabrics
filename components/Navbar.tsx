@@ -15,47 +15,17 @@ import CartButton from "./navbar/CartButton"
 
 interface NavbarProps {
     currentUser?: null
+    menuItems: {
+        name: string
+        slug: string
+    }[]
 }
 
 const Navbar: React.FC<NavbarProps> = ({
-    currentUser
+    currentUser,
+    menuItems
 }) => {
     const pathname = usePathname()
-
-    const menuItems = [
-        {
-            label: "Fabrics",
-            link: "/collections/fabrics"
-        },
-        {
-            label: "Accessories",
-            link: "/collections/accessories"
-        },
-        {
-            label: "Men Fashion",
-            link: "/collections/men-fashion"
-        },
-        {
-            label: "Dresses",
-            link: "/collections/dresses"
-        },
-        {
-            label: "Sunglasses",
-            link: "/collections/sunglasses"
-        },
-        {
-            label: "Shoes",
-            link: "/collections/shoes"
-        },
-        {
-            label: "Bags",
-            link: "/collections/bags"
-        },
-        {
-            label: "Kids",
-            link: "/collections/kids"
-        },
-    ]
 
     return (
         <div className="fixed top-0 w-full bg-white z-20 shadow-sm">
@@ -70,14 +40,14 @@ const Navbar: React.FC<NavbarProps> = ({
                             {
                                 menuItems.map(item => (
                                     <Link
-                                        key={item.label}
-                                        href={item.link}
+                                        key={item.name}
+                                        href={`/collections/${item.slug}`}
                                         className={cn(
                                             "cursor-pointer transition-all duration-300 hover:text-df-yellow",
-                                            pathname === item.link && 'text-df-yellow'
+                                            pathname === `/collections/${item.slug}` && 'text-df-yellow'
                                         )}
                                     >
-                                        {item.label}
+                                        {item.name}
                                     </Link>
                                 ))
                             }
