@@ -1,6 +1,7 @@
 import { defineType, defineField, defineArrayMember } from 'sanity'
 import { BasketIcon, ControlsIcon, TagIcon } from '@sanity/icons'
 import { GenerateVariants } from '../components/GenerateVariants'
+import ColorPickerInput from '../../components/ColorPickerInput'
 
 // tieing color to product image
 
@@ -113,6 +114,22 @@ const product = defineType({
             of: [{ type: 'image' }],
             group: 'media',
         }),
+        // defineField({
+        //     name: 'color',
+        //     title: 'Colours',
+        //     type: 'array',
+        //     of: [
+        //         defineArrayMember({
+        //             name: 'value',
+        //             title: 'Value',
+        //             type: 'string',
+        //             components: {
+        //                 input: ColorPickerInput
+        //             }
+        //         }),
+        //     ],
+        //     group: 'inventory',
+        // }),
         defineField({
             name: 'options',
             title: 'Options',
@@ -126,7 +143,7 @@ const product = defineType({
                     fields: [
                         defineField({
                             name: 'name',
-                            description: 'size, color, etc.',
+                            description: 'sizes, colors, etc.',
                             title: 'Option Name',
                             type: 'string',
                         }),
@@ -134,13 +151,7 @@ const product = defineType({
                             name: 'values',
                             title: 'Option Values',
                             type: 'array',
-                            of: [
-                                defineArrayMember({
-                                    name: 'value',
-                                    title: 'Value',
-                                    type: 'string',
-                                }),
-                            ],
+                            of: [{ type: 'string' }],
                         }),
                     ],
                     preview: {
