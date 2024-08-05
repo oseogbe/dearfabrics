@@ -1,15 +1,13 @@
 export type ProductType = {
-    _id: string
+    id: string
     name: string
     slug: string
     description?: string
-    sku: string
-    category: string
+    categories: string[]
     oldPrice?: number
     price: number
     currency: string
     quantity?: number
-    image: string
     images: string[]
     colors: string[]
     sizes?: string[]
