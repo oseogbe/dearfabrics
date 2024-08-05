@@ -7,25 +7,29 @@ import ProductFilter from "@/components/product/ProductFilter"
 import FilterModal from "@/components/product/FilterModal"
 import ProductCard from '@/components/product/ProductCard'
 import Select from "@/components/Select"
-import Pagination from "@/components/Pagination"
 
 import { IoClose } from "react-icons/io5"
 import { ProductType } from '@/typings'
 import { formatCurrency } from '@/lib/utils'
 
 const ProductsClient = ({
-    products
+    products,
+    total
 }: {
-    products: ProductType[]
+    products: ProductType[],
+    total: number
 }) => {
     const searchParams = useSearchParams()
-    const { replace } = useRouter()
     const pathname = usePathname()
+    const { replace } = useRouter()
+
+    const [minPrice, setMinPrice] = useState(0)
+    const [maxPrice, setMaxPrice] = useState(0)
+    const [prices, setPrices] = useState([minPrice, maxPrice])
+
     const [selectedCategories, setSelectedCategories] = useState<string[]>(searchParams.get('categories')?.toString().split(',') ?? [])
     const [selectedColors, setSelectedColors] = useState<string[]>([])
     const [selectedSizes, setSelectedSizes] = useState<string[]>([])
-
-    const productPrices = products.flatMap(product => product.price)
 
     const formatPrice = (num: number, upOrDown: 'up' | 'down') => {
         const magnitude = Math.floor(Math.log10(num))
@@ -39,10 +43,12 @@ const ProductsClient = ({
         return roundedNum
     }
 
-    const minPrice = formatPrice(Math.min(...productPrices), 'down')
-    const maxPrice = formatPrice(Math.max(...productPrices), 'up')
+    useEffect(() => {
+        const productPrices = products.flatMap(product => product.price)
 
-    const [price, setPrice] = useState([minPrice, maxPrice])
+        setMinPrice(Math.min(...productPrices))
+        setMaxPrice(Math.max(...productPrices))
+    }, [products])
 
     // update query string when selectedCategories change
     useEffect(() => {
@@ -85,7 +91,7 @@ const ProductsClient = ({
         setSelectedCategories([])
         setSelectedColors([])
         setSelectedSizes([])
-        setPrice([minPrice, maxPrice])
+        setPrices([minPrice, maxPrice])
     }
 
     return (
@@ -95,13 +101,13 @@ const ProductsClient = ({
                     <h3 className='text-[#807D7E] text-2xl font-bold'>Filter Options</h3>
                     <hr className='my-8' />
                     <ProductFilter
-                        price={price}
+                        price={prices}
                         minPrice={minPrice}
                         maxPrice={maxPrice}
                         selectedCategories={selectedCategories}
                         selectedColors={selectedColors}
                         selectedSizes={selectedSizes}
-                        onPriceChange={setPrice}
+                        onPriceChange={setPrices}
                         onCategoryChange={handleCategoryChange}
                         onColorChange={handleColorChange}
                         onSizeChange={handleSizeChange}
@@ -111,7 +117,7 @@ const ProductsClient = ({
             <div className="w-full">
                 <div className="flex items-center justify-between">
                     <div className="text-xs md:text-base">
-                        Showing 1-12 of 240 results
+                        Showing 1-20 of {total} results
                     </div>
                     <div className="flex items-center gap-2">
                         <div className="flex items-center">
@@ -133,7 +139,7 @@ const ProductsClient = ({
                 {
                     (
                         selectedCategories.length > 0 ||
-                        minPrice !== price[0] || maxPrice !== price[1] ||
+                        minPrice !== prices[0] || maxPrice !== prices[1] ||
                         selectedColors.length > 0 ||
                         selectedSizes.length > 0
                     ) && (
@@ -154,14 +160,14 @@ const ProductsClient = ({
                                 ))
                             }
                             {
-                                (minPrice !== price[0] || maxPrice !== price[1]) && (
+                                (minPrice !== prices[0] || maxPrice !== prices[1]) && (
                                     <div
                                         className="shrink-0 flex items-center px-2.5 py-1.5 bg-df-gray"
                                     >
-                                        {formatCurrency(price[0])} - {formatCurrency(price[1])}
+                                        {formatCurrency(prices[0])} - {formatCurrency(prices[1])}
                                         <IoClose
                                             className="pl-3 text-3xl cursor-pointer"
-                                            onClick={() => setPrice([minPrice, maxPrice])}
+                                            onClick={() => setPrices([minPrice, maxPrice])}
                                         />
                                     </div>
                                 )
@@ -204,12 +210,10 @@ const ProductsClient = ({
                             <ProductCard
                                 key={product.name}
                                 product={product}
+                                containerStyles=''
                             />
                         ))
                     }
-                </div>
-                <div className="mt-16 flex justify-center">
-                    <Pagination />
                 </div>
             </div>
         </>
