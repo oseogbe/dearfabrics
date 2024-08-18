@@ -1,9 +1,11 @@
 import { defineField, defineType } from "sanity"
+import { ClockIcon } from '@sanity/icons'
 
 const sale = defineType({
     name: 'sale',
     title: 'Sales',
     type: 'document',
+    icon: ClockIcon,
     fields: [
         defineField({
             name: 'name',
