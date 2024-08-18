@@ -7,10 +7,11 @@ import { useShoppingCart } from "use-shopping-cart"
 import { StripeError } from "@stripe/stripe-js"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Country, ICountry, IState, State } from "country-state-city"
+import { Country, IState, State } from "country-state-city"
 
 import Container from "@/components/Container"
 import { Switch } from "@/components/ui/switch"
+import Loader from "@/components/Loader"
 
 import { formatCurrency } from "@/lib/utils"
 
@@ -30,10 +31,10 @@ const CheckoutPage = () => {
     const [selectedBillingCountry, setSelectedBillingCountry] = useState(country)
     const [selectedBillingState, setSelectedBillingState] = useState(state)
 
-    const shipping = 5000
-    const tax = 8000
-    const discount = -3000
-    const grandTotal = (totalPrice ?? 0) + shipping + tax + discount
+    const shipping = 8
+    const tax = 3
+    const discount = 3
+    const grandTotal = (totalPrice ?? 0) + shipping + tax - discount
 
     const CheckoutSchema = z.object({
         name: z.string().min(2),
@@ -83,22 +84,11 @@ const CheckoutPage = () => {
     }
 
     const onSubmit: SubmitHandler<CheckoutSchemaType> = async (values) => {
-        console.log({
-            ...values,
-            country: Country.getCountryByCode(values.countryCode)?.name,
-            state: State.getStateByCodeAndCountry(values.stateCode, values.countryCode)?.name,
-        })
-        // const response = await fetch('/api/checkout', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(values),
-        // })
-
-        // const data = await response.json()
-
-        // reset()
+        // {
+        //     ...values,
+        //     country: Country.getCountryByCode(values.countryCode)?.name,
+        //     state: State.getStateByCodeAndCountry(values.stateCode, values.countryCode)?.name,
+        // }
 
         if (!cartDetails) return
 
@@ -113,7 +103,7 @@ const CheckoutPage = () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ cartItems: Object.values(cartDetails) })
+                body: JSON.stringify({ cartItems: Object.values(cartDetails), shipping, tax, discount })
             })
 
             const data: CheckoutResponse = await response.json()
@@ -127,6 +117,9 @@ const CheckoutPage = () => {
         } catch (error) {
             console.error('An unexpected error occurred:', error);
         }
+
+        // reset()
+
     }
 
     return (
@@ -580,7 +573,7 @@ const CheckoutPage = () => {
 
                                     <dl className="flex items-center justify-between gap-4 py-3">
                                         <dt className="text-base font-normal text-gray-500">Discount</dt>
-                                        <dd className="text-base font-medium text-df-yellow">{formatCurrency(discount)}</dd>
+                                        <dd className="text-base font-medium text-df-yellow">-{formatCurrency(discount)}</dd>
                                     </dl>
 
                                     <dl className="flex items-center justify-between gap-4 py-3">
@@ -591,7 +584,17 @@ const CheckoutPage = () => {
                             </div>
 
                             <div className="space-y-3">
-                                <button type="submit" className="flex w-full items-center justify-center rounded-lg bg-df-yellow px-5 py-2.5 text-sm font-medium text-white hover:bg-df-yellow/80 focus:outline-none focus:ring-4 focus:ring-df-yellow/30">Proceed to Payment</button>
+                                <button
+                                    type="submit"
+                                    className="flex w-full items-center justify-center rounded-lg bg-df-yellow px-5 py-2.5 text-sm font-medium text-white hover:bg-df-yellow/80 focus:outline-none focus:ring-4 focus:ring-df-yellow/30"
+                                    disabled={isSubmitting}
+                                >
+                                    {isSubmitting ? (
+                                        <div className="flex-center">
+                                            <Loader />
+                                        </div>
+                                    ) : "Proceed to Payment"}
+                                </button>
 
                                 <p className="text-sm font-normal text-gray-500">One or more items in your cart require an account.
                                     <a href="#" title="" className="font-medium text-df-yellow/80 underline hover:no-underline">
