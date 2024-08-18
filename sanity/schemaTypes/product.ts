@@ -67,12 +67,14 @@ const product = defineType({
         defineField({
             name: 'oldPrice',
             title: 'Old Price (Optional)',
+            description: 'Old Price should be in dollars',
             type: 'number',
             group: 'product',
         }),
         defineField({
             name: 'price',
             title: 'Price',
+            description: 'Price should be in dollars',
             type: 'number',
             group: 'product',
         }),
