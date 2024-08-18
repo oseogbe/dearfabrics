@@ -1,25 +1,26 @@
 "use client"
 
-import { formatCurrency } from '@/lib/utils'
-import { Dispatch, SetStateAction } from 'react'
 import RangeSlider from 'react-range-slider-input'
 import 'react-range-slider-input/dist/style.css'
 
+import { formatCurrency } from '@/lib/utils'
+import { useEffect, useState } from 'react'
+
 interface ProductFilterProps {
-    price: number[]
+    priceRange: number[]
     minPrice: number
     maxPrice: number
     selectedCategories: string[]
     selectedColors: string[]
     selectedSizes: string[]
-    onPriceChange: Dispatch<SetStateAction<number[]>>
+    onPriceChange: (values: number[]) => void
     onCategoryChange: (category: string, checked: boolean) => void
     onColorChange: (color: string) => void
     onSizeChange: (size: string) => void
 }
 
 const ProductFilter = ({
-    price,
+    priceRange,
     minPrice,
     maxPrice,
     selectedCategories,
@@ -30,6 +31,22 @@ const ProductFilter = ({
     onColorChange,
     onSizeChange,
 }: ProductFilterProps) => {
+    const [step, setStep] = useState(0)
+
+    useEffect(() => {
+        if (maxPrice <= 500) {
+            setStep(10)
+        } else if (maxPrice <= 5000) {
+            setStep(100)
+        } else if (maxPrice <= 50000) {
+            setStep(1000)
+        } else if (maxPrice <= 500000) {
+            setStep(10000)
+        } else {
+            setStep(100000)
+        }
+    }, [maxPrice])
+
     const subCategories = [
         "Lace",
         "Aso-oke",
@@ -39,55 +56,20 @@ const ProductFilter = ({
         "Ankara"
     ]
 
+    // TODO: change to colors defined for products
     const colors = [
-        {
-            name: "Purple",
-            code: "#7e22ce"
-        },
-        {
-            name: "Black",
-            code: "#000000"
-        },
-        {
-            name: "Red",
-            code: "#dc2626"
-        },
-        {
-            name: "Orange",
-            code: "#ea580c"
-        },
-        {
-            name: "Navy",
-            code: "#345eff"
-        },
-        {
-            name: "White",
-            code: "#ffffff"
-        },
-        {
-            name: "Brown",
-            code: "#d67e3b"
-        },
-        {
-            name: "Green",
-            code: "#22c55e"
-        },
-        {
-            name: "Yellow",
-            code: "#eab308"
-        },
-        {
-            name: "Grey",
-            code: "#6b7280"
-        },
-        {
-            name: "Pink",
-            code: "#ec4899"
-        },
-        {
-            name: "Blue",
-            code: "#60a5fa"
-        },
+        "Purple",
+        "Black",
+        "Red",
+        "Orange",
+        "Navy",
+        "White",
+        "Brown",
+        "Green",
+        "Yellow",
+        "Grey",
+        "Pink",
+        "Blue",
     ]
 
     const sizes = [
@@ -101,18 +83,6 @@ const ProductFilter = ({
         "3XL",
         "4XL"
     ]
-
-    const step = (maxPrice: number) => {
-        if (maxPrice <= 1000) {
-            return 100
-        } else if (maxPrice <= 10000) {
-            return 1000
-        } else if (maxPrice <= 100000) {
-            return 10000
-        } else {
-            return 100000
-        }
-    }
 
     return (
         <div className='space-y-10'>
@@ -136,13 +106,13 @@ const ProductFilter = ({
             </div>
             <div className='flex flex-col gap-4'>
                 <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Price</h4>
-                <div className='text-sm xl:text-base'>{formatCurrency(price[0])} - {formatCurrency(price[1])}</div>
+                <div className='text-sm xl:text-base'>{formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}</div>
                 <RangeSlider
                     id="range-slider-yellow"
                     min={minPrice}
                     max={maxPrice}
-                    step={step(maxPrice)}
-                    defaultValue={[minPrice, maxPrice]}
+                    step={step}
+                    values={priceRange}
                     onInput={onPriceChange}
                 />
             </div>
@@ -151,17 +121,17 @@ const ProductFilter = ({
                 <div className='grid grid-cols-8 md:grid-cols-12 xl:grid-cols-4 gap-2 xl:gap-6'>
                     {
                         colors.map(color => (
-                            <div key={color.name}>
+                            <div key={color}>
                                 <div
                                     className='w-full aspect-square border rounded-md xl:rounded-lg cursor-pointer'
                                     style={{
-                                        backgroundColor: color.code,
+                                        backgroundColor: color,
                                         borderWidth: '2px',
-                                        boxShadow: selectedColors.includes(color.name) ? `0 0 0 2px ${color.code}` : ''
+                                        boxShadow: selectedColors.includes(color) ? `0 0 0 2px ${color}` : ''
                                     }}
-                                    onClick={() => onColorChange(color.name)}
+                                    onClick={() => onColorChange(color)}
                                 ></div>
-                                <div className='mt-2 text-[#8A8989] text-[8px] xl:text-[10px] text-center font-semibold'>{color.name}</div>
+                                <div className='mt-2 text-[#8A8989] text-[8px] xl:text-[10px] text-center font-semibold'>{color}</div>
                             </div>
                         ))
                     }

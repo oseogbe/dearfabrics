@@ -14,47 +14,37 @@ import { formatCurrency } from '@/lib/utils'
 
 const ProductsClient = ({
     products,
+    minPrice,
+    maxPrice,
     total
 }: {
     products: ProductType[],
+    minPrice: number
+    maxPrice: number
     total: number
 }) => {
     const searchParams = useSearchParams()
     const pathname = usePathname()
     const { replace } = useRouter()
 
-    const [minPrice, setMinPrice] = useState(0)
-    const [maxPrice, setMaxPrice] = useState(0)
-    const [prices, setPrices] = useState([minPrice, maxPrice])
-
+    const [priceRange, setPriceRange] = useState([0, 0])
     const [selectedCategories, setSelectedCategories] = useState<string[]>(searchParams.get('categories')?.toString().split(',') ?? [])
     const [selectedColors, setSelectedColors] = useState<string[]>([])
     const [selectedSizes, setSelectedSizes] = useState<string[]>([])
 
-    const formatPrice = (num: number, upOrDown: 'up' | 'down') => {
-        const magnitude = Math.floor(Math.log10(num))
-        const base = Math.pow(10, magnitude)
-        let roundedNum
-        if (upOrDown == 'up') {
-            roundedNum = Math.ceil(num / base) * base
-        } else {
-            roundedNum = Math.floor(num / base) * base
-        }
-        return roundedNum
-    }
-
     useEffect(() => {
-        const productPrices = products.flatMap(product => product.price)
-
-        setMinPrice(Math.min(...productPrices))
-        setMaxPrice(Math.max(...productPrices))
-    }, [products])
+        setPriceRange([minPrice, maxPrice])
+    }, [minPrice, maxPrice])
 
     // update query string when selectedCategories change
     useEffect(() => {
         const query = selectedCategories.length > 0 ? `?categories=${selectedCategories.join(',')}` : ''
         replace(`${pathname}${query}`)
     }, [pathname, replace, selectedCategories])
+
+    const handlePriceChange = (values: number[]) => {
+        setPriceRange(values)
+    }
 
     // update query string when category checkboxes change
     const handleCategoryChange = (category: string, checked: boolean) => {
@@ -91,7 +81,7 @@ const ProductsClient = ({
         setSelectedCategories([])
         setSelectedColors([])
         setSelectedSizes([])
-        setPrices([minPrice, maxPrice])
+        setPriceRange([minPrice, maxPrice])
     }
 
     return (
@@ -101,13 +91,13 @@ const ProductsClient = ({
                     <h3 className='text-[#807D7E] text-2xl font-bold'>Filter Options</h3>
                     <hr className='my-8' />
                     <ProductFilter
-                        price={prices}
+                        priceRange={priceRange}
                         minPrice={minPrice}
                         maxPrice={maxPrice}
                         selectedCategories={selectedCategories}
                         selectedColors={selectedColors}
                         selectedSizes={selectedSizes}
-                        onPriceChange={setPrices}
+                        onPriceChange={handlePriceChange}
                         onCategoryChange={handleCategoryChange}
                         onColorChange={handleColorChange}
                         onSizeChange={handleSizeChange}
@@ -139,7 +129,7 @@ const ProductsClient = ({
                 {
                     (
                         selectedCategories.length > 0 ||
-                        minPrice !== prices[0] || maxPrice !== prices[1] ||
+                        minPrice !== priceRange[0] || maxPrice !== priceRange[1] ||
                         selectedColors.length > 0 ||
                         selectedSizes.length > 0
                     ) && (
@@ -160,14 +150,14 @@ const ProductsClient = ({
                                 ))
                             }
                             {
-                                (minPrice !== prices[0] || maxPrice !== prices[1]) && (
+                                (minPrice !== priceRange[0] || maxPrice !== priceRange[1]) && (
                                     <div
                                         className="shrink-0 flex items-center px-2.5 py-1.5 bg-df-gray"
                                     >
-                                        {formatCurrency(prices[0])} - {formatCurrency(prices[1])}
+                                        {formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}
                                         <IoClose
                                             className="pl-3 text-3xl cursor-pointer"
-                                            onClick={() => setPrices([minPrice, maxPrice])}
+                                            onClick={() => setPriceRange([minPrice, maxPrice])}
                                         />
                                     </div>
                                 )
