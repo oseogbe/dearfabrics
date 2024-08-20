@@ -6,8 +6,7 @@ const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY)
 
 export async function POST(request: NextRequest) {
     try {
-        const { cartItems } = await request.json()
-        console.log('Server', cartItems)
+        const { cartItems, shipping, tax, discount } = await request.json()
         // const line_items = validateCartItems(inventory, cartItems)
 
         type CartItem = {
@@ -16,27 +15,57 @@ export async function POST(request: NextRequest) {
             quantity: number
         }
 
-        const session = await stripe.checkout.sessions.create({
-            mode: 'payment',
-            payment_method_types: ['card'],
-            line_items: cartItems.map((item: CartItem) => ({
+        // create an order?
+
+        const line_items = cartItems.map((item: CartItem) => ({
+            price_data: {
+                currency: 'usd',
+                product_data: {
+                    name: item.name,
+                },
+                unit_amount: item.price * 100,
+            },
+            quantity: item.quantity,
+        }))
+
+        if (shipping && shipping > 0) {
+            line_items.push({
                 price_data: {
                     currency: 'usd',
                     product_data: {
-                        name: item.name,
+                        name: 'Shipping Fee',
                     },
-                    unit_amount: item.price * 100,
+                    unit_amount: shipping * 100,
                 },
-                quantity: item.quantity,
-            })),
-            success_url: `${headers().get('origin')}/success`,
-            cancel_url: `${headers().get('origin')}/cancel`,
-        })
+                quantity: 1,
+            })
+        }
 
-        console.log({ sessionId: session.id })
+        if (tax && tax > 0) {
+            line_items.push({
+                price_data: {
+                    currency: 'usd',
+                    product_data: {
+                        name: 'Tax',
+                    },
+                    unit_amount: tax * 100,
+                },
+                quantity: 1,
+            })
+        }
+
+        const session = await stripe.checkout.sessions.create({
+            mode: 'payment',
+            payment_method_types: ['card'],
+            line_items,
+            discounts: [],
+            success_url: `${headers().get('origin')}/order/hfjkjukkjjbjk`,
+            cancel_url: `${headers().get('origin')}/checkout`,
+        })
 
         return NextResponse.json({ sessionId: session.id })
     } catch (e) {
-
+        //  NextResponse.json({ error: "An error occurred." }, { status: 500 })
+        return NextResponse.error()
     }
 }
