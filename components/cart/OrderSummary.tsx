@@ -10,9 +10,10 @@ const OrderSummary = () => {
     const router = useRouter()
     const { cartCount, totalPrice, formattedTotalPrice } = useShoppingCart()
 
-    const shipping = 5000
-    const tax = 8000
-    const total = totalPrice as number + shipping + tax
+    const shipping = 8
+    const tax = 3
+    const discount = -3
+    const grandTotal = totalPrice as number + shipping + tax + discount
 
     return (
         <div className="col-span-12 xl:col-span-4 bg-gray-50 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:px-8 py-24">
@@ -51,7 +52,7 @@ const OrderSummary = () => {
                 </form>
                 <div className="flex items-center justify-between py-8">
                     <p className="font-medium text-xl leading-8 text-black">{cartCount} Items</p>
-                    <p className="font-semibold text-xl leading-8 text-df-yellow">{formatCurrency(total)}</p>
+                    <p className="font-semibold text-xl leading-8 text-df-yellow">{formatCurrency(grandTotal)}</p>
                 </div>
                 <button
                     className="w-full text-center bg-df-yellow rounded-xl py-3 px-6 font-semibold text-lg text-white transition-all duration-500 hover:bg-df-yellow/80"
