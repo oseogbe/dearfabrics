@@ -69,10 +69,11 @@ const coupon = defineType({
             name: 'duration',
             title: 'Duration',
             type: 'string',
+            description: 'once (if it\'s used only once per customer) or forever (if you want it to apply indefinitely to customers who haven\'t yet redeemed it)',
             options: {
                 list: [
                     { title: 'Once', value: 'once' },
-                    { title: 'Repeating', value: 'repeating' },
+                    // { title: 'Repeating', value: 'repeating' },
                     { title: 'Forever', value: 'forever' },
                 ],
                 layout: 'radio',
@@ -122,7 +123,7 @@ const coupon = defineType({
                     ? `$${(amountOff / 100).toFixed(2)} off`
                     : `${percentOff}% off`
             return {
-                title: `${title} - ${discount}`,
+                title: `${title}`,
                 subtitle,
             }
         },
