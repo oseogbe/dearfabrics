@@ -129,9 +129,9 @@ const FlashSales: React.FC<FlashSalesProps> = ({
             </div>
             <div ref={saleProductsRef} className="mt-10 flex overflow-x-scroll gap-6 scrollbar-hide">
                 {
-                    saleData.products.map(product => (
+                    saleData.products.map((product, i) => (
                         <ProductCard
-                            key={product.id}
+                            key={i}
                             product={product}
                             containerStyles="w-[230px] md:w-[270px] flex-shrink-0"
                         />
