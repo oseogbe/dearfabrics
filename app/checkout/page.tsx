@@ -4,7 +4,6 @@ import { useEffect, useState } from "react"
 
 import { SubmitHandler, useForm } from "react-hook-form"
 import { useShoppingCart } from "use-shopping-cart"
-import { StripeError } from "@stripe/stripe-js"
 import { z } from "zod"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Country, IState, State } from "country-state-city"
@@ -13,7 +12,7 @@ import Container from "@/components/Container"
 import { Switch } from "@/components/ui/switch"
 import Loader from "@/components/Loader"
 
-import { formatCurrency } from "@/lib/utils"
+import { formatCurrency, generateRandomString } from "@/lib/utils"
 
 const countries = Country.getAllCountries()
 const country = "NG"
@@ -84,42 +83,37 @@ const CheckoutPage = () => {
     }
 
     const onSubmit: SubmitHandler<CheckoutSchemaType> = async (values) => {
-        // {
-        //     ...values,
-        //     country: Country.getCountryByCode(values.countryCode)?.name,
-        //     state: State.getStateByCodeAndCountry(values.stateCode, values.countryCode)?.name,
-        // }
-
-        if (!cartDetails) return
-
-        type CheckoutResponse = {
-            sessionId: string
-            error?: StripeError
+        const formData = {
+            ...values,
+            country: Country.getCountryByCode(values.countryCode)?.name,
+            state: State.getStateByCodeAndCountry(values.stateCode, values.countryCode)?.name,
         }
 
         try {
-            const response = await fetch('/api/checkout', {
+            const response = await fetch('/api/paystack/initialize', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ cartItems: Object.values(cartDetails), shipping, tax, discount })
+                body: JSON.stringify({
+                    email: values.email,
+                    amount: Math.round(grandTotal * 100),
+                    reference: `dfng${generateRandomString(12)}`
+                })
             })
 
-            const data: CheckoutResponse = await response.json()
+            const data = await response.json()
 
-            const result = await redirectToCheckout(data.sessionId)
-
-            if (result?.error) {
-                console.error(result.error)
-                // console.error(result.error.message)
+            if (data.status) {
+                window.location.href = data.data.authorization_url
+            } else {
+                alert('Payment initialization failed. Try again.')
             }
         } catch (error) {
-            console.error('An unexpected error occurred:', error);
+            console.error('Error initializing payment:', error)
         }
 
         // reset()
-
     }
 
     return (
