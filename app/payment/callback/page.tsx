@@ -1,33 +1,28 @@
-"use client"
+const PaymentCallbackPage = async ({
+    searchParams
+}: {
+    searchParams: {
+        reference: string
+    }
+}) => {
+    const reference = searchParams.reference
 
-import { useEffect, useState } from 'react'
-import { useSearchParams } from 'next/navigation'
+    let verificationStatus = 'Verifying payment...'
 
-const PaymentCallbackPage = () => {
-    const searchParams = useSearchParams()
-    const reference = searchParams.get('reference')
-    const [verificationStatus, setVerificationStatus] = useState<string | null>(null)
+    if (reference) {
+        const response = await fetch(`/api/paystack/verify?reference=${reference}`)
+        const data = await response.json()
 
-    useEffect(() => {
-        if (reference) {
-            const verifyPayment = async () => {
-                const response = await fetch(`/api/paystack/verify?reference=${reference}`)
-                const data = await response.json()
-
-                if (data.status) {
-                    setVerificationStatus('Payment successful')
-                } else {
-                    setVerificationStatus('Payment failed')
-                }
-            }
-
-            verifyPayment()
+        if (data.status) {
+            verificationStatus = 'Payment successful'
+        } else {
+            verificationStatus = 'Payment failed'
         }
-    }, [reference])
+    }
 
     return (
         <div>
-            <h1 className='text-3xl font-bold'>{verificationStatus ? verificationStatus : 'Verifying payment...'}</h1>
+            <h1 className='text-3xl font-bold'>{verificationStatus}</h1>
         </div>
     )
 }
