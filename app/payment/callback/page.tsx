@@ -1,11 +1,11 @@
 "use client"
 
 import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 
 const PaymentCallbackPage = () => {
-    const searchParams = new URLSearchParams(window.location.search)
+    const searchParams = useSearchParams()
     const reference = searchParams.get('reference')
-    console.log("ref", reference)
     const [verificationStatus, setVerificationStatus] = useState<string | null>(null)
 
     useEffect(() => {
