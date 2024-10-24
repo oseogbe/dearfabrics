@@ -10,7 +10,7 @@ const PaymentCallbackPage = async ({
     let verificationStatus = 'Verifying payment...'
 
     if (reference) {
-        const response = await fetch(`/api/paystack/verify?reference=${reference}`)
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/paystack/verify?reference=${reference}`, { cache: 'no-store' })
         const data = await response.json()
 
         if (data.status) {
