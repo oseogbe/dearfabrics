@@ -30,22 +30,47 @@ const navLinks = [
             {
                 label: "Lace",
                 link: "/collections/fabrics/lace",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
             },
             {
                 label: "Aso-Oke",
                 link: "/collections/fabrics/aso-oke",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
             },
             {
                 label: "Ankara",
                 link: "/collections/fabrics/ankara",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
             },
             {
                 label: "Plain",
                 link: "/collections/fabrics/plain",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
+            },
+            {
+                label: "Sample",
+                link: "/collections/fabrics/sample",
+                info: ""
+            },
+            {
+                label: "Traditional",
+                link: "/collections/fabrics/traditional",
+                info: ""
+            },
+            {
+                label: "Georgewrapper",
+                link: "/collections/fabrics/georgewrapper",
+                info: ""
+            },
+            {
+                label: "Siffon/Silk",
+                link: "/collections/fabrics/siffon-silk",
+                info: ""
+            },
+            {
+                label: "Cotton",
+                link: "/collections/fabrics/cotton",
+                info: ""
             },
         ]
     },
@@ -53,24 +78,39 @@ const navLinks = [
         label: "Men",
         children: [
             {
+                label: "Brocade",
+                link: "/collections/men/brocade",
+                info: ""
+            },
+            {
+                label: "Shadda",
+                link: "/collections/men/shadda",
+                info: ""
+            },
+            {
+                label: "Lace",
+                link: "/collections/men/lace",
+                info: ""
+            },
+            {
+                label: "Cotton",
+                link: "/collections/men/cotton",
+                info: ""
+            },
+            {
                 label: "T-Shirt",
                 link: "/collections/men/t-shirt",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
+            },
+            {
+                label: "Trousers",
+                link: "/collections/men/trousers",
+                info: ""
             },
             {
                 label: "Jeans",
                 link: "/collections/men/jeans",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
-            },
-            {
-                label: "Shoes",
-                link: "/collections/men/shoes",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
-            },
-            {
-                label: "Bags",
-                link: "/collections/bags",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
             },
         ]
     },
@@ -78,44 +118,79 @@ const navLinks = [
         label: "Women",
         children: [
             {
-                label: "Dresses",
-                link: "/collections/women/dresses",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                label: "Ready to Wear",
+                link: "/collections/women/ready-to-wear",
+                info: ""
             },
             {
-                label: "Tops",
-                link: "/collections/women/tops",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                label: "Bags",
+                link: "/collections/women/bags",
+                info: ""
             },
             {
                 label: "Skirts",
                 link: "/collections/women/skirts",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
+            },
+            {
+                label: "Jeans",
+                link: "/collections/women/jeans",
+                info: ""
             },
             {
                 label: "Perfumes",
                 link: "/collections/women/perfumes",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
+            },
+            {
+                label: "Shoes",
+                link: "/collections/women/shoes",
+                info: ""
+            },
+            {
+                label: "Slippers / Scandal",
+                link: "/collections/women/slippers-scandal",
+                info: ""
+            },
+            {
+                label: "Belts",
+                link: "/collections/women/belts",
+                info: ""
             },
             {
                 label: "Accessories",
                 link: "/collections/women/accessories",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                info: ""
             },
         ]
     },
     {
-        label: "Jewelries",
+        label: "Jewelry",
         children: [
             {
                 label: "Necklaces",
-                link: "/collections/jewelries/necklaces",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                link: "/collections/jewelry/necklaces",
+                info: ""
             },
             {
                 label: "Bracelets",
-                link: "/collections/jewelries/bracelets",
-                info: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui sit nulla doloremque consequatur quae, odit voluptatem minus mollitia illum tenetur aliquam quaerat esse, omnis at quibusdam unde, inventore totam rerum."
+                link: "/collections/jewelry/bracelets",
+                info: ""
+            },
+            {
+                label: "Earrings",
+                link: "/collections/jewelry/earrings",
+                info: ""
+            },
+            {
+                label: "Rings",
+                link: "/collections/jewelry/rings",
+                info: ""
+            },
+            {
+                label: "Complete Set",
+                link: "/collections/jewelry/complete-set",
+                info: ""
             },
         ]
     },
@@ -241,7 +316,7 @@ const ListItem = React.forwardRef<
                 <a
                     ref={ref}
                     className={cn(
-                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground",
+                        "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-gray-100/50 hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground cursor-pointer",
                         className
                     )}
                     {...props}
