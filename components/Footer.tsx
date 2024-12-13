@@ -53,31 +53,31 @@ const Footer = () => {
                     </div>
                     <div className="md:col-span-2 xl:col-span-1 flex flex-col gap-y-16 md:flex-row md:ml-auto gap-x-12 md:gap-x-20">
                         <div>
-                            <h5 className="text-white text-xs xl:text-base mb-6">Shop</h5>
+                            <h5 className="text-white text-sm xl:text-base mb-6">Shop</h5>
                             <div className="flex flex-col gap-3 md:gap-4">
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline" href="#">New Arrivals</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline" href="#">Fabrics</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline" href="#">Jewelries</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline" href="#">Sales</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline" href="#">Wishlist</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">New Arrivals</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Fabrics</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Jewelries</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Sales</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Wishlist</a>
                             </div>
                         </div>
                         <div>
-                            <h5 className="text-white text-xs xl:text-base mb-6">Information</h5>
+                            <h5 className="text-white text-sm xl:text-base mb-6">Information</h5>
                             <div className="flex flex-col gap-3 md:gap-4">
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">About Us</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Frequently Asked Questions</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Returns & Exchanges</a>
-                                <a className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Terms & Conditions</a>
-                                <Link href="/contact-us" className="text-zinc-500 text-xs xl:text-base cursor-pointer hover:underline">Contact Us</Link>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline">About Us</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline">Frequently Asked Questions</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline">Returns & Exchanges</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline">Terms & Conditions</a>
+                                <Link href="/contact-us" className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline">Contact Us</Link>
                             </div>
                         </div>
                         <div>
-                            <h5 className="text-white text-xs xl:text-base mb-6">Contact</h5>
+                            <h5 className="text-white text-sm xl:text-base mb-6">Contact</h5>
                             <div className="flex flex-col gap-3 md:gap-4">
-                                <div className="text-zinc-500 text-xs xl:text-base">Suite C11,12, 2XL Mall, Plot 111, Christiana Ajayi Okunuga Street, Gwarinpa, Abuja</div>
-                                <div className="text-zinc-500 text-xs xl:text-base">shop@dearfabrics.com</div>
-                                <div className="text-zinc-500 text-xs xl:text-base">+234 902 052 4006</div>
+                                <div className="text-zinc-500 text-sm xl:text-base">Suite C11,12, 2XL Mall, Plot 111, Christiana Ajayi Okunuga Street, Gwarinpa, Abuja</div>
+                                <div className="text-zinc-500 text-sm xl:text-base">shop@dearfabrics.com</div>
+                                <div className="text-zinc-500 text-sm xl:text-base">+234 902 052 4006</div>
                             </div>
                         </div>
                     </div>

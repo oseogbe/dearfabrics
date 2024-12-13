@@ -32,9 +32,9 @@ const CartPage = () => {
         <Container>
             <div className="pt-5 xl:pt-10">
                 <div className="grid grid-cols-12">
-                    <div className="col-span-12 xl:col-span-8 lg:pr-8 pt-14 pb-8 lg:py-24 w-full max-xl:max-w-3xl max-xl:mx-auto">
-                        <div className="flex items-center justify-between pb-8 border-b border-gray-300">
-                            <h2 className="font-bold text-3xl leading-10 text-black">
+                    <div className="col-span-12 xl:col-span-8 lg:pr-8 lg:py-24 w-full max-xl:max-w-3xl max-xl:mx-auto">
+                        <div className="flex items-center justify-between pb-4 lg:pb-8 border-b border-gray-300">
+                            <h2 className="font-bold text-2xl lg:text-3xl leading-10 text-black">
                                 Shopping Cart
                             </h2>
                         </div>
@@ -93,7 +93,7 @@ const CartPage = () => {
                                             <div className="flex flex-col max-[500px]:items-center gap-3">
                                                 <Link
                                                     href={`/${product.categories[0]}/${product.slug}`}
-                                                    className="font-semibold text-base leading-7 text-black hover:cursor-pointer"
+                                                    className="text-center md:text-left font-semibold text-base leading-7 text-black hover:cursor-pointer"
                                                 >
                                                     {product.name}
                                                 </Link>
@@ -136,13 +136,13 @@ const CartPage = () => {
                                                 </div>
                                             </div>
                                         </div>
-                                        <div className="flex items-start py-4 max-[500px]:justify-center h-full max-md:mt-3">
+                                        <div className="flex items-start md:py-4 max-[500px]:justify-center h-full max-md:mt-3">
                                             <div className="grid place-items-center gap-y-4">
                                                 <div className="flex items-start h-full">
                                                     <button
                                                         className="group rounded-l-xl px-5 py-[18px] border border-gray-200 flex items-center justify-center shadow-sm shadow-transparent transition-all duration-500 hover:bg-gray-50 hover:border-gray-300 hover:shadow-gray-300 focus-within:outline-gray-300"
                                                         onClick={() => {
-                                                            if(product?.quantity > 1) {
+                                                            if (product?.quantity > 1) {
                                                                 decrementItem(product.id)
                                                             }
                                                         }}

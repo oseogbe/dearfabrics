@@ -118,11 +118,11 @@ const CheckoutPage = () => {
 
     return (
         <Container>
-            <div className="relative w-full max-w-7xl mx-auto py-24 px-4 md:px-5 lg-6">
-                <h2 className="font-bold text-3xl sm:text-4xl leading-10 text-black mb-11">
+            <div className="relative w-full max-w-7xl mx-auto lg:py-24 px-4 md:px-5 lg-6">
+                <h2 className="font-bold text-2xl lg:text-3xl leading-10 text-black mb-11">
                     Checkout
                 </h2>
-                <form onSubmit={handleSubmit(onSubmit)} className="px-4 2xl:px-0">
+                <form onSubmit={handleSubmit(onSubmit)}>
                     <div className="mt-6 sm:mt-8 lg:flex lg:items-start lg:gap-12 xl:gap-16">
                         <div className="min-w-0 flex-1 space-y-8">
                             <div className="space-y-4">
