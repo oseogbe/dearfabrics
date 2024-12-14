@@ -10,9 +10,9 @@ const OrderSummary = () => {
     const router = useRouter()
     const { cartCount, totalPrice, formattedTotalPrice } = useShoppingCart()
 
-    const shipping = 8
-    const tax = 3
-    const discount = -3
+    const shipping = 10000
+    const tax = 3000
+    const discount = -5000
     const grandTotal = totalPrice as number + shipping + tax + discount
 
     return (
@@ -33,6 +33,14 @@ const OrderSummary = () => {
                     <p className="font-normal text-lg leading-8 text-gray-700">Tax estimate</p>
                     <p className="font-medium text-lg leading-8 text-black">{formatCurrency(tax)}</p>
                 </div>
+                {
+                    discount < 0 && (
+                        <div className="flex items-center justify-between pb-6">
+                            <p className="font-normal text-lg leading-8 text-gray-700">Discount</p>
+                            <p className="font-medium text-lg leading-8 text-black">{formatCurrency(discount)}</p>
+                        </div>
+                    )
+                }
                 <form>
                     <label className="flex items-center mb-1.5 text-gray-400 text-sm font-medium">Promo Code</label>
                     <div className="flex pb-4 w-full">

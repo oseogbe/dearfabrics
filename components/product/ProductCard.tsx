@@ -1,5 +1,6 @@
 "use client"
 
+import { lazy } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -8,7 +9,7 @@ import ProductStars from "./ProductStars"
 
 import { formatCurrency, percentageDiscount } from "@/lib/utils"
 import { ProductType } from "@/typings"
-import QuickView from "./QuickView"
+const QuickView = lazy(() => import("./QuickView"))
 import AddToFavorite from "./AddToFavorite"
 import { urlFor } from "@/lib/sanity"
 

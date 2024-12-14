@@ -30,10 +30,10 @@ const CheckoutPage = () => {
     const [selectedBillingCountry, setSelectedBillingCountry] = useState(country)
     const [selectedBillingState, setSelectedBillingState] = useState(state)
 
-    const shipping = 8
-    const tax = 3
-    const discount = 3
-    const grandTotal = (totalPrice ?? 0) + shipping + tax - discount
+    const shipping = 10000
+    const tax = 3000
+    const discount = -5000
+    const grandTotal = totalPrice as number + shipping + tax + discount
 
     const CheckoutSchema = z.object({
         name: z.string().min(2),
@@ -567,7 +567,7 @@ const CheckoutPage = () => {
 
                                     <dl className="flex items-center justify-between gap-4 py-3">
                                         <dt className="text-base font-normal text-gray-500">Discount</dt>
-                                        <dd className="text-base font-medium text-df-yellow">-{formatCurrency(discount)}</dd>
+                                        <dd className="text-base font-medium text-gray-900">{formatCurrency(discount)}</dd>
                                     </dl>
 
                                     <dl className="flex items-center justify-between gap-4 py-3">
