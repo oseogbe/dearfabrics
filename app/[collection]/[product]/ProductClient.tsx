@@ -14,7 +14,7 @@ import { FaMinus, FaPlus } from "react-icons/fa6"
 import { IoCartOutline } from "react-icons/io5"
 import { FaRegHeart } from "react-icons/fa"
 
-import { cn, formatCurrency } from "@/lib/utils"
+import { cn, formatCurrency, setCartItem } from "@/lib/utils"
 import { ProductType } from "@/typings"
 import { urlFor } from "@/lib/sanity"
 
@@ -24,19 +24,15 @@ const ProductClient = ({
     product: ProductType
 }) => {
     const [selectedImage, setSelectedImage] = useState(product.images[0])
-    const [selectedColor, setSelectedColor] = useState(product.colors[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes ? product.sizes[0] : "")
+    const [selectedColor, setSelectedColor] = useState(product.colors[0][0])
+    const [selectedSize, setSelectedSize] = useState(product.sizes?.[0][0])
     const [quantity, setQuantity] = useState(1)
 
     const shoppingCart = useShoppingCart()
 
     const handleAddItem = () => {
-        shoppingCart.addItem(
-            product,
-            {
-                count: quantity,
-                product_metadata: product
-            })
+        const { item, count } = setCartItem(product, selectedColor, selectedSize, quantity)
+        shoppingCart.addItem(item, { count })
         setQuantity(1)
         toast("Added to cart", { duration: 1500 })
     }
@@ -136,7 +132,7 @@ const ProductClient = ({
                                     onClick={() => setSelectedColor(color)}
                                 ></div>
                             ))} */}
-                            {product.colors.map(color => (
+                            {product.colors[0].map(color => (
                                 <div
                                     key={color}
                                     className="w-5 h-5 xl:h-6 xl:w-6 rounded-full cursor-pointer"
@@ -156,7 +152,7 @@ const ProductClient = ({
                                 <>
                                     <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size:</span> {selectedSize}</div>
                                     <div className="mt-3 flex items-center gap-4">
-                                        {product.sizes.map(size => (
+                                        {product.sizes[0].map(size => (
                                             <div
                                                 key={size}
                                                 className={cn(

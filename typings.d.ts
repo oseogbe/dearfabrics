@@ -9,8 +9,12 @@ export type ProductType = {
     currency: string
     quantity?: number
     images: string[]
-    colors: string[]
-    sizes?: string[]
+    colors: {
+        [key: number]: string[]
+    }
+    sizes?: {
+        [key: number]: string[]
+    }
     stars: number
     ratings: number
     inStock?: boolean

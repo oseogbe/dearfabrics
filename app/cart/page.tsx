@@ -74,12 +74,12 @@ const CartPage = () => {
                         {cartProducts.map((product) => {
                             return (
                                 <div
-                                    key={product.slug}
+                                    key={product.id}
                                     className="relative flex flex-col min-[500px]:flex-row min-[500px]:items-start gap-5 py-6 border-b border-gray-200 group"
                                 >
                                     <div className="w-full md:max-w-[210px] flex items-center aspect-square bg-df-gray">
                                         <Image
-                                            src={urlFor(product.images[0] as string)
+                                            src={urlFor(product?.image as string)
                                                 .width(300)
                                                 .url()}
                                             alt={product.name as string}
@@ -91,27 +91,17 @@ const CartPage = () => {
                                     <div className="grid grid-cols-1 md:grid-cols-4 w-full">
                                         <div className="md:col-span-2 md:py-4">
                                             <div className="flex flex-col max-[500px]:items-center gap-3">
-                                                <Link
-                                                    href={`/${product.categories[0]}/${product.slug}`}
-                                                    className="text-center md:text-left font-semibold text-base leading-7 text-black hover:cursor-pointer"
-                                                >
-                                                    {product.name}
-                                                </Link>
+                                                {product.categories && product.categories.length > 0 && (
+                                                    <Link
+                                                        href={`/${product.categories[0]}/${product.slug}`}
+                                                        className="text-center md:text-left font-semibold text-base leading-7 text-black hover:cursor-pointer"
+                                                    >
+                                                        {product.name}
+                                                    </Link>
+                                                )}
                                                 {/* <h6 className="font-normal text-base leading-7 text-gray-500 uppercase">{product.categories[0]}</h6> */}
                                                 <div className="font-thin">
-                                                    {/* Safely access sizes and colors */}
-                                                    {product.sizes && product.sizes.length > 0 ? (
-                                                        <>
-                                                            {product.sizes[0]}
-                                                            {product.colors && product.colors.length > 0
-                                                                ? `, ${product.colors[0]}`
-                                                                : ""}
-                                                        </>
-                                                    ) : product.colors && product.colors.length > 0 ? (
-                                                        product.colors[0]
-                                                    ) : (
-                                                        ""
-                                                    )}
+                                                    {product?.size}, {product?.color}
                                                 </div>
 
                                                 <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300">
@@ -233,7 +223,7 @@ const CartPage = () => {
                                         </div>
                                         <div className="flex items-start md:py-8 max-[500px]:justify-center md:justify-end h-full max-md:mt-3">
                                             <p className="font-bold text-lg leading-8 text-gray-600 text-center transition-all duration-300">
-                                                {formatCurrency(product.price)}
+                                                {formatCurrency(product.price * product?.quantity)}
                                             </p>
                                         </div>
                                     </div>

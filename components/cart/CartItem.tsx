@@ -25,7 +25,7 @@ const CartItem = ({
         >
             <div className="relative w-[120px] md:w-[160px] h-full">
                 <Image
-                    src={urlFor(cartItem.images[0] as string).width(200).url()}
+                    src={urlFor(cartItem.image as string).width(200).url()}
                     fill
                     priority
                     sizes="(max-width: 160px) 160px, 160px"
