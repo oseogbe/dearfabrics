@@ -116,8 +116,8 @@ async function fetchSingleProduct(productSlug: string) {
       "categories": categories[]->slug.current,
       inStock,
       delivery,
-      "sizes": options[name=='Size'].values[],
-      "colors": options[name=='Colour'].values[],
+      "sizes": options[name=='sizes'].values[],
+      "colors": options[name=='colors'].values[],
       relatedProducts[]->{
         _id,
         name,
@@ -126,8 +126,8 @@ async function fetchSingleProduct(productSlug: string) {
         oldPrice,
         price,
         "images": images[].asset->url,
-        "sizes": options[name=='Size'].values[],
-        "colors": options[name=='Colour'].values[]
+        "sizes": options[name=='sizes'].values[],
+        "colors": options[name=='colors'].values[]
       }
     }`
     const data = await client.fetch(query)
