@@ -39,9 +39,9 @@ const FlashSales: React.FC<FlashSalesProps> = ({
             setSaleData(await fetchSaleData('Flash Sales'))
         }
         fetchData()
-    }, [])
+    }, [saleData])
 
-    if (!hasMounted || !saleData) {
+    if (!hasMounted || !saleData || new Date(saleData.startDate) > new Date() || new Date(saleData.endDate) < new Date()) {
         return null
     }
 
