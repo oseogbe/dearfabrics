@@ -243,46 +243,37 @@ const Navbar: React.FC<NavbarProps> = ({
                             </div>
                             <NavigationMenu className="hidden lg:flex">
                                 <NavigationMenuList>
-                                    {
-                                        navLinks.map(item => (
-                                            <NavigationMenuItem key={item.label}>
-                                                {
-                                                    item.link ?
-                                                        (
-                                                            <NavigationMenuItem>
-                                                                <Link href={item.link} legacyBehavior passHref>
-                                                                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                                                                        {item.label}
-                                                                    </NavigationMenuLink>
-                                                                </Link>
-                                                            </NavigationMenuItem>
-                                                        ) : (
-                                                            <>
-                                                                <NavigationMenuTrigger>
-                                                                    {item.label}
-                                                                </NavigationMenuTrigger>
-                                                                <NavigationMenuContent>
-                                                                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
-                                                                        {
-                                                                            item.children && item.children.map(child => (
-                                                                                <ListItem
-                                                                                    key={child.label}
-                                                                                    title={child.label}
-                                                                                    href={child.link}
-                                                                                >
-                                                                                    {child.info}
-                                                                                </ListItem>
-                                                                            ))
-                                                                        }
-
-                                                                    </ul>
-                                                                </NavigationMenuContent>
-                                                            </>
-                                                        )
-                                                }
-                                            </NavigationMenuItem>
-                                        ))
-                                    }
+                                    {navLinks.map((item) => (
+                                        <NavigationMenuItem key={item.label}>
+                                            {item.link ? (
+                                                <Link href={item.link} legacyBehavior passHref>
+                                                    <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                                                        {item.label}
+                                                    </NavigationMenuLink>
+                                                </Link>
+                                            ) : (
+                                                <>
+                                                    <NavigationMenuTrigger>
+                                                        {item.label}
+                                                    </NavigationMenuTrigger>
+                                                    <NavigationMenuContent>
+                                                        <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                                                            {item.children &&
+                                                                item.children.map((child) => (
+                                                                    <ListItem
+                                                                        key={child.label}
+                                                                        title={child.label}
+                                                                        href={child.link}
+                                                                    >
+                                                                        {child.info}
+                                                                    </ListItem>
+                                                                ))}
+                                                        </ul>
+                                                    </NavigationMenuContent>
+                                                </>
+                                            )}
+                                        </NavigationMenuItem>
+                                    ))}
                                 </NavigationMenuList>
                             </NavigationMenu>
                         </div>
