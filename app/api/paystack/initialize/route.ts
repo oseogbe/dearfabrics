@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server"
 
 export async function POST(request: NextRequest) {
     try {
-        const { email, amount, reference } = await request.json()
+        const { email, amount, order_id } = await request.json()
 
         const paystackUrl = 'https://api.paystack.co/transaction/initialize'
 
@@ -15,8 +15,10 @@ export async function POST(request: NextRequest) {
             body: JSON.stringify({
                 email,
                 amount,
-                reference,
-                callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/callback`
+                callback_url: `${process.env.NEXT_PUBLIC_BASE_URL}/payment/callback`,
+                metadata: {
+                    order_id
+                }
             })
         })
 

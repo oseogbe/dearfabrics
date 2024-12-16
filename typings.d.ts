@@ -31,6 +31,7 @@ export type OrderItem = {
 }
 
 export type OrderData = {
+    id: string
     customerName: string
     email: string
     billingAddress: string

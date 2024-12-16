@@ -12,7 +12,7 @@ import Container from "@/components/Container"
 import { Switch } from "@/components/ui/switch"
 import Loader from "@/components/Loader"
 
-import { formatCurrency } from "@/lib/utils"
+import { formatCurrency, generateOrderId } from "@/lib/utils"
 
 const countries = Country.getAllCountries()
 const country = "NG"
@@ -92,6 +92,8 @@ const CheckoutPage = () => {
         }
 
         try {
+            const orderId = generateOrderId()
+
             const response = await fetch('/api/paystack/initialize', {
                 method: 'POST',
                 headers: {
@@ -100,6 +102,7 @@ const CheckoutPage = () => {
                 body: JSON.stringify({
                     email: values.email,
                     amount: Math.round(grandTotal * 100),
+                    order_id: orderId
                 })
             })
 
@@ -118,6 +121,7 @@ const CheckoutPage = () => {
                 )
 
                 const orderData = {
+                    id: orderId,
                     customerName: formData.name,
                     email: formData.email,
                     billingAddress: formData.billingStreetAddress ? `${formData.billingStreetAddress}, ${formData.billingCity}, ${formData.billingState} ${formData.billingZipCode}, ${formData.billingCountry}` : `${formData.streetAddress}, ${formData.city}, ${formData.state} ${formData.zipCode}, ${formData.country}`,

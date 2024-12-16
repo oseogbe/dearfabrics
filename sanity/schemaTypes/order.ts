@@ -15,7 +15,7 @@ export default defineType({
         },
         {
             name: 'paymentId',
-            title: 'Payment ID (Paystack)',
+            title: 'Payment Reference (Paystack)',
             type: 'string',
             readOnly: true,
         },
@@ -98,6 +98,18 @@ export default defineType({
                 ],
             },
             initialValue: 'pending',
+            readOnly: true,
+        },
+        {
+            name: 'created',
+            title: 'Created Date',
+            type: 'datetime',
+            readOnly: true,
+        },
+        {
+            name: 'updated',
+            title: 'Updated Date',
+            type: 'datetime',
             readOnly: true,
         },
     ],

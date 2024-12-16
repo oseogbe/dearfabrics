@@ -3,7 +3,6 @@ import { unstable_noStore as noStore } from "next/cache"
 import { createClient } from "next-sanity"
 import ImageURLBuilder from "@sanity/image-url"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
-import { generateOrderId } from "./utils"
 import { OrderData } from "@/typings"
 import { v4 as uuidv4 } from 'uuid'
 
@@ -152,7 +151,7 @@ async function createOrder(orderData: OrderData) {
   try {
     const order = {
       _type: 'order',
-      id: generateOrderId(),
+      id: orderData.id,
       customerName: orderData.customerName,
       email: orderData.email,
       billingAddress: orderData.billingAddress,
@@ -176,6 +175,8 @@ async function createOrder(orderData: OrderData) {
       discount: orderData.discount,
       grandTotal: orderData.grandTotal,
       status: 'pending',
+      created: new Date().toISOString(),
+      updated: new Date().toISOString(),
     }
 
     const result = await client.create(order)
@@ -186,11 +187,34 @@ async function createOrder(orderData: OrderData) {
   }
 }
 
+async function updateOrderStatus(orderId: string, paymentRef: string, newStatus: string) {
+  try {
+    const currentTime = new Date().toISOString()
+
+    const order = await client.fetch(`*[_type == "order" && id == $orderId][0]`, { orderId })
+
+    if (!order) {
+      throw new Error(`Order with id ${orderId} not found`)
+    }
+
+    const result = await client.patch(order._id).set({
+      paymentId: paymentRef,
+      status: newStatus,
+      updated: currentTime
+    }).commit()
+    return result
+  } catch (error) {
+    console.error('Error updating order status:', error)
+    throw error
+  }
+}
+
 export {
   urlFor,
   fetchCategories,
   fetchProductsByCategory,
   fetchSingleProduct,
   fetchSaleData,
-  createOrder
+  createOrder,
+  updateOrderStatus
 }
