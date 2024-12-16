@@ -128,11 +128,11 @@ const CheckoutPage = () => {
                     shippingAddress: `${formData.streetAddress}, ${formData.city}, ${formData.state} ${formData.zipCode}, ${formData.country}`,
                     phone: `${formData.phoneCode}${formData.phoneNo}`,
                     items: line_items,
-                    total: Number(totalPrice),
+                    subtotal: Number(totalPrice),
                     shipping: Number(shipping),
                     tax: Number(tax),
                     discount: Number(discount),
-                    grandTotal: Number(grandTotal),
+                    total: Number(grandTotal),
                 }
 
                 const response = await fetch('/api/orders', {

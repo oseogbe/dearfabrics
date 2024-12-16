@@ -57,8 +57,8 @@ export default defineType({
             readOnly: true,
         },
         {
-            name: 'total',
-            title: 'Total (₦)',
+            name: 'subtotal',
+            title: 'Subtotal (₦)',
             type: 'number',
             readOnly: true,
         },
@@ -81,7 +81,7 @@ export default defineType({
             readOnly: true,
         },
         {
-            name: 'grandTotal',
+            name: 'total',
             title: 'Amount Paid (₦)',
             type: 'number',
             readOnly: true,

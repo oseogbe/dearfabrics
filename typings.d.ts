@@ -38,11 +38,11 @@ export type OrderData = {
     shippingAddress: string
     phone: string
     items: OrderItem[]
-    total: number
+    subtotal: number
     shipping: number
     tax: number
     discount: number
-    grandTotal: number
+    total: number
 }
 
 // export type RelatedProductType = Pick<ProductType, "name" | "slug" | "image" | "oldPrice" | "price" | "stars" | "ratings">
