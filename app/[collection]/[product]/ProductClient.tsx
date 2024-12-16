@@ -23,8 +23,8 @@ const ProductClient = ({
 }: {
     product: ProductType
 }) => {
-    const [selectedImage, setSelectedImage] = useState(product.images[0])
-    const [selectedColor, setSelectedColor] = useState(product.colors[0][0])
+    const [selectedImage, setSelectedImage] = useState(product.images?.[0])
+    const [selectedColor, setSelectedColor] = useState(product.colors?.[0][0])
     const [selectedSize, setSelectedSize] = useState(product.sizes?.[0][0])
     const [quantity, setQuantity] = useState(1)
 
@@ -42,7 +42,7 @@ const ProductClient = ({
             <div className="flex-1">
                 <div className="flex flex-col-reverse md:flex-row h-auto md:h-[650px] xl:h-[700px] overflow-y-hidden">
                     <div className="w-full md:w-32 flex flex-row md:flex-col md:gap-y-4 overflow-x-scroll md:overflow-y-scroll scrollbar-hide">
-                        {product.images.map((image, i) => (
+                        {product.images?.map((image, i) => (
                             <div key={i} className="h-20 md:h-auto aspect-square border-2 border-df-gray cursor-pointer">
                                 <Image
                                     src={urlFor(image).width(200).url()}
@@ -92,7 +92,7 @@ const ProductClient = ({
             </div>
             <div className="flex-1">
                 <div className="mt-8">
-                    <div className="text-xs xl:text-base text-[#807D7E] uppercase">{product.categories[0]}</div>
+                    <div className="text-xs xl:text-base text-[#807D7E] uppercase">{product.categories?.[0]}</div>
                     <div className="mt-4 md:mt-8 text-xl md:text-2xl xl:text-4xl text-[#3C4242] font-bold">{product.name}</div>
                     <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] text-3xl text-[#3C4242] font-medium">
                         {product.oldPrice ? (
@@ -132,7 +132,7 @@ const ProductClient = ({
                                     onClick={() => setSelectedColor(color)}
                                 ></div>
                             ))} */}
-                            {product.colors[0].map(color => (
+                            {product.colors?.[0].map(color => (
                                 <div
                                     key={color}
                                     className="w-5 h-5 xl:h-6 xl:w-6 rounded-full cursor-pointer"
@@ -152,7 +152,7 @@ const ProductClient = ({
                                 <>
                                     <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size:</span> {selectedSize}</div>
                                     <div className="mt-3 flex items-center gap-4">
-                                        {product.sizes[0].map(size => (
+                                        {product.sizes?.[0].map(size => (
                                             <div
                                                 key={size}
                                                 className={cn(
