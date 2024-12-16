@@ -57,7 +57,7 @@ const Footer = () => {
                             <div className="flex flex-col gap-3 md:gap-4">
                                 <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">New Arrivals</a>
                                 <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Fabrics</a>
-                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Jewelries</a>
+                                <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Jewelry</a>
                                 <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Sales</a>
                                 <a className="text-zinc-500 text-sm xl:text-base cursor-pointer hover:underline" href="#">Wishlist</a>
                             </div>

@@ -22,7 +22,7 @@ const HomePage = () => {
     },
     {
       heading: "Best Quality",
-      title: "The Best Jewelries",
+      title: "The Best Jewelry",
       offerLabel: "Up to 50% Off",
       actionLabel: "Explore Items",
       actionLink: "#",
