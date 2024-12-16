@@ -6,6 +6,29 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function formatDate(dateString: string) {
+  const date = new Date(dateString)
+
+  // Get day, month, year, and weekday
+  const day = date.getDate()
+  const month = date.toLocaleString('en-US', { month: 'long' })
+  const year = date.getFullYear()
+  const weekday = date.toLocaleString('en-US', { weekday: 'short' })
+
+  // Add ordinal suffix to the day
+  const ordinalSuffix = (day: number) => {
+    if (day > 3 && day < 21) return 'th'
+    switch (day % 10) {
+      case 1: return 'st'
+      case 2: return 'nd'
+      case 3: return 'rd'
+      default: return 'th'
+    }
+  }
+
+  return `${weekday}, ${day}${ordinalSuffix(day)} ${month}, ${year}`
+}
+
 export function formatCurrency(amount: number) {
   return new Intl.NumberFormat('en-NG', {
     style: 'currency',

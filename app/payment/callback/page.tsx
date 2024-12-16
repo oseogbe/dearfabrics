@@ -1,3 +1,6 @@
+import Container from "@/components/Container"
+import { redirect } from "next/navigation"
+
 const PaymentCallbackPage = async ({
     searchParams
 }: {
@@ -15,15 +18,19 @@ const PaymentCallbackPage = async ({
 
         if (data.status) {
             verificationStatus = 'Payment successful'
+
+            const orderId = data.data.metadata.order_id
+
+            redirect(`/orders/${orderId}`)
         } else {
             verificationStatus = 'Payment failed'
         }
     }
 
     return (
-        <div>
-            <h1 className='text-3xl font-bold'>{verificationStatus}</h1>
-        </div>
+        <Container>
+            <h1 className='pt-5 lg:pt-10 text-[18px] md:text-[22px] lg:text-3xl text-[#3C4242] font-medium'>{verificationStatus}</h1>
+        </Container>
     )
 }
 

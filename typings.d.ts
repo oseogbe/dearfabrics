@@ -24,6 +24,15 @@ export type ProductType = {
 
 export type OrderItem = {
     productId: string
+    product: {
+        id: string,
+        name: string,
+        slug: string,
+        price: number,
+        oldPrice: number,
+        description: string,
+        images: string[]
+    }
     size: string
     color: string
     quantity: number
@@ -43,6 +52,8 @@ export type OrderData = {
     tax: number
     discount: number
     total: number
+    created: string
+    updated: string
 }
 
 // export type RelatedProductType = Pick<ProductType, "name" | "slug" | "image" | "oldPrice" | "price" | "stars" | "ratings">

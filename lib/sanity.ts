@@ -118,7 +118,7 @@ async function fetchSaleData(sale: string) {
   noStore()
 
   try {
-    const query = `*[_type == 'sale' && name == '${sale}'][0] {
+    const query = `*[_type == 'sale' && name == $sale][0] {
       "id": _id,
       name,
       startDate,
@@ -139,11 +139,36 @@ async function fetchSaleData(sale: string) {
         "colors": options[name=='colors'].values[],
       }
     }`
-    const data = await client.fetch(query)
+    const data = await client.fetch(query, { sale })
     return data
   } catch (error) {
     console.error('Database Error:', error)
     throw new Error('Failed to fetch sale data.')
+  }
+}
+
+async function getOrder(orderId: string) {
+  try {
+    const query = `*[_type == "order" && id == $orderId][0] {
+      ...,
+      items[]{
+        ...,
+        product->{
+          'id': _id,
+          name,
+          slug,
+          price,
+          oldPrice,
+          description,
+          images
+        }
+      }
+    }`
+    const order = await client.fetch(query, { orderId })
+    return order
+  } catch (error) {
+    console.error('Error retrieving order:', error)
+    throw error
   }
 }
 
@@ -215,6 +240,7 @@ export {
   fetchProductsByCategory,
   fetchSingleProduct,
   fetchSaleData,
+  getOrder,
   createOrder,
   updateOrderStatus
 }
