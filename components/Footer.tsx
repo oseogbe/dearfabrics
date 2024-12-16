@@ -77,7 +77,7 @@ const Footer = () => {
                             <div className="flex flex-col gap-3 md:gap-4">
                                 <div className="text-zinc-500 text-sm xl:text-base">Suite C11,12, 2XL Mall, Plot 111, Christiana Ajayi Okunuga Street, Gwarinpa, Abuja</div>
                                 <div className="text-zinc-500 text-sm xl:text-base">shop@dearfabrics.com</div>
-                                <div className="text-zinc-500 text-sm xl:text-base">+234 902 052 4006</div>
+                                <div className="text-zinc-500 text-sm xl:text-base">+234 702 578 9859</div>
                             </div>
                         </div>
                     </div>

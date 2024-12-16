@@ -17,7 +17,7 @@ const ContactPage = async () => {
             imageSrc: "/img/assets/call.svg",
             alt: "dearfabrics.ng phonenumber icon",
             name: "Call Us",
-            value: "+234 902 052 4006"
+            value: "+234 702 578 9859"
         },
         {
             imageSrc: "/img/assets/mail.svg",

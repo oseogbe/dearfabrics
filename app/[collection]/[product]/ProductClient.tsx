@@ -94,7 +94,7 @@ const ProductClient = ({
                 <div className="mt-8">
                     <div className="text-xs xl:text-base text-[#807D7E] uppercase">{product.categories?.[0]}</div>
                     <div className="mt-4 md:mt-8 text-xl md:text-2xl xl:text-4xl text-[#3C4242] font-bold">{product.name}</div>
-                    <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] text-3xl text-[#3C4242] font-medium">
+                    <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] lg:text-3xl text-[#3C4242] font-medium">
                         {product.oldPrice ? (
                             <div>
                                 {`${formatCurrency(product.price)}`}
