@@ -12,7 +12,7 @@ import Container from "@/components/Container"
 import { Switch } from "@/components/ui/switch"
 import Loader from "@/components/Loader"
 
-import { formatCurrency, generateRandomString } from "@/lib/utils"
+import { formatCurrency } from "@/lib/utils"
 
 const countries = Country.getAllCountries()
 const country = "NG"
@@ -87,6 +87,8 @@ const CheckoutPage = () => {
             ...values,
             country: Country.getCountryByCode(values.countryCode)?.name,
             state: State.getStateByCodeAndCountry(values.stateCode, values.countryCode)?.name,
+            billingCountry: values.billingCountryCode ? Country.getCountryByCode(values.billingCountryCode)?.name : null,
+            billingState: values.billingStateCode && values.billingCountryCode ? State.getStateByCodeAndCountry(values.billingStateCode, values.billingCountryCode)?.name : null,
         }
 
         try {
@@ -98,19 +100,57 @@ const CheckoutPage = () => {
                 body: JSON.stringify({
                     email: values.email,
                     amount: Math.round(grandTotal * 100),
-                    reference: `dfng${generateRandomString(12)}`
                 })
             })
 
             const data = await response.json()
 
             if (data.status) {
+                if (!cartDetails) return
+                const line_items = Object.values(cartDetails).flatMap(
+                    product => ({
+                        productId: product.id,
+                        size: product.size,
+                        color: product.color,
+                        quantity: product.quantity,
+                        price: product.price
+                    })
+                )
+
+                const orderData = {
+                    customerName: formData.name,
+                    email: formData.email,
+                    billingAddress: formData.billingStreetAddress ? `${formData.billingStreetAddress}, ${formData.billingCity}, ${formData.billingState} ${formData.billingZipCode}, ${formData.billingCountry}` : `${formData.streetAddress}, ${formData.city}, ${formData.state} ${formData.zipCode}, ${formData.country}`,
+                    shippingAddress: `${formData.streetAddress}, ${formData.city}, ${formData.state} ${formData.zipCode}, ${formData.country}`,
+                    phone: `${formData.phoneCode}${formData.phoneNo}`,
+                    items: line_items,
+                    total: Number(totalPrice),
+                    shipping: Number(shipping),
+                    tax: Number(tax),
+                    discount: Number(discount),
+                    grandTotal: Number(grandTotal),
+                }
+
+                const response = await fetch('/api/orders', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(orderData),
+                })
+
+                const result = await response.json()
+
+                if (!response.ok) {
+                    throw new Error(result.error || 'Something went wrong')
+                }
+
                 window.location.href = data.data.authorization_url
             } else {
                 alert('Payment initialization failed. Try again.')
             }
         } catch (error) {
-            console.error('Error initializing payment:', error)
+            console.error(error)
         }
 
         // reset()

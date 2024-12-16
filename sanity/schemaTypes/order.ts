@@ -8,6 +8,18 @@ export default defineType({
     icon: PackageIcon,
     fields: [
         {
+            name: 'id',
+            title: 'Order ID',
+            type: 'string',
+            readOnly: true,
+        },
+        {
+            name: 'paymentId',
+            title: 'Payment ID (Paystack)',
+            type: 'string',
+            readOnly: true,
+        },
+        {
             name: 'customerName',
             title: 'Customer Name',
             type: 'string',
@@ -20,8 +32,14 @@ export default defineType({
             readOnly: true,
         },
         {
-            name: 'address',
-            title: 'Address',
+            name: 'billingAddress',
+            title: 'Billing Address',
+            type: 'string',
+            readOnly: true,
+        },
+        {
+            name: 'shippingAddress',
+            title: 'Shipping Address',
             type: 'string',
             readOnly: true,
         },
@@ -40,7 +58,31 @@ export default defineType({
         },
         {
             name: 'total',
-            title: 'Total',
+            title: 'Total (₦)',
+            type: 'number',
+            readOnly: true,
+        },
+        {
+            name: 'shipping',
+            title: 'Shipping Charge (₦)',
+            type: 'number',
+            readOnly: true,
+        },
+        {
+            name: 'tax',
+            title: 'Tax Charge (₦)',
+            type: 'number',
+            readOnly: true,
+        },
+        {
+            name: 'discount',
+            title: 'Discount (₦)',
+            type: 'number',
+            readOnly: true,
+        },
+        {
+            name: 'grandTotal',
+            title: 'Amount Paid (₦)',
             type: 'number',
             readOnly: true,
         },
@@ -52,6 +94,7 @@ export default defineType({
                 list: [
                     { title: 'Pending', value: 'pending' },
                     { title: 'Completed', value: 'completed' },
+                    { title: 'Failed', value: 'failed' },
                 ],
             },
             initialValue: 'pending',
@@ -73,6 +116,16 @@ export const orderItem = {
             to: [{ type: 'product' }],
         },
         {
+            name: 'size',
+            title: 'Size',
+            type: 'string',
+        },
+        {
+            name: 'color',
+            title: 'Color',
+            type: 'string',
+        },
+        {
             name: 'quantity',
             title: 'Quantity',
             type: 'number',
@@ -83,4 +136,18 @@ export const orderItem = {
             type: 'number',
         },
     ],
+    preview: {
+        select: {
+            productName: 'product.name',
+            quantity: 'quantity',
+            color: 'color',
+            size: 'size',
+        },
+        prepare({ productName, quantity, color, size }: { productName: string, quantity: number, color: string, size: string }) {
+            return {
+                title: `${productName || 'Unknown Product'} (${quantity || 0})`,
+                subtitle: `${color || 'No color selected'}, ${size || 'No size selected'}`,
+            }
+        },
+    },
 }

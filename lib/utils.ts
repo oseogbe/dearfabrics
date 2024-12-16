@@ -50,5 +50,11 @@ export function setCartItem(product: Product, selectedColor: string, selectedSiz
       shipsIn: product.shipsIn,
     },
     count: quantity,
-  };
+  }
+}
+
+export function generateOrderId() {
+  const timestamp = Date.now().toString(36).toUpperCase() // Base36 encoding of timestamp
+  const randomString = Math.random().toString(36).substring(2, 8).toUpperCase() // Random 6-character string
+  return `DFNG-${timestamp}-${randomString}` // Example: DFNG-2PT7D1-A1B2C3
 }

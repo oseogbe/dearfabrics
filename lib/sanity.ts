@@ -3,12 +3,16 @@ import { unstable_noStore as noStore } from "next/cache"
 import { createClient } from "next-sanity"
 import ImageURLBuilder from "@sanity/image-url"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { generateOrderId } from "./utils"
+import { OrderData } from "@/typings"
+import { v4 as uuidv4 } from 'uuid'
 
 export const client = createClient({
   projectId: "4e9k5q7y",
   dataset: "production",
   apiVersion: "v1",
-  useCdn: true
+  token: process.env.SANITY_WRITE_TOKEN,
+  useCdn: false, // Disable CDN for write operations
 })
 
 const imgBuilder = ImageURLBuilder(client)
@@ -36,32 +40,6 @@ async function fetchCategories() {
   }
 }
 
-// async function fetchProductsByCategory(categorySlug: string) {
-//   // Add noStore() here prevent the response from being cached.
-//   // This is equivalent to in fetch(..., {cache: 'no-store'}).
-
-//   noStore()
-
-//   try {
-//     const query = `*[_type == 'product' && references(*[_type == 'category' && slug.current == '${categorySlug}']._id)] {
-//       name,
-//       "slug": slug.current,
-//       "images": images[].asset->url,
-//       oldPrice,
-//       price,
-//       inStock,
-//       "sizes": options[name=='sizes'].values[],
-//       "colors": options[name=='colors'].values[]
-//     }`
-//     const data = await client.fetch(query)
-//     return data
-//   } catch (error) {
-//     console.error('Database Error:', error)
-//     throw new Error('Failed to fetch products.')
-//   }
-// }
-
-
 async function fetchProductsByCategory(categorySlug: string, page: number, pageSize: number) {
   // Add noStore() here prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
@@ -79,7 +57,7 @@ async function fetchProductsByCategory(categorySlug: string, page: number, pageS
       "images": images[].asset->url,
       oldPrice,
       price,
-      "currency": "USD",
+      "currency": "NGN",
       inStock,
       "sizes": options[name=='sizes'].values[],
       "colors": options[name=='colors'].values[]
@@ -111,8 +89,7 @@ async function fetchSingleProduct(productSlug: string) {
       "images": images[].asset->url,
       oldPrice,
       price,
-      "currency": "USD",
-      "slug": slug.current,
+      "currency": "NGN",
       "categories": categories[]->slug.current,
       inStock,
       delivery,
@@ -148,15 +125,19 @@ async function fetchSaleData(sale: string) {
       startDate,
       endDate,
       "products": products[]->{
+        "id": _id,
         name,
         "slug": slug.current,
-        "categories": categories[]->slug.current,
+        description,
         "images": images[].asset->url,
         oldPrice,
         price,
+        "currency": "NGN",
+        "categories": categories[]->slug.current,
         inStock,
+        delivery,
         "sizes": options[name=='sizes'].values[],
-        "colors": options[name=='colors'].values[]
+        "colors": options[name=='colors'].values[],
       }
     }`
     const data = await client.fetch(query)
@@ -167,10 +148,49 @@ async function fetchSaleData(sale: string) {
   }
 }
 
+async function createOrder(orderData: OrderData) {
+  try {
+    const order = {
+      _type: 'order',
+      id: generateOrderId(),
+      customerName: orderData.customerName,
+      email: orderData.email,
+      billingAddress: orderData.billingAddress,
+      shippingAddress: orderData.shippingAddress,
+      phone: orderData.phone,
+      items: orderData.items.map(item => ({
+        _type: 'orderItem',
+        _key: uuidv4(),
+        product: {
+          _type: 'reference',
+          _ref: item.productId,
+        },
+        size: item.size,
+        color: item.color,
+        quantity: item.quantity,
+        price: item.price,
+      })),
+      total: orderData.total,
+      shipping: orderData.shipping,
+      tax: orderData.tax,
+      discount: orderData.discount,
+      grandTotal: orderData.grandTotal,
+      status: 'pending',
+    }
+
+    const result = await client.create(order)
+    return result
+  } catch (error) {
+    console.error('Error creating order:', error)
+    throw error
+  }
+}
+
 export {
   urlFor,
   fetchCategories,
   fetchProductsByCategory,
   fetchSingleProduct,
-  fetchSaleData
+  fetchSaleData,
+  createOrder
 }
