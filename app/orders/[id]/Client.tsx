@@ -35,7 +35,7 @@ const Client = ({ order }: { order: OrderData }) => {
                     </div>
                     <div className="box group">
                         <p className="font-normal text-base leading-7 text-gray-500 mb-3 transition-all duration-500 group-hover:text-gray-700">Payment Method</p>
-                        <img src="/img/assets/mastercard.svg" width={70} alt="mastercard logo" />
+                        <Image src="/img/assets/mastercard.svg" width={70} height={70} alt="mastercard logo" />
                     </div>
                     <div className="box group">
                         <p className="font-normal text-base leading-7 text-gray-500 mb-3 transition-all duration-500 group-hover:text-gray-700">Address</p>

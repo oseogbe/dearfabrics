@@ -155,7 +155,9 @@ export const orderItem = {
             color: 'color',
             size: 'size',
         },
-        prepare({ productName, quantity, color, size }: { productName: string, quantity: number, color: string, size: string }) {
+        prepare(selection: Record<string, any>) {
+            const { productName, quantity, color, size } = selection
+
             return {
                 title: `${productName || 'Unknown Product'} (${quantity || 0})`,
                 subtitle: `${color || 'No color selected'}, ${size || 'No size selected'}`,

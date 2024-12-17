@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic'
+
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
 import { updateOrderStatus } from '@/lib/sanity'
@@ -37,10 +39,4 @@ export async function POST(req: NextRequest) {
         // Invalid signature (possible security issue)
         return NextResponse.json({ error: 'Invalid signature' }, { status: 400 })
     }
-}
-
-export const config = {
-    api: {
-        bodyParser: false, // Disable body parsing to manually parse request body for signature verification
-    },
 }
