@@ -9,9 +9,9 @@ import ProductCard from "@/components/product/ProductCard"
 import Pagination from "@/components/Pagination"
 import Select from "@/components/Select"
 
-import { IoClose } from "react-icons/io5"
-import { ProductType } from "@/typings"
 import { formatCurrency } from "@/lib/utils"
+import { ProductType } from "@/typings"
+import { IoClose } from "react-icons/io5"
 
 const ProductsClient = ({
     initialProducts,
@@ -22,6 +22,7 @@ const ProductsClient = ({
     maxPrice,
     category,
     subcategory,
+    relatedCategories
 }: {
     initialProducts: ProductType[]
     initialTotal: number
@@ -31,6 +32,13 @@ const ProductsClient = ({
     maxPrice: number
     category: string
     subcategory: string
+    relatedCategories: {
+        _id: string
+        name: string
+        slug: {
+            current: string
+        }
+    }[]
 }) => {
     const searchParams = useSearchParams()
     const pathname = usePathname()
@@ -51,28 +59,34 @@ const ProductsClient = ({
         setPriceRange([minPrice, maxPrice])
     }, [minPrice, maxPrice])
 
-    // Fetch products dynamically when filters or pagination changes
     useEffect(() => {
-        const fetchData = async () => {
-            const queryParams = new URLSearchParams({
-                page: currentPage.toString(),
-                pageSize: pageSize.toString(),
-                categories: selectedCategories.join(","),
-                minPrice: priceRange[0].toString(),
-                maxPrice: priceRange[1].toString(),
-            })
+        const query = selectedCategories.length > 0 ? `?categories=${selectedCategories.join(',')}` : ''
+        replace(`${pathname}${query}`)
+    }, [pathname, replace, selectedCategories])
 
-            const response = await fetch(
-                `/api/products?category=${category}&subcategory=${subcategory}&${queryParams}`
-            )
-            const data = await response.json()
 
-            setProducts(data.products)
-            setTotal(data.total)
-        }
+    // Fetch products dynamically when filters or pagination changes
+    // useEffect(() => {
+    //     const fetchData = async () => {
+    //         const queryParams = new URLSearchParams({
+    //             page: currentPage.toString(),
+    //             pageSize: pageSize.toString(),
+    //             categories: selectedCategories.join(","),
+    //             minPrice: priceRange[0].toString(),
+    //             maxPrice: priceRange[1].toString(),
+    //         })
 
-        fetchData()
-    }, [currentPage, pageSize, selectedCategories, priceRange, category, subcategory])
+    //         const response = await fetch(
+    //             `/api/products?category=${category}&subcategory=${subcategory}&${queryParams}`
+    //         )
+    //         const data = await response.json()
+
+    //         setProducts(data.products)
+    //         setTotal(data.total)
+    //     }
+
+    //     fetchData()
+    // }, [currentPage, pageSize, selectedCategories, priceRange, category, subcategory])
 
     const handlePriceChange = (values: number[]) => {
         setPriceRange(values)
@@ -131,6 +145,7 @@ const ProductsClient = ({
                         minPrice={minPrice}
                         maxPrice={maxPrice}
                         selectedCategories={selectedCategories}
+                        relatedCategories={relatedCategories}
                         selectedColors={selectedColors}
                         selectedSizes={selectedSizes}
                         onPriceChange={handlePriceChange}

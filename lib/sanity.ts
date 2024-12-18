@@ -39,6 +39,25 @@ async function fetchCategories() {
   }
 }
 
+async function fetchSubcategories(slug: string) {
+  try {
+    const query = `*[_type == "category" && slug.current == $slug][0] {
+      subCategories[]->{
+        _id,
+        name,
+        slug
+      }
+    }`
+
+    const result = await client.fetch(query, { slug })
+    return result?.subCategories
+  } catch (error) {
+    console.error('Database Error:', error)
+    throw new Error('Failed to fetch subcategories.')
+  }
+
+}
+
 async function fetchProductsByCategory(category: string, subcategory: string, page: number, pageSize: number) {
   // Add noStore() here prevent the response from being cached.
   // This is equivalent to in fetch(..., {cache: 'no-store'}).
@@ -47,7 +66,7 @@ async function fetchProductsByCategory(category: string, subcategory: string, pa
   const skip = (page - 1) * pageSize
 
   try {
-    const productsQuery = `*[_type == "product" && references(*[_type == "category" && isTopLevel == true  && 
+    const productsQuery = `*[_type == "product" && references(*[_type == "category" && isTopLevel == true && 
     slug.current == '${category}']._id) && references(*[_type == "category" && slug.current == '${subcategory}']._id)] 
     | order(_created_at desc) [${skip}...${skip + pageSize}] {
       "id": _id,
@@ -64,7 +83,8 @@ async function fetchProductsByCategory(category: string, subcategory: string, pa
     }`
     const products = await client.fetch(productsQuery)
 
-    const countQuery = `count(*[_type == 'product' && references(*[_type == 'category' && slug.current == '${category}' && slug.current == '${subcategory}']._id)])`
+    const countQuery = `count(*[_type == "product" && references(*[_type == "category" && isTopLevel == true && 
+    slug.current == '${category}']._id) && references(*[_type == "category" && slug.current == '${subcategory}']._id)])`
     const total = await client.fetch(countQuery)
 
     return {
@@ -238,6 +258,7 @@ async function updateOrderStatus(orderId: string, paymentRef: string, newStatus:
 export {
   urlFor,
   fetchCategories,
+  fetchSubcategories,
   fetchProductsByCategory,
   fetchSingleProduct,
   fetchSaleData,

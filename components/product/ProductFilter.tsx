@@ -11,6 +11,13 @@ interface ProductFilterProps {
     minPrice: number
     maxPrice: number
     selectedCategories: string[]
+    relatedCategories: {
+        _id: string
+        name: string
+        slug: {
+            current: string
+        }
+    }[]
     selectedColors: string[]
     selectedSizes: string[]
     onPriceChange: (values: number[]) => void
@@ -24,6 +31,7 @@ const ProductFilter = ({
     minPrice,
     maxPrice,
     selectedCategories,
+    relatedCategories,
     selectedColors,
     selectedSizes,
     onPriceChange,
@@ -46,15 +54,6 @@ const ProductFilter = ({
             setStep(100000)
         }
     }, [maxPrice])
-
-    const subCategories = [
-        "Lace",
-        "Aso-oke",
-        "George",
-        "Flower",
-        "Plain",
-        "Ankara"
-    ]
 
     // TODO: change to colors defined for products
     const colors = [
@@ -90,14 +89,14 @@ const ProductFilter = ({
                 <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Sub-categories</h4>
                 <div className='space-y-4'>
                     {
-                        subCategories.map(category => (
-                            <div key={category} className='flex justify-between'>
-                                <h6 className='text-[#3C4242] text-xs xl:text-base font-semibold'>{category}</h6>
+                        relatedCategories.map(category => (
+                            <div key={category._id} className='flex justify-between'>
+                                <h6 className='text-[#3C4242] text-xs xl:text-base font-semibold'>{category.name}</h6>
                                 <input
                                     type="checkbox"
                                     className="shrink-0 border-gray-400 rounded !text-df-yellow focus:ring-0"
-                                    checked={selectedCategories.includes(category)}
-                                    onChange={e => onCategoryChange(category, e.target.checked)}
+                                    checked={selectedCategories.includes(category.slug.current)}
+                                    onChange={e => onCategoryChange(category.slug.current, e.target.checked)}
                                 />
                             </div>
                         ))

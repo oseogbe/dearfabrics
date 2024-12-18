@@ -1,4 +1,4 @@
-import { fetchProductsByCategory } from "@/lib/sanity"
+import { fetchProductsByCategory, fetchSubcategories } from "@/lib/sanity"
 import Container from "@/components/Container"
 import ProductsClient from "./ProductsClient"
 import { ProductType } from "@/typings"
@@ -21,6 +21,7 @@ const CollectionPage = async ({ params }: { params: { category: string; subcateg
     const currentPage = 1
 
     const { products, total } = await fetchProductsByCategory(category, subcategory, currentPage, pageSize)
+    const subCategories = await fetchSubcategories(category)
 
     const productPrices = products.map((product: ProductType) => product.price)
     const minPrice = formatPrice(Math.min(...productPrices), "down")
@@ -38,6 +39,7 @@ const CollectionPage = async ({ params }: { params: { category: string; subcateg
                     maxPrice={maxPrice}
                     category={category}
                     subcategory={subcategory}
+                    relatedCategories={subCategories}
                 />
             </div>
         </Container>
