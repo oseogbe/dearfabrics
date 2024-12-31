@@ -27,8 +27,8 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
                     className="w-24 xl:w-32 rounded-full shadow-lg dark:shadow-black/20 border-e-2 border-df-yellow"
                 />
             </div>
-            <h5 className="mb-4 text-center text-sm xl:text-lg font-bold">{commenter}</h5>
-            <p className="mb-4 text-xs xl:text-base text-center">
+            <h5 className="mb-4 text-center text-sm xl:text-lg font-bold text-gray-900">{commenter}</h5>
+            <p className="mb-4 text-xs xl:text-base text-center text-gray-900">
                 {comment}
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 96 960 960" className="inline-block w-4 xl:w-6">
                     <path fill="currentColor"

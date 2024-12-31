@@ -23,7 +23,7 @@ const Testimonials: React.FC<TestimonialsProps> = ({
     return (
         <div>
             <div className="pl-5 border-l-4 border-df-yellow">
-                <h3 className="font-bold text-xl md:text-2xl xl:text-4xl">Testimonials</h3>
+                <h3 className="font-bold text-xl md:text-2xl xl:text-4xl text-gray-900">Testimonials</h3>
             </div>
             <div className="mt-6 md:mt-8 xl:mt-[62px]">
                 <Swiper

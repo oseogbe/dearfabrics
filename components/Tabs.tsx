@@ -33,7 +33,7 @@ const CustomTabs = ({
                 ))}
             </TabsList>
             {tabsContent.map(({ value, body }) => (
-                <TabsContent key={value} value={value} className="w-full border-t mt-0 pt-6 text-sm xl:text-base">{body}</TabsContent>
+                <TabsContent key={value} value={value} className="w-full border-t mt-0 pt-6 text-sm text-gray-900 xl:text-base">{body}</TabsContent>
             ))}
         </Tabs>
     )

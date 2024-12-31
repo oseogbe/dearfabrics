@@ -635,7 +635,7 @@ const CheckoutPage = () => {
                                 </button>
 
                                 <p className="text-sm font-normal text-gray-500">One or more items in your cart require an account.
-                                    <a href="#" title="" className="font-medium text-df-yellow/80 underline hover:no-underline">
+                                    <a href="#" title="" className="font-medium text-df-yellow/80 underline hover:no-underline ml-1">
                                         Sign in or create an account now.
                                     </a>.
                                 </p>

@@ -45,12 +45,12 @@ const ProductCard = ({
             </div>
             <div className="mt-3">
                 <Link href={`/${product.categories[0]}/${product.slug}`} className="flex flex-col gap-2">
-                    <h4 className="text-sm md:text-base font-bold">
+                    <h4 className="text-sm md:text-base text-gray-900 font-bold">
                         {product.name}
                     </h4>
                     <div className="flex items-center gap-2 text-sm md:text-base">
-                        <div className="bg-df-gray p-2 rounded-lg font-bold">{formatCurrency(product.price)}</div>
-                        {product.oldPrice && <div className="line-through">{formatCurrency(product.oldPrice)}</div>}
+                        <div className="bg-df-gray p-2 rounded-lg font-bold text-gray-900">{formatCurrency(product.price)}</div>
+                        {product.oldPrice && <div className="line-through text-gray-900">{formatCurrency(product.oldPrice)}</div>}
                     </div>
                 </Link>
                 <div className="mt-2">

@@ -56,7 +56,7 @@ const CartPage = () => {
                         {!cartDetails ||
                             (!cartCount && (
                                 <div className="grid place-items-center h-[50vh]">
-                                    <div className="flex flex-col items-center">
+                                    <div className="flex flex-col items-center text-gray-900">
                                         <div className="flex">
                                             <motion.div
                                                 animate={{ rotate: [-10, 10, -10] }}
@@ -100,7 +100,7 @@ const CartPage = () => {
                                                     </Link>
                                                 )}
                                                 {/* <h6 className="font-normal text-base leading-7 text-gray-500 uppercase">{product.categories[0]}</h6> */}
-                                                <div className="font-thin">
+                                                <div className="font-thin text-gray-900">
                                                     {product?.size}, {product?.color}
                                                 </div>
 
@@ -214,7 +214,7 @@ const CartPage = () => {
                                                 </div>
                                                 {/* remove cart item */}
                                                 <div
-                                                    className="text-sm underline cursor-pointer"
+                                                    className="text-sm underline cursor-pointer text-gray-900"
                                                     onClick={() => removeItem(product.id)}
                                                 >
                                                     remove

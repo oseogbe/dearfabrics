@@ -35,22 +35,22 @@ const CartItem = ({
             </div>
             <div className="flex flex-col justify-between w-full h-full pl-4 md:pl-6 pb-4">
                 <div className="flex items-start justify-between">
-                    <h5 className="text-xs md:text-base">{cartItem.name}</h5>
+                    <h5 className="text-xs md:text-base text-gray-900">{cartItem.name}</h5>
                     <button className="mt-[3px] md:mt-1.5 cursor-pointer" onClick={() => removeItem(cartItem.id)}>
-                        <FaX className="text-[10px] md:text-sm" />
+                        <FaX className="text-[10px] md:text-sm text-gray-900" />
                     </button>
                 </div>
                 <div className="flex items-center justify-between">
                     <div className="flex gap-4">
                         <button onClick={() => decrementItem(cartItem.id)}>
-                            <FaMinus className="text-[10px]" />
+                            <FaMinus className="text-[10px] text-gray-900" />
                         </button>
-                        <div className="font-light text-xs md:text-base">{cartItem.quantity}</div>
+                        <div className="font-light text-xs md:text-base text-gray-900">{cartItem.quantity}</div>
                         <button onClick={() => incrementItem(cartItem.id)}>
-                            <FaPlus className="text-[10px]" />
+                            <FaPlus className="text-[10px] text-gray-900" />
                         </button>
                     </div>
-                    <div className="font-light text-xs md:text-base">{formatCurrency(cartItem.value)}</div>
+                    <div className="font-light text-xs md:text-base text-gray-900">{formatCurrency(cartItem.value)}</div>
                 </div>
             </div>
         </div>

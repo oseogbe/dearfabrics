@@ -120,7 +120,7 @@ const QuickView = ({
                         <div className="mt-6 flex items-center gap-5">
                             <div className="flex">
                                 <div
-                                    className="w-10 h-10 flex items-center justify-center border cursor-pointer"
+                                    className="w-10 h-10 flex items-center justify-center border cursor-pointer text-gray-900"
                                     onClick={() => {
                                         if (quantity > 1) {
                                             setQuantity(current => current - 1)
@@ -129,11 +129,11 @@ const QuickView = ({
                                 >
                                     <FaMinus />
                                 </div>
-                                <div className="w-12 h-10 flex items-center justify-center border">
+                                <div className="w-12 h-10 flex items-center justify-center border text-gray-900">
                                     {quantity}
                                 </div>
                                 <div
-                                    className="w-10 h-10 flex items-center justify-center border cursor-pointer"
+                                    className="w-10 h-10 flex items-center justify-center border cursor-pointer text-gray-900"
                                     onClick={() => setQuantity(current => current + 1)}
                                 >
                                     <FaPlus />

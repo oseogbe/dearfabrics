@@ -21,7 +21,7 @@ const FeaturedCategories: React.FC<CategoriesProps> = ({
     return (
         <div>
             <div className="pl-5 border-l-4 border-df-yellow">
-                <h3 className="font-bold text-xl md:text-2xl xl:text-4xl">{name}</h3>
+                <h3 className="font-bold text-xl md:text-2xl xl:text-4xl text-gray-900">{name}</h3>
             </div>
             <div className="flex gap-6 md:gap-8 xl:gap-[50px] mt-6 md:mt-8 xl:mt-[62px] overflow-x-scroll scrollbar-hide">
                 {categories.map(category => (

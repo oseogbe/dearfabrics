@@ -244,7 +244,7 @@ const Navbar: React.FC<NavbarProps> = ({
                             <NavigationMenu className="hidden lg:flex">
                                 <NavigationMenuList>
                                     {navLinks.map((item) => (
-                                        <NavigationMenuItem key={item.label}>
+                                        <NavigationMenuItem className="text-gray-900" key={item.label}>
                                             {item.link ? (
                                                 <Link href={item.link} legacyBehavior passHref>
                                                     <NavigationMenuLink className={navigationMenuTriggerStyle()}>

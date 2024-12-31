@@ -30,7 +30,7 @@ const RelatedProducts = ({
         <div>
             <div className="flex items-center justify-between">
                 <div className="pl-5 border-l-4 border-df-yellow">
-                    <h3 className="font-bold text-lg md:text-xl xl:text-2xl">Related Products</h3>
+                    <h3 className="font-bold text-lg md:text-xl xl:text-2xl text-gray-900">Related Products</h3>
                 </div>
                 <div className="flex items-center justify-end gap-2">
                     <ArrowLeft onClick={() => handleScroll('left')} />

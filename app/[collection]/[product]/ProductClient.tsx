@@ -171,7 +171,7 @@ const ProductClient = ({
                     <div className="mt-6 flex items-center gap-5">
                         <div className="flex">
                             <div
-                                className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer"
+                                className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer text-gray-900"
                                 onClick={() => {
                                     if (quantity > 1) {
                                         setQuantity(current => current - 1)
@@ -180,11 +180,11 @@ const ProductClient = ({
                             >
                                 <FaMinus />
                             </div>
-                            <div className="w-12 xl:w-14 h-10 xl:h-12 flex items-center justify-center border">
+                            <div className="w-12 xl:w-14 h-10 xl:h-12 flex items-center justify-center border text-gray-900">
                                 {quantity}
                             </div>
                             <div
-                                className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer"
+                                className="w-10 h-10 xl:w-12 xl:h-12 flex items-center justify-center border cursor-pointer text-gray-900"
                                 onClick={() => setQuantity(current => current + 1)}
                             >
                                 <FaPlus />
@@ -196,7 +196,7 @@ const ProductClient = ({
                         >
                             Add to cart <IoCartOutline size={18} />
                         </button>
-                        <button className="w-[50px] h-10 xl:h-12 flex items-center justify-center border" onClick={() => { }}>
+                        <button className="w-[50px] h-10 xl:h-12 flex items-center justify-center border text-gray-900" onClick={() => { }}>
                             <FaRegHeart size={24} />
                         </button>
                     </div>

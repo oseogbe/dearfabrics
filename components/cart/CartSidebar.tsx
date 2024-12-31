@@ -41,10 +41,10 @@ const CartSidebar = () => {
                         transition={{ duration: 0.2 }}
                         className="fixed top-0 right-0 h-full w-[300px] md:w-[360px] xl:w-[440px] bg-white p-4 xl:p-6 z-50 shadow-md"
                     >
-                        <h3 className="font-bold xl:text-lg">My Shopping Cart ({cartCount})</h3>
+                        <h3 className="font-bold xl:text-lg text-gray-900">My Shopping Cart ({cartCount})</h3>
                         {
                             cartCount === 0 ? (
-                                <div className="h-full flex flex-col items-center justify-center">
+                                <div className="h-full flex flex-col items-center justify-center text-gray-900">
                                     <motion.div
                                         animate={{ rotate: [-10, 10, -10] }}
                                         transition={{ duration: 0.5, repeat: Infinity }}

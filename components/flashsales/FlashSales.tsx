@@ -67,8 +67,8 @@ const FlashSales: React.FC<FlashSalesProps> = ({
         return (
             <>
                 <div className="flex flex-col items-center">
-                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Days</div>
-                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(days)}</div>
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium text-gray-900">Days</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold text-gray-900">{zeroPad(days)}</div>
                 </div>
                 <Image
                     src="/img/semicolon.svg"
@@ -78,8 +78,8 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                     className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
                 />
                 <div className="flex flex-col items-center">
-                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Hours</div>
-                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(hours)}</div>
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium text-gray-900">Hours</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold text-gray-900">{zeroPad(hours)}</div>
                 </div>
                 <Image
                     src="/img/semicolon.svg"
@@ -89,8 +89,8 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                     className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
                 />
                 <div className="flex flex-col items-center">
-                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Minutes</div>
-                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(minutes)}</div>
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium text-gray-900">Minutes</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold text-gray-900">{zeroPad(minutes)}</div>
                 </div>
                 <Image
                     src="/img/semicolon.svg"
@@ -100,8 +100,8 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                     className="mt-4 h-3 md:mt-5 md:h-[14px] xl:mt-6 xl:h-5"
                 />
                 <div className="flex flex-col items-center">
-                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium">Seconds</div>
-                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold">{zeroPad(seconds)}</div>
+                    <div className="text-[6px] md:text-[8px] xl:text-xs font-medium text-gray-900">Seconds</div>
+                    <div className="text-[18px] md:text-[22px] xl:text-3xl font-bold text-gray-900">{zeroPad(seconds)}</div>
                 </div>
             </>
         )
@@ -114,7 +114,7 @@ const FlashSales: React.FC<FlashSalesProps> = ({
                     Today&apos;s
                 </div>
                 <div className="row-start-2 col-start-1 col-span-full mt-2 xl:mt-4 flex items-center justify-between md:justify-start gap-[44px] xl:gap-[88px]">
-                    <h3 className="flex-shrink-0 font-bold text-xl md:text-2xl xl:text-4xl">{saleData.name}</h3>
+                    <h3 className="flex-shrink-0 font-bold text-xl md:text-2xl xl:text-4xl text-gray-900">{saleData.name}</h3>
                     <div className="flex gap-2">
                         <Countdown
                             date={new Date(saleData.endDate).getTime()}

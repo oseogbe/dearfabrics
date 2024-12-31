@@ -16,7 +16,7 @@ const NewArrival: React.FC<NewArrivalProps> = ({
                 Featured
             </div>
             <div className="mt-4 xl:mt-8">
-                <h3 className="font-bold text-xl md:text-2xl xl:text-4xl">New Arrival</h3>
+                <h3 className="font-bold text-xl md:text-2xl xl:text-4xl text-gray-900">New Arrival</h3>
             </div>
             <div className="mt-6 md:mt-8 xl:mt-[62px] h-[750px] md:h-[360px] xl:h-[600px] grid grid-rows-4 md:grid-rows-2 grid-cols-2 md:grid-cols-4 gap-4 xl:gap-[30px]">
                 <div className="relative row-start-1 row-span-2 md:row-span-full col-span-full md:col-start-1 md:col-span-2 bg-black overflow-hidden">
