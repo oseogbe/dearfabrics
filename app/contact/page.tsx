@@ -30,7 +30,7 @@ const ContactPage = async () => {
     return (
         <Container>
             <div className="pt-10 xl:pt-20">
-                <div className="text-xl md:text-2xl xl:text-4xl font-extrabold text-center">
+                <div className="text-xl md:text-2xl xl:text-4xl text-gray-900 font-extrabold text-center">
                     Contact Us
                 </div>
                 <div className="mt-8 xl:mt-11 flex flex-col md:flex-row gap-[14px] xl:gap-6">
