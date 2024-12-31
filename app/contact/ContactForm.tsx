@@ -47,7 +47,7 @@ const ContactForm = () => {
                     type="text"
                     id="name"
                     placeholder="Your name"
-                    className="w-full mt-3 text-sm xl:text-base border border-[#CBCBCB] focus:outline-none focus-visible:outline-[#6C7275] placeholder:text-[#6C7275] rounded-md px-4 py-3"
+                    className="w-full mt-3 text-sm xl:text-base border border-[#CBCBCB] focus:outline-none focus:ring-transparent focus:border-[#CBCBCB] focus-visible:outline-[#6C7275] placeholder:text-[#6C7275] rounded-md px-4 py-3"
                     {...register('name')}
                 />
                 {errors.name?.message && (
@@ -60,7 +60,7 @@ const ContactForm = () => {
                     type="text"
                     id="email"
                     placeholder="Your email"
-                    className="w-full mt-3 text-sm xl:text-base border border-[#CBCBCB] focus:outline-none focus-visible:outline-[#6C7275] placeholder:text-[#6C7275] rounded-md px-4 py-3"
+                    className="w-full mt-3 text-sm xl:text-base border border-[#CBCBCB] focus:outline-none focus:ring-transparent focus:border-[#CBCBCB] focus-visible:outline-[#6C7275] placeholder:text-[#6C7275] rounded-md px-4 py-3"
                     {...register('email')}
                 />
                 {errors.email?.message && (
@@ -73,7 +73,7 @@ const ContactForm = () => {
                     id="message"
                     placeholder="Your message"
                     rows={10}
-                    className="w-full mt-3 text-sm xl:text-base border border-[#CBCBCB] focus:outline-none focus-visible:outline-[#6C7275] placeholder:text-[#6C7275] rounded-md px-4 py-3"
+                    className="w-full mt-3 text-sm xl:text-base border border-[#CBCBCB] focus:outline-none focus:ring-transparent focus:border-[#CBCBCB] focus-visible:outline-[#6C7275] placeholder:text-[#6C7275] rounded-md px-4 py-3"
                     {...register('message')}
                 ></textarea>
                 {errors.message?.message && (
@@ -82,7 +82,7 @@ const ContactForm = () => {
             </div>
             <div>
                 <button
-                    className="bg-black w-full md:w-auto text-white text-xs md:text-sm font-light uppercase px-12 py-4 focus:outline-none focus-visible:outline-[#6C7275] rounded-md"
+                    className="bg-black w-full md:w-auto text-white text-xs md:text-sm font-light uppercase px-12 py-4 focus:outline-none focus:ring-transparent focus:border-[#CBCBCB] focus-visible:outline-[#6C7275] rounded-md"
                     type="submit"
                     disabled={isSubmitting}
                 >
