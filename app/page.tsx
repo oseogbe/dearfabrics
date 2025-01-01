@@ -80,32 +80,32 @@ const HomePage = () => {
 
   const testimonials = [
     {
-      commenter: "Favour Emmanuel",
-      comment: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed cum aut est nostrum aliquid adipisci, esse eos similique? Corporis dolorum tenetur consequatur esse eum nostrum est voluptas animi id eveniet!",
+      commenter: "Angela, Abuja",
+      comment: "I absolutely love the lace fabrics I ordered! The quality is top-notch, and the colors are just as vibrant as they look in the pictures. My tailor did a fantastic job with it, and I received so many compliments at the event. Will definitely be coming back for more!",
       image: "",
       stars: 5,
     },
     {
-      commenter: "Jacob Benson",
-      comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit odit rem veritatis alias beatae vel. Nemo similique optio, velit deleniti recusandae rerum perspiciatis labore, laudantium nisi hic inventore, officiis sequi.",
+      commenter: "Ngozi, Abuja",
+      comment: "I've been looking for beautiful, authentic Ankara prints for a while, and this store has the best selection! The fabric is so soft and easy to work with, and it arrived in no time. I also got a pair of stylish shoes that I can't wait to wear!",
       image: "",
       stars: 5,
     },
     {
-      commenter: "Anne Eghosa",
-      comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate, sed amet eos harum explicabo architecto, soluta ducimus aspernatur perspiciatis eum quis omnis quaerat ut molestias eius, odio pariatur quasi sunt.",
+      commenter: "Anne, Port Harcourt",
+      comment: "My husband loved his brocade fabric from here! It was the perfect material for his traditional outfit, and he looked amazing. I also got myself a stylish bag and perfume that has become my favorite. I'm truly satisfied with my shopping experience.",
       image: "",
       stars: 5,
     },
     {
-      commenter: "Blessing Daniel",
-      comment: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Alias debitis harum recusandae illo maiores consequuntur praesentium qui! Repellat beatae facere corrupti quasi ex, velit voluptatem dolor? Dicta, iusto illum. Nobis.",
+      commenter: "Titi, Lagos",
+      comment: "The Aso-Oke fabrics here are gorgeous! I used it for my wedding outfit, and it was simply stunning. The quality is unmatched, and the customer service was excellent. I'll recommend this store to all my friends!",
       image: "",
       stars: 5,
     },
     {
-      commenter: "Funke Agunjobi",
-      comment: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Commodi blanditiis soluta quia, fugiat explicabo sint dicta eveniet eum corrupti architecto obcaecati libero dolore recusandae rem! Consequuntur placeat quae labore ipsam.",
+      commenter: "Chidinma, Enugu",
+      comment: "I've shopped here a few times for my ready-to-wear outfits and I'm never disappointed. The skirts and dresses are fashionable and fit perfectly. Plus, their perfumes smell amazing! I always get compliments when I wear them.",
       image: "",
       stars: 5,
     },
