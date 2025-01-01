@@ -197,12 +197,12 @@ const MobileMenu = () => {
             >
                 <div className="float-left min-h-full w-[75%] bg-white text-gray-900 px-4 pt-12 shadow-2xl">
                     <div className="mt-7 ml-6"><Logo /></div>
-                    <Accordion type="single" collapsible className="w-full mt-12 ml-6">
+                    <Accordion type="single" collapsible className="w-full mt-12 pl-6">
                         {navLinks.map((item) => (
                             <AccordionItem key={item.label} value={item.label}>
                                 <AccordionTrigger>{item.label}</AccordionTrigger>
                                 <AccordionContent>
-                                    <menu className="ml-6 space-y-4">
+                                    <menu className="pl-6 space-y-4">
                                         {item.children?.map((child) => (
                                             <li key={child.label}>
                                                 <Link href={child.link} className="text-sm font-medium leading-none">{child.label}</Link>
