@@ -75,46 +75,6 @@ const navLinks = [
         ]
     },
     {
-        label: "Men",
-        children: [
-            {
-                label: "Brocade",
-                link: "/collections/men/brocade",
-                info: ""
-            },
-            {
-                label: "Shadda",
-                link: "/collections/men/shadda",
-                info: ""
-            },
-            {
-                label: "Lace",
-                link: "/collections/men/lace",
-                info: ""
-            },
-            {
-                label: "Cotton",
-                link: "/collections/men/cotton",
-                info: ""
-            },
-            {
-                label: "T-Shirt",
-                link: "/collections/men/t-shirt",
-                info: ""
-            },
-            {
-                label: "Trousers",
-                link: "/collections/men/trousers",
-                info: ""
-            },
-            {
-                label: "Jeans",
-                link: "/collections/men/jeans",
-                info: ""
-            },
-        ]
-    },
-    {
         label: "Women",
         children: [
             {
@@ -160,6 +120,46 @@ const navLinks = [
             {
                 label: "Accessories",
                 link: "/collections/women/accessories",
+                info: ""
+            },
+        ]
+    },
+    {
+        label: "Men",
+        children: [
+            {
+                label: "Brocade",
+                link: "/collections/men/brocade",
+                info: ""
+            },
+            {
+                label: "Shadda",
+                link: "/collections/men/shadda",
+                info: ""
+            },
+            {
+                label: "Lace",
+                link: "/collections/men/lace",
+                info: ""
+            },
+            {
+                label: "Cotton",
+                link: "/collections/men/cotton",
+                info: ""
+            },
+            {
+                label: "T-Shirt",
+                link: "/collections/men/t-shirt",
+                info: ""
+            },
+            {
+                label: "Trousers",
+                link: "/collections/men/trousers",
+                info: ""
+            },
+            {
+                label: "Jeans",
+                link: "/collections/men/jeans",
                 info: ""
             },
         ]

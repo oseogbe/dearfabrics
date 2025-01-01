@@ -1,3 +1,5 @@
+import Link from "next/link"
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
 import Logo from "./Logo"
 
 const navLinks = [
@@ -52,46 +54,6 @@ const navLinks = [
         ]
     },
     {
-        label: "Men",
-        children: [
-            {
-                label: "Brocade",
-                link: "/collections/men/brocade",
-                info: ""
-            },
-            {
-                label: "Shadda",
-                link: "/collections/men/shadda",
-                info: ""
-            },
-            {
-                label: "Lace",
-                link: "/collections/men/lace",
-                info: ""
-            },
-            {
-                label: "Cotton",
-                link: "/collections/men/cotton",
-                info: ""
-            },
-            {
-                label: "T-Shirt",
-                link: "/collections/men/t-shirt",
-                info: ""
-            },
-            {
-                label: "Trousers",
-                link: "/collections/men/trousers",
-                info: ""
-            },
-            {
-                label: "Jeans",
-                link: "/collections/men/jeans",
-                info: ""
-            },
-        ]
-    },
-    {
         label: "Women",
         children: [
             {
@@ -137,6 +99,46 @@ const navLinks = [
             {
                 label: "Accessories",
                 link: "/collections/women/accessories",
+                info: ""
+            },
+        ]
+    },
+    {
+        label: "Men",
+        children: [
+            {
+                label: "Brocade",
+                link: "/collections/men/brocade",
+                info: ""
+            },
+            {
+                label: "Shadda",
+                link: "/collections/men/shadda",
+                info: ""
+            },
+            {
+                label: "Lace",
+                link: "/collections/men/lace",
+                info: ""
+            },
+            {
+                label: "Cotton",
+                link: "/collections/men/cotton",
+                info: ""
+            },
+            {
+                label: "T-Shirt",
+                link: "/collections/men/t-shirt",
+                info: ""
+            },
+            {
+                label: "Trousers",
+                link: "/collections/men/trousers",
+                info: ""
+            },
+            {
+                label: "Jeans",
+                link: "/collections/men/jeans",
                 info: ""
             },
         ]
@@ -195,13 +197,22 @@ const MobileMenu = () => {
             >
                 <div className="float-left min-h-full w-[75%] bg-white text-gray-900 px-4 pt-12 shadow-2xl">
                     <div className="mt-7 ml-6"><Logo /></div>
-                    <menu className="mt-12 space-y-6">
+                    <Accordion type="single" collapsible className="w-full mt-12 ml-6">
                         {navLinks.map((item) => (
-                            <li key={item.label}>
-                                <div className="text-sm font-medium leading-none">{item.label}</div>
-                            </li>
+                            <AccordionItem key={item.label} value={item.label}>
+                                <AccordionTrigger>{item.label}</AccordionTrigger>
+                                <AccordionContent>
+                                    <menu className="ml-6 space-y-4">
+                                        {item.children?.map((child) => (
+                                            <li key={child.label}>
+                                                <Link href={child.link} className="text-sm font-medium leading-none">{child.label}</Link>
+                                            </li>
+                                        ))}
+                                    </menu>
+                                </AccordionContent>
+                            </AccordionItem>
                         ))}
-                    </menu>
+                    </Accordion>
                 </div>
             </div>
         </label>
