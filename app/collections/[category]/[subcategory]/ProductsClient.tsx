@@ -159,7 +159,7 @@ const ProductsClient = ({
             {/* Product listing */}
             <div className="w-full">
                 <div className="flex items-center justify-between">
-                    <div className="text-xs md:text-base">
+                    <div className="text-xs md:text-base text-base-900">
                         Showing {pageSize * (currentPage - 1) + 1} -{" "}
                         {Math.min(pageSize * currentPage, total)} of {total} results
                     </div>
