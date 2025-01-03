@@ -82,7 +82,7 @@ const HomePage = () => {
     {
       commenter: "Angela, Abuja",
       comment: "I absolutely love the lace fabrics I ordered! The quality is top-notch, and the colors are just as vibrant as they look in the pictures. My tailor did a fantastic job with it, and I received so many compliments at the event. Will definitely be coming back for more!",
-      image: "/img/testimonials/sophia.png",
+      image: "/img/testimonials/angela.png",
       stars: 5,
     },
     {
