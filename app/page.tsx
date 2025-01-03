@@ -82,31 +82,31 @@ const HomePage = () => {
     {
       commenter: "Angela, Abuja",
       comment: "I absolutely love the lace fabrics I ordered! The quality is top-notch, and the colors are just as vibrant as they look in the pictures. My tailor did a fantastic job with it, and I received so many compliments at the event. Will definitely be coming back for more!",
-      image: "",
+      image: "/img/testimonials/sophia.png",
+      stars: 5,
+    },
+    {
+      commenter: "Chidinma, Port Harcourt",
+      comment: "I've shopped here a few times for my ready-to-wear outfits and I'm never disappointed. The skirts and dresses are fashionable and fit perfectly. Plus, their perfumes smell amazing! I always get compliments when I wear them.",
+      image: "/img/testimonials/chidinma.png",
+      stars: 5,
+    },
+    {
+      commenter: "Joan, Enugu",
+      comment: "My husband loved his brocade fabric from here! It was the perfect material for his traditional outfit, and he looked amazing. I also got myself a stylish bag and perfume that has become my favorite. I'm truly satisfied with my shopping experience.",
+      image: "/img/testimonials/joan.png",
       stars: 5,
     },
     {
       commenter: "Ngozi, Abuja",
       comment: "I've been looking for beautiful, authentic Ankara prints for a while, and this store has the best selection! The fabric is so soft and easy to work with, and it arrived in no time. I also got a pair of stylish shoes that I can't wait to wear!",
-      image: "",
+      image: "/img/testimonials/ngozi.png",
       stars: 5,
     },
     {
-      commenter: "Anne, Port Harcourt",
-      comment: "My husband loved his brocade fabric from here! It was the perfect material for his traditional outfit, and he looked amazing. I also got myself a stylish bag and perfume that has become my favorite. I'm truly satisfied with my shopping experience.",
-      image: "",
-      stars: 5,
-    },
-    {
-      commenter: "Titi, Lagos",
+      commenter: "Timilehin, Lagos",
       comment: "The Aso-Oke fabrics here are gorgeous! I used it for my wedding outfit, and it was simply stunning. The quality is unmatched, and the customer service was excellent. I'll recommend this store to all my friends!",
-      image: "",
-      stars: 5,
-    },
-    {
-      commenter: "Chidinma, Enugu",
-      comment: "I've shopped here a few times for my ready-to-wear outfits and I'm never disappointed. The skirts and dresses are fashionable and fit perfectly. Plus, their perfumes smell amazing! I always get compliments when I wear them.",
-      image: "",
+      image: "/img/testimonials/timilehin.png",
       stars: 5,
     },
   ]

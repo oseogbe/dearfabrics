@@ -19,7 +19,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
         <div className="mb-12 md:mb-0 p-12 border shadow-md rounded-lg xl:rounded-xl">
             <div className="mb-6 flex justify-center">
                 <Image
-                    src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).jpg"
+                    src={image}
                     alt={`${commenter}'s picture`}
                     height={500}
                     width={500}
