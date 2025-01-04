@@ -55,7 +55,7 @@ const coupon = defineType({
             description: 'The percentage to subtract from the total (only for Percent Off type)',
             hidden: ({ parent }) => parent?.discountType !== 'percent_off',
             validation: Rule => Rule.custom((field, context) => {
-                const discountType = (context.parent as {discountType?: string}).discountType
+                const discountType = (context.parent as { discountType?: string }).discountType
                 if (discountType === 'percent_off' && !field) {
                     return 'Percent Off is required for Percent Off discount type'
                 }
@@ -86,7 +86,7 @@ const coupon = defineType({
             description: 'Number of months the coupon will apply (only for Repeating duration)',
             hidden: ({ parent }) => parent?.duration !== 'repeating',
             validation: Rule => Rule.custom((field, context) => {
-                const duration = (context.parent as {duration?: string}).duration
+                const duration = (context.parent as { duration?: string }).duration
                 if (duration === 'repeating' && (!field || field <= 0)) {
                     return 'Duration in Months is required and must be greater than 0 for Repeating duration'
                 }
@@ -99,6 +99,14 @@ const coupon = defineType({
             type: 'number',
             description: 'Maximum number of times this coupon can be redeemed in total',
             validation: Rule => Rule.min(0),
+        }),
+        defineField({
+            name: 'useCount',
+            title: 'Usage Count',
+            type: 'number',
+            description: 'Number of times the coupon has been used',
+            validation: Rule => Rule.min(0),
+            readOnly: true,
         }),
         defineField({
             name: 'redeemBy',
