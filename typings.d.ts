@@ -9,10 +9,10 @@ export type ProductType = {
     currency: string
     quantity?: number
     images: string[]
-    colors: {
+    colors?: {
         [key: number]: string[]
     }
-    sizes?: {
+    sizes: {
         [key: number]: string[]
     }
     stars: number
@@ -34,7 +34,7 @@ export type OrderItem = {
         images: string[]
     }
     size: string
-    color: string
+    color?: string
     quantity: number
     price: number
 }

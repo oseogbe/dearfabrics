@@ -101,7 +101,7 @@ const CartPage = () => {
                                                 )}
                                                 {/* <h6 className="font-normal text-base leading-7 text-gray-500 uppercase">{product.categories[0]}</h6> */}
                                                 <div className="font-thin text-gray-900">
-                                                    {product?.size}, {product?.color}
+                                                    {product.size} {product.color && (`, ${product.color}`)}
                                                 </div>
 
                                                 <h6 className="font-medium text-base leading-7 text-gray-600 transition-all duration-300">

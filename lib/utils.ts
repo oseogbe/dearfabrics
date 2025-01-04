@@ -57,7 +57,7 @@ export function generateRandomString(length: number) {
   return randomString.toLowerCase()
 }
 
-export function setCartItem(product: Product, selectedColor: string, selectedSize: string | undefined, quantity: number) {
+export function setCartItem(product: Product, selectedColor: string | undefined, selectedSize: string, quantity: number) {
   return {
     item: {
       id: product.id,
