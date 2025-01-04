@@ -71,6 +71,7 @@ async function fetchProductsByCategory(category: string, subcategory: string, pa
     | order(_created_at desc) [${skip}...${skip + pageSize}] {
       "id": _id,
       name,
+      description,
       "slug": slug.current,
       "categories": categories[]->slug.current,
       "images": images[].asset->url,

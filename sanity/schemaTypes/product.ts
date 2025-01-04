@@ -54,7 +54,7 @@ const product = defineType({
         defineField({
             name: 'description',
             title: 'Description',
-            type: 'string',
+            type: 'text',
             group: 'product',
         }),
         defineField({
@@ -63,18 +63,19 @@ const product = defineType({
             type: 'array',
             of: [{ type: 'reference', to: { type: 'category' } }],
             group: 'product',
+            validation: Rule => Rule.required(),
         }),
         defineField({
             name: 'oldPrice',
             title: 'Old Price (Optional)',
-            description: 'Old Price should be in dollars',
+            description: 'Old Price should be in naira',
             type: 'number',
             group: 'product',
         }),
         defineField({
             name: 'price',
             title: 'Price',
-            description: 'Price should be in dollars',
+            description: 'Price should be in naira',
             type: 'number',
             group: 'product',
         }),

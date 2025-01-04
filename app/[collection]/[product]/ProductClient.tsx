@@ -23,8 +23,8 @@ const ProductClient = ({
 }: {
     product: ProductType
 }) => {
-    const [selectedImage, setSelectedImage] = useState(product.images?.[0])
-    const [selectedColor, setSelectedColor] = useState(product.colors?.[0][0])
+    const [selectedImage, setSelectedImage] = useState(product.images[0])
+    const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.[0])
     const [selectedSize, setSelectedSize] = useState(product.sizes?.[0][0])
     const [quantity, setQuantity] = useState(1)
 
@@ -36,6 +36,10 @@ const ProductClient = ({
         setQuantity(1)
         toast("Added to cart", { duration: 1500 })
     }
+
+    const formattedDescription = product.description?.split("\n").map((item, index) => (
+        <p key={index} className="mb-3">{item}</p>
+    ))
 
     return (
         <>
@@ -80,11 +84,11 @@ const ProductClient = ({
                         tabsContent={[
                             {
                                 value: "description",
-                                body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo vel ipsum repellat laboriosam sint impedit accusamus minus autem molestiae natus totam laudantium quidem mollitia obcaecati, temporibus consectetur? Qui, itaque quo."
+                                body: ""
                             },
                             {
                                 value: "reviews",
-                                body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, unde. Non quis, asperiores atque porro alias est eos saepe accusantium. Veniam aliquam blanditiis porro illum sunt itaque quas nihil placeat?"
+                                body: ""
                             },
                         ]}
                     />
@@ -116,11 +120,12 @@ const ProductClient = ({
                             <div className="text-xs xl:text-red-500">Out of Stock</div>
                         )}
                     </div>
-                    <div className="mt-8 text-sm xl:text-base text-[#3C4242]">{product.description}</div>
-                    <div className="mt-8">
-                        <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Color:</span> {selectedColor}</div>
-                        <div className="mt-3 flex items-center gap-4">
-                            {/* {product.colors.map(color => (
+                    <div className="mt-8 text-sm xl:text-base text-[#3C4242]">{formattedDescription}</div>
+                    {product.colors && product.colors[0]?.length > 0 && (
+                        <div className="mt-8">
+                            <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Color</span> {selectedColor}</div>
+                            <div className="mt-3 flex items-center gap-4">
+                                {/* {product.colors.map(color => (
                                 <div
                                     key={color.code}
                                     className="w-5 h-5 xl:h-6 xl:w-6 rounded-full cursor-pointer"
@@ -132,25 +137,26 @@ const ProductClient = ({
                                     onClick={() => setSelectedColor(color)}
                                 ></div>
                             ))} */}
-                            {product.colors?.[0].map(color => (
-                                <div
-                                    key={color}
-                                    className="w-5 h-5 xl:h-6 xl:w-6 rounded-full cursor-pointer"
-                                    style={{
-                                        backgroundColor: color,
-                                        borderWidth: '2px',
-                                        boxShadow: selectedColor === color ? `0 0 0 1px ${color}` : '',
-                                    }}
-                                    onClick={() => setSelectedColor(color)}
-                                ></div>
-                            ))}
+                                {product.colors?.[0].map(color => (
+                                    <div
+                                        key={color}
+                                        className="w-5 h-5 xl:h-6 xl:w-6 rounded-full cursor-pointer"
+                                        style={{
+                                            backgroundColor: color,
+                                            borderWidth: '2px',
+                                            boxShadow: selectedColor === color ? `0 0 0 1px ${color}` : '',
+                                        }}
+                                        onClick={() => setSelectedColor(color)}
+                                    ></div>
+                                ))}
+                            </div>
                         </div>
-                    </div>
+                    )}
                     <div className="mt-8">
                         {
                             product.sizes && (
                                 <>
-                                    <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size:</span> {selectedSize}</div>
+                                    <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size</span> {selectedSize}</div>
                                     <div className="mt-3 flex items-center gap-4">
                                         {product.sizes?.[0].map(size => (
                                             <div
@@ -245,11 +251,11 @@ const ProductClient = ({
                             tabsContent={[
                                 {
                                     value: "description",
-                                    body: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Explicabo vel ipsum repellat laboriosam sint impedit accusamus minus autem molestiae natus totam laudantium quidem mollitia obcaecati, temporibus consectetur? Qui, itaque quo."
+                                    body: ""
                                 },
                                 {
                                     value: "reviews",
-                                    body: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos, unde. Non quis, asperiores atque porro alias est eos saepe accusantium. Veniam aliquam blanditiis porro illum sunt itaque quas nihil placeat?"
+                                    body: ""
                                 },
                             ]}
                         />
