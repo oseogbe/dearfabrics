@@ -63,6 +63,7 @@ const product = defineType({
             type: 'array',
             of: [{ type: 'reference', to: { type: 'category' } }],
             group: 'product',
+            validation: Rule => Rule.required(),
         }),
         defineField({
             name: 'oldPrice',
