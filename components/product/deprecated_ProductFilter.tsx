@@ -10,9 +10,18 @@ interface ProductFilterProps {
     priceRange: number[]
     minPrice: number
     maxPrice: number
+    selectedCategories: string[]
+    relatedCategories: {
+        _id: string
+        name: string
+        slug: {
+            current: string
+        }
+    }[]
     selectedColors: string[]
     selectedSizes: string[]
     onPriceChange: (values: number[]) => void
+    onCategoryChange: (category: string, checked: boolean) => void
     onColorChange: (color: string) => void
     onSizeChange: (size: string) => void
 }
@@ -21,9 +30,12 @@ const ProductFilter = ({
     priceRange,
     minPrice,
     maxPrice,
+    selectedCategories,
+    relatedCategories,
     selectedColors,
     selectedSizes,
     onPriceChange,
+    onCategoryChange,
     onColorChange,
     onSizeChange,
 }: ProductFilterProps) => {
@@ -43,7 +55,7 @@ const ProductFilter = ({
         }
     }, [maxPrice])
 
-    // TODO: change to colors defined for products in selected category
+    // TODO: change to colors defined for products
     const colors = [
         "Purple",
         "Black",
@@ -59,7 +71,6 @@ const ProductFilter = ({
         "Blue",
     ]
 
-    // TODO: change to sizes defined for products in selected category
     const sizes = [
         "XXS",
         "XL",
@@ -75,14 +86,32 @@ const ProductFilter = ({
     return (
         <div className='space-y-10'>
             <div className='flex flex-col gap-4'>
-                <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Price Range</h4>
-                <div className='text-sm xl:text-base text-gray-900'>{formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}</div>
+                <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Sub-categories</h4>
+                <div className='space-y-4'>
+                    {
+                        relatedCategories.map(category => (
+                            <div key={category._id} className='flex justify-between'>
+                                <h6 className='text-[#3C4242] text-xs xl:text-base font-semibold'>{category.name}</h6>
+                                <input
+                                    type="checkbox"
+                                    className="shrink-0 border-gray-400 rounded !text-df-yellow focus:ring-0"
+                                    checked={selectedCategories.includes(category.slug.current)}
+                                    onChange={e => onCategoryChange(category.slug.current, e.target.checked)}
+                                />
+                            </div>
+                        ))
+                    }
+                </div>
+            </div>
+            <div className='flex flex-col gap-4'>
+                <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Price</h4>
+                <div className='text-sm xl:text-base'>{formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}</div>
                 <RangeSlider
                     id="range-slider-yellow"
                     min={minPrice}
                     max={maxPrice}
                     step={step}
-                    value={priceRange}
+                    values={priceRange}
                     onInput={onPriceChange}
                 />
             </div>
