@@ -16,7 +16,23 @@ const sale = defineType({
             name: 'startDate',
             title: 'Start date',
             type: 'datetime',
-            validation: Rule => Rule.required().min(new Date().toISOString())
+            validation: Rule => Rule.custom((startDate, context) => {
+                const currentDate = new Date()
+
+                const existingStartDate = (context.document as { startDate?: string }).startDate
+
+                // If the startDate is being updated and it's in the past, allow it
+                if (existingStartDate && startDate && startDate !== existingStartDate && new Date(startDate) < currentDate) {
+                    return 'Start date cannot be in the past unless it\'s not being updated'
+                }
+
+                // If there's no existing startDate (on initial creation), it must be at least the current date
+                if (!existingStartDate && startDate && new Date(startDate) < currentDate) {
+                    return 'Start date must be in the future'
+                }
+
+                return true
+            })
         }),
         defineField({
             name: 'endDate',

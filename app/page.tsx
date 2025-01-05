@@ -8,7 +8,9 @@ import FeaturedCategories from "@/components/Categories"
 import NewArrival from "@/components/NewArrival"
 import Testimonials from "@/components/Testimonials"
 
-const HomePage = () => {
+import { fetchSales } from "@/lib/sanity"
+
+const HomePage = async () => {
   const adCardItems = [
     {
       heading: "Affordable Prices",
@@ -111,6 +113,8 @@ const HomePage = () => {
     },
   ]
 
+  const sales = await fetchSales()
+
   return (
     <Container>
       {/* <div className="grid grid-cols-6">
@@ -146,8 +150,12 @@ const HomePage = () => {
         }
       </div>
       <hr className="w-[95%] mx-auto my-6 md:my-12 xl:my-[54px]" />
+      <div className="flex flex-col gap-y-8 md:gap-y-12 mb-12 md:mb-16 xl:mb-24">
+        {sales.map((sale, i) => (
+          <FlashSales key={i} sale={sale} />
+        ))}
+      </div>
       <div className="flex flex-col gap-12 md:gap-16 xl:gap-24">
-        <FlashSales />
         <AnkaraCard />
         <FeaturedCategories
           name="Categories For Women"

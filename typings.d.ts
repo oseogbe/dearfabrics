@@ -56,4 +56,12 @@ export type OrderData = {
     updated: string
 }
 
+export type Sale = {
+    id: string
+    name: string
+    startDate: string
+    endDate: string
+    products: ProductType[]
+}
+
 // export type RelatedProductType = Pick<ProductType, "name" | "slug" | "image" | "oldPrice" | "price" | "stars" | "ratings">

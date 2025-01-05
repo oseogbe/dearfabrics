@@ -3,7 +3,7 @@ import { unstable_noStore as noStore } from "next/cache"
 import { createClient } from "next-sanity"
 import ImageURLBuilder from "@sanity/image-url"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
-import { OrderData } from "@/typings"
+import { OrderData, Sale } from "@/typings"
 import { v4 as uuidv4 } from 'uuid'
 
 export const client = createClient({
@@ -136,11 +136,11 @@ async function fetchSingleProduct(productSlug: string) {
   }
 }
 
-async function fetchSaleData(sale: string) {
+async function fetchSales(): Promise<Sale[]> {
   noStore()
 
   try {
-    const query = `*[_type == 'sale' && name == $sale][0] {
+    const query = `*[_type == 'sale'] {
       "id": _id,
       name,
       startDate,
@@ -161,11 +161,11 @@ async function fetchSaleData(sale: string) {
         "colors": options[name=='colors'].values[],
       }
     }`
-    const data = await client.fetch(query, { sale })
+    const data = await client.fetch(query)
     return data
   } catch (error) {
     console.error('Database Error:', error)
-    throw new Error('Failed to fetch sale data.')
+    throw new Error('Failed to fetch sales data.')
   }
 }
 
@@ -262,7 +262,7 @@ export {
   fetchSubcategories,
   fetchProductsByCategory,
   fetchSingleProduct,
-  fetchSaleData,
+  fetchSales,
   getOrder,
   createOrder,
   updateOrderStatus
