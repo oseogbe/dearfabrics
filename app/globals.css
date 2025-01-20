@@ -67,6 +67,11 @@ body {
 }
 
 @media(min-width: 768px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: black !important;
+  }
+
   #range-slider-yellow {
     height: 6px;
   }
