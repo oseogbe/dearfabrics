@@ -12,6 +12,7 @@ const Client = ({ order }: { order: OrderData }) => {
 
     useEffect(() => {
         clearCart()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     return (
@@ -22,7 +23,7 @@ const Client = ({ order }: { order: OrderData }) => {
                 </h2>
                 <h6 className="font-medium text-xl leading-8 text-black mb-3">Hello, {order.customerName}</h6>
                 <p className="font-normal text-lg leading-8 text-gray-500 mb-11">
-                    Your order has been completed and will be delivered within the next 7 days.
+                    Your order has been received and will be prepared for delivery within the next 3-10 days.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8 py-6 border-y border-gray-100 mb-6">
                     <div className="box group">
