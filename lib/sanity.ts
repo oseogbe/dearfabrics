@@ -20,6 +20,25 @@ function urlFor(source: SanityImageSource) {
   return imgBuilder.image(source)
 }
 
+async function fetchHeroSlides() {
+  try {
+    const query = `*[_type == "hero"] {
+      _id,
+      text,
+      subtext,
+      category,
+      image,
+      mobileImage,
+      link
+    }`
+    const data = await client.fetch(query)
+    return data
+  } catch (error) {
+    console.error('Database Error:', error)
+    throw new Error('Failed to fetch hero slides.')
+  }
+}
+
 async function fetchCategories() {
   try {
     const query = `*[_type == "category" && isTopLevel] | order(orderNo) {
@@ -258,6 +277,7 @@ async function updateOrderStatus(orderId: string, paymentRef: string, newStatus:
 
 export {
   urlFor,
+  fetchHeroSlides,
   fetchCategories,
   fetchSubcategories,
   fetchProductsByCategory,

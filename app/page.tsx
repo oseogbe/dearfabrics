@@ -8,9 +8,13 @@ import FeaturedCategories from "@/components/Categories"
 import NewArrival from "@/components/NewArrival"
 import Testimonials from "@/components/Testimonials"
 
-import { fetchSales } from "@/lib/sanity"
+import { fetchHeroSlides, fetchSales } from "@/lib/sanity"
 
 const HomePage = async () => {
+  const slides = await fetchHeroSlides()
+
+  const sales = await fetchSales()
+
   const adCardItems = [
     {
       heading: "Affordable Prices",
@@ -113,8 +117,6 @@ const HomePage = async () => {
     },
   ]
 
-  const sales = await fetchSales()
-
   return (
     <Container>
       {/* <div className="grid grid-cols-6">
@@ -130,7 +132,7 @@ const HomePage = async () => {
           </div>
         </div> */}
       <div className="pt-5 xl:pt-10">
-        <Hero />
+        <Hero slides={slides} />
       </div>
       <div className="w-full flex flex-col md:flex-row gap-4 xl:gap-8 mt-6 md:mt-12 xl:mt-[54px]">
         {
