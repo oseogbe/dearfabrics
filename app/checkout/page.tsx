@@ -21,7 +21,7 @@ const states = State.getStatesOfCountry(country)
 const state = states[1].isoCode
 
 const CheckoutPage = () => {
-    const { cartDetails, redirectToCheckout, totalPrice } = useShoppingCart()
+    const { cartDetails, totalPrice } = useShoppingCart()
     const [selectedCountry, setSelectedCountry] = useState(country)
     const [countryStates, setCountryStates] = useState<IState[]>(states)
     const [selectedState, setSelectedState] = useState(state)
@@ -33,7 +33,7 @@ const CheckoutPage = () => {
 
     const [shippingRate, setShippingRate] = useState(0)
     const [taxRate, setTaxRate] = useState(0)
-    const [discount, setDiscount] = useState(0)
+    const [discount] = useState(0)
     const grandTotal = totalPrice as number + shippingRate + taxRate + discount
 
     const CheckoutSchema = z.object({
@@ -57,7 +57,6 @@ const CheckoutPage = () => {
         register,
         handleSubmit,
         formState: { errors, isSubmitting },
-        reset,
         setValue
     } = useForm<CheckoutSchemaType>({
         resolver: zodResolver(CheckoutSchema),
@@ -239,11 +238,8 @@ const CheckoutPage = () => {
                                         <select
                                             id="select-country"
                                             className={`block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-black focus:ring-black ${errors.countryCode && 'border-red-500'}`}
-                                            {...register('countryCode')}
                                             defaultValue={selectedCountry}
-                                            onChange={(e) => setSelectedCountry(e.target.value)}
                                             disabled
-                                            required
                                         >
                                             {
                                                 countries.map(country => (
@@ -251,6 +247,7 @@ const CheckoutPage = () => {
                                                 ))
                                             }
                                         </select>
+                                        <input type="hidden" {...register('countryCode')} value={selectedCountry} />
                                     </div>
 
                                     <div>
