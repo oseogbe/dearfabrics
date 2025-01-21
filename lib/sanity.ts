@@ -1,6 +1,6 @@
 import { unstable_noStore as noStore } from "next/cache"
 
-import { createClient } from "next-sanity"
+import { createClient, SanityDocument } from "next-sanity"
 import ImageURLBuilder from "@sanity/image-url"
 import { SanityImageSource } from "@sanity/image-url/lib/types/types"
 import { OrderData, Sale } from "@/typings"
@@ -177,7 +177,7 @@ async function fetchSales(): Promise<Sale[]> {
         inStock,
         delivery,
         "sizes": options[name=='sizes'].values[],
-        "colors": options[name=='colors'].values[],
+        "colors": options[name=='colors'].values[]
       }
     }`
     const data = await client.fetch(query)
@@ -185,6 +185,23 @@ async function fetchSales(): Promise<Sale[]> {
   } catch (error) {
     console.error('Database Error:', error)
     throw new Error('Failed to fetch sales data.')
+  }
+}
+
+async function fetchRates(selectedState: string) {
+  try {
+    const query = `*[_type == 'rate'] {
+      locations,
+      shippingRate,
+      taxRate,
+      transitTime
+    }`
+    const rates = await client.fetch(query)
+    const data = rates.find((rate: SanityDocument) => rate.locations.includes(selectedState))
+    return data
+  } catch (error) {
+    console.error('Database Error:', error)
+    throw new Error('Failed to fetch rate data.')
   }
 }
 
@@ -283,6 +300,7 @@ export {
   fetchProductsByCategory,
   fetchSingleProduct,
   fetchSales,
+  fetchRates,
   getOrder,
   createOrder,
   updateOrderStatus

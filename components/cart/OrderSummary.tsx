@@ -1,5 +1,6 @@
 "use client"
 
+import { useState } from "react"
 import { useRouter } from "next/navigation"
 
 import { useShoppingCart } from "use-shopping-cart"
@@ -9,11 +10,8 @@ import { formatCurrency } from "@/lib/utils"
 const OrderSummary = () => {
     const router = useRouter()
     const { cartCount, totalPrice, formattedTotalPrice } = useShoppingCart()
-
-    const shipping = 10000
-    const tax = 3000
-    const discount = -5000
-    const grandTotal = totalPrice as number + shipping + tax + discount
+    const [discount, setDiscount] = useState(0)
+    const grandTotal = Number(totalPrice) + discount
 
     return (
         <div className="col-span-12 xl:col-span-4 bg-gray-50 w-full max-xl:px-6 max-w-3xl xl:max-w-lg mx-auto lg:px-8 py-24">
@@ -25,16 +23,8 @@ const OrderSummary = () => {
                     <p className="font-normal text-lg leading-8 text-gray-700">Subtotal</p>
                     <p className="font-medium text-lg leading-8 text-black">{formatCurrency(totalPrice as number)}</p>
                 </div>
-                <div className="flex items-center justify-between pb-6">
-                    <p className="font-normal text-lg leading-8 text-gray-700">Shipping estimate</p>
-                    <p className="font-medium text-lg leading-8 text-black">{formatCurrency(shipping)}</p>
-                </div>
-                <div className="flex items-center justify-between pb-6">
-                    <p className="font-normal text-lg leading-8 text-gray-700">Tax estimate</p>
-                    <p className="font-medium text-lg leading-8 text-black">{formatCurrency(tax)}</p>
-                </div>
                 {
-                    discount < 0 && (
+                    discount > 0 && (
                         <div className="flex items-center justify-between pb-6">
                             <p className="font-normal text-lg leading-8 text-gray-700">Discount</p>
                             <p className="font-medium text-lg leading-8 text-black">{formatCurrency(discount)}</p>

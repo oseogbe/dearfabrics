@@ -12,12 +12,13 @@ import Container from "@/components/Container"
 import { Switch } from "@/components/ui/switch"
 import Loader from "@/components/Loader"
 
+import { fetchRates } from "@/lib/sanity"
 import { formatCurrency, generateOrderId } from "@/lib/utils"
 
 const countries = Country.getAllCountries()
 const country = "NG"
 const states = State.getStatesOfCountry(country)
-const state = states[0].isoCode
+const state = states[1].isoCode
 
 const CheckoutPage = () => {
     const { cartDetails, redirectToCheckout, totalPrice } = useShoppingCart()
@@ -30,10 +31,10 @@ const CheckoutPage = () => {
     const [selectedBillingCountry, setSelectedBillingCountry] = useState(country)
     const [selectedBillingState, setSelectedBillingState] = useState(state)
 
-    const shipping = 10000
-    const tax = 3000
-    const discount = -5000
-    const grandTotal = totalPrice as number + shipping + tax + discount
+    const [shippingRate, setShippingRate] = useState(0)
+    const [taxRate, setTaxRate] = useState(0)
+    const [discount, setDiscount] = useState(0)
+    const grandTotal = totalPrice as number + shippingRate + taxRate + discount
 
     const CheckoutSchema = z.object({
         name: z.string().min(2),
@@ -74,7 +75,21 @@ const CheckoutPage = () => {
         }
 
         fetchStates()
-    }, [selectedCountry, selectedState])
+    }, [selectedCountry])
+
+    useEffect(() => {
+        const fetchDeliveryRates = async () => {
+            const state = State.getStateByCodeAndCountry(selectedState, selectedCountry)
+            if (state) {
+                const rate = await fetchRates(state.name)
+                setShippingRate(rate.shippingRate)
+                setTaxRate(rate.taxRate / 100 * rate.shippingRate)
+            }
+        }
+
+        fetchDeliveryRates()
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedState])
 
     const handlePhoneCodeSelect = (code: string) => {
         setSelectedPhoneCode(code)
@@ -128,11 +143,11 @@ const CheckoutPage = () => {
                     shippingAddress: `${formData.streetAddress}, ${formData.city}, ${formData.state} ${formData.zipCode}, ${formData.country}`,
                     phone: `${formData.phoneCode}${formData.phoneNo}`,
                     items: line_items,
-                    subtotal: Number(totalPrice),
-                    shipping: Number(shipping),
-                    tax: Number(tax),
-                    discount: Number(discount),
-                    total: Number(grandTotal),
+                    subtotal: totalPrice,
+                    shipping: shippingRate,
+                    tax: taxRate,
+                    discount,
+                    total: grandTotal,
                 }
 
                 const response = await fetch('/api/orders', {
@@ -227,6 +242,7 @@ const CheckoutPage = () => {
                                             {...register('countryCode')}
                                             defaultValue={selectedCountry}
                                             onChange={(e) => setSelectedCountry(e.target.value)}
+                                            disabled
                                             required
                                         >
                                             {
@@ -437,6 +453,7 @@ const CheckoutPage = () => {
                                                     {...register('billingCountryCode')}
                                                     defaultValue={selectedBillingCountry}
                                                     onChange={(e) => setSelectedBillingCountry(e.target.value)}
+                                                    disabled
                                                     required
                                                 >
                                                     {
@@ -599,20 +616,20 @@ const CheckoutPage = () => {
                                         <dd className="text-base font-medium text-gray-900">{formatCurrency(totalPrice ?? 0)}</dd>
                                     </dl>
 
-                                    <dl className="flex items-center justify-between gap-4 py-3">
+                                    {shippingRate > 0 && (<dl className="flex items-center justify-between gap-4 py-3">
                                         <dt className="text-base font-normal text-gray-500">Shipping</dt>
-                                        <dd className="text-base font-medium text-gray-900">{formatCurrency(shipping)}</dd>
-                                    </dl>
+                                        <dd className="text-base font-medium text-gray-900">{formatCurrency(shippingRate)}</dd>
+                                    </dl>)}
 
-                                    <dl className="flex items-center justify-between gap-4 py-3">
+                                    {taxRate > 0 && (<dl className="flex items-center justify-between gap-4 py-3">
                                         <dt className="text-base font-normal text-gray-500">Tax</dt>
-                                        <dd className="text-base font-medium text-gray-900">{formatCurrency(tax)}</dd>
-                                    </dl>
+                                        <dd className="text-base font-medium text-gray-900">{formatCurrency(taxRate)}</dd>
+                                    </dl>)}
 
-                                    <dl className="flex items-center justify-between gap-4 py-3">
+                                    {discount > 0 && (<dl className="flex items-center justify-between gap-4 py-3">
                                         <dt className="text-base font-normal text-gray-500">Discount</dt>
                                         <dd className="text-base font-medium text-gray-900">{formatCurrency(discount)}</dd>
-                                    </dl>
+                                    </dl>)}
 
                                     <dl className="flex items-center justify-between gap-4 py-3">
                                         <dt className="text-base font-bold text-gray-900">Total</dt>
