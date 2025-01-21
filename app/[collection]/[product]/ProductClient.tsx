@@ -113,11 +113,10 @@ const ProductClient = ({
                             stars={product.stars}
                             ratings={product.ratings}
                         />
-                        <div className="h-4 w-[1px] bg-black mx-3"></div>
-                        {product.inStock ? (
-                            <div className="text-xs xl:text-green-500">In Stock</div>
-                        ) : (
-                            <div className="text-xs xl:text-red-500">Out of Stock</div>
+                        {product.inStock && (
+                            <div className="px-3 py-1 text-xs text-white bg-green-500 rounded-full">
+                                In Stock
+                            </div>
                         )}
                     </div>
                     <div className="mt-8 text-sm xl:text-base text-[#3C4242]">{formattedDescription}</div>

@@ -87,7 +87,7 @@ const product = defineType({
             options: {
                 layout: 'switch', // Optional: 'switch' is another option for boolean
             },
-            initialValue: false, // Set the default value
+            initialValue: true, // Set the default value
             group: 'product',
         }),
         defineField({
