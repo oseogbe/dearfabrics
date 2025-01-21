@@ -12,7 +12,7 @@ const Announcement = () => {
         <div className="bg-black py-3 px-4 sm:px-2 md:px-10 xl:px-20">
             <div className="flex flex-col md:flex-row items-center justify-between max-w-6xl mx-auto text-white text-xs xl:text-sm">
                 <div className="md:flex flex-row items-center gap-3">
-                    Holiday Sale For All Fabrics And Free Delivery Within Abuja - OFF 50%!
+                    Massive Sales For Ankara Fabrics And Free Delivery Within Abuja - Up to 50% Off!
                     <span className="ml-3 md:ml-0 cursor-pointer hover:text-df-yellow font-extrabold underline transition">ShopNow</span>
                 </div>
                 <div className="hidden md:flex flex-row items-center">
