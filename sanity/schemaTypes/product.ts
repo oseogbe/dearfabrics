@@ -146,15 +146,17 @@ const product = defineType({
                     fields: [
                         defineField({
                             name: 'name',
-                            description: 'sizes, colors, etc.',
+                            description: 'Option name must be either \'sizes\' or \'colors\'.',
                             title: 'Option Name',
                             type: 'string',
+                            validation: Rule => Rule.required(),
                         }),
                         defineField({
                             name: 'values',
                             title: 'Option Values',
                             type: 'array',
                             of: [{ type: 'string' }],
+                            validation: Rule => Rule.required(),
                         }),
                     ],
                     preview: {
