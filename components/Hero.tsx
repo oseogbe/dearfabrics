@@ -84,7 +84,7 @@ const MediumSizeHero: React.FC<HeroProps> = ({ slides }) => {
                 slides.map((slide, i) => (
                     <SwiperSlide key={i}>
                         <div className="relative w-full h-[250px] border shadow-sm rounded-xl overflow-hidden">
-                            <Image src={slide.image} alt={slide.text} fill className="object-cover" />
+                            <Image src={urlFor(slide.image).url()} alt={slide.text} fill className="object-cover" />
                             <div className="absolute inset-y-0 right-0 flex flex-col justify-center space-y-3 text-gray-900 w-1/2 p-8">
                                 <h5 className="text-sm font-medium">{slide.category}</h5>
                                 <h3 className="text-2xl leading-10 font-black">{slide.text}</h3>
@@ -119,7 +119,7 @@ const MobileSizeHero: React.FC<HeroProps> = ({ slides }) => {
                 slides.map((slide, i) => (
                     <SwiperSlide key={i}>
                         <div className="relative w-full h-[350px] border shadow-sm rounded-xl overflow-hidden">
-                            <Image src={slide.mobileImage} alt={slide.text} fill className="object-cover" />
+                            <Image src={urlFor(slide.mobileImage).url()} alt={slide.text} fill className="object-cover" />
                             <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-center space-y-3 p-8 text-gray-900 text-center">
                                 <h5 className="text-sm font-medium text-white">{slide.category}</h5>
                                 <h3 className="text-2xl leading-10 font-black text-white">{slide.text}</h3>
