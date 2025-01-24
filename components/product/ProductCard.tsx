@@ -22,7 +22,7 @@ const ProductCard = ({
 }) => {
     return (
         <div className={`${containerStyles}`}>
-            <div className="relative h-[200px] md:h-[280px] overflow-y-clip w-full rounded group">
+            <div className="relative h-[200px] md:h-[280px] overflow-y-hidden w-full rounded group">
                 {product.oldPrice && (
                     <div className="absolute top-3 left-3 px-3 py-1 bg-df-yellow text-white text-xs rounded">
                         {percentageDiscount(product.oldPrice, product.price)}% off
@@ -33,7 +33,7 @@ const ProductCard = ({
                     alt={product.name}
                     width={500}
                     height={500}
-                    className="object-cover"
+                    className="object-cover h-full"
                 />
                 <div className="absolute top-0 right-0 bottom-0 left-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                     <div className="flex items-center gap-[10px] transition-transform duration-300 transform-gpu translate-y-full group-hover:translate-y-0">
