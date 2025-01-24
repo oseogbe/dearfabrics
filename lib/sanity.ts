@@ -155,6 +155,42 @@ async function fetchSingleProduct(productSlug: string) {
   }
 }
 
+async function searchProducts(term: string, page: number = 1, limit: number = 12) {
+  noStore()
+
+  const offset = (page - 1) * limit
+
+  try {
+    const query = `*[_type == "product" && name match $term] | order(name asc) [$offset...$offset+$limit] {
+      "id": _id,
+      name,
+      description,
+      "slug": slug.current,
+      "categories": categories[]->slug.current,
+      "images": images[].asset->url,
+      oldPrice,
+      price,
+      "currency": "NGN",
+      inStock,
+      "sizes": options[name=='sizes'].values[],
+      "colors": options[name=='colors'].values[]
+    }`
+    const params = { term: `*${term}*`, offset, limit }
+    const products = await client.fetch(query, params)
+
+    const countQuery = `count(*[_type == "product" && name match $term] | order(name asc))`
+    const total = await client.fetch(countQuery, params)
+
+    return {
+      products,
+      total
+    }
+  } catch (error) {
+    console.error('Database Error:', error)
+    throw new Error('Failed to fetch products.')
+  }
+}
+
 async function fetchSales(): Promise<Sale[]> {
   noStore()
 
@@ -299,6 +335,7 @@ export {
   fetchSubcategories,
   fetchProductsByCategory,
   fetchSingleProduct,
+  searchProducts,
   fetchSales,
   fetchRates,
   getOrder,
