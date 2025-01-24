@@ -97,9 +97,9 @@ const Pagination: React.FC<PaginationProps> = ({
 
             <button
                 type="button"
-                className={`min-h-8 min-w-8 md:min-h-[54px] md:min-w-[54px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm md:text-xl rounded-lg ${currentPage === pagesCount ? 'text-gray-400 disabled:opacity-50' : 'text-gray-800 hover:bg-gray-100'} focus:outline-none focus:bg-gray-100`}
+                className={`min-h-8 min-w-8 md:min-h-[54px] md:min-w-[54px] py-2 px-2.5 inline-flex justify-center items-center gap-x-2 text-sm md:text-xl rounded-lg ${currentPage === pagesCount || pages.length === 0 ? 'text-gray-400 disabled:opacity-50' : 'text-gray-800 hover:bg-gray-100'} focus:outline-none focus:bg-gray-100`}
                 onClick={() => handlePageClick(currentPage + 1)}
-                disabled={currentPage === pagesCount}
+                disabled={currentPage === pagesCount || pages.length === 0}
             >
                 <span aria-hidden="true" className="sr-only">Next</span>
                 <svg className="flex-shrink-0 size-6" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
