@@ -24,7 +24,7 @@ const QuickView = ({
 }) => {
     const [selectedImage, setSelectedImage] = useState(product.images[0])
     const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes[0][0])
+    const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]?.[0])
     const [quantity, setQuantity] = useState(1)
 
     const shoppingCart = useShoppingCart()
@@ -102,21 +102,23 @@ const QuickView = ({
                                 </div>
                             </div>
                         )}
-                        <div className="mt-6">
-                            <div className="hidden lg:block"><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size</span> {selectedSize}</div>
-                            <div className="mt-3 flex items-center gap-4">
-                                {product.sizes[0].map(size => (
-                                    <div
-                                        key={size}
-                                        className={cn(
-                                            "px-3 py-2 flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
-                                            selectedSize === size && 'bg-df-gray'
-                                        )}
-                                        onClick={() => setSelectedSize(size)}
-                                    >{size}</div>
-                                ))}
+                        {product.sizes && product.sizes[0]?.length > 0 && (
+                            <div className="mt-6">
+                                <div className="hidden lg:block"><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size</span> {selectedSize}</div>
+                                <div className="mt-3 flex items-center gap-4">
+                                    {product.sizes[0].map(size => (
+                                        <div
+                                            key={size}
+                                            className={cn(
+                                                "px-3 py-2 flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
+                                                selectedSize === size && 'bg-df-gray'
+                                            )}
+                                            onClick={() => setSelectedSize(size)}
+                                        >{size}</div>
+                                    ))}
+                                </div>
                             </div>
-                        </div>
+                        )}
                         <div className="mt-6 flex items-center gap-5">
                             <div className="flex">
                                 <div

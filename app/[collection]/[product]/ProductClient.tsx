@@ -25,7 +25,7 @@ const ProductClient = ({
 }) => {
     const [selectedImage, setSelectedImage] = useState(product.images[0])
     const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes?.[0][0])
+    const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]?.[0])
     const [quantity, setQuantity] = useState(1)
 
     const shoppingCart = useShoppingCart()
@@ -153,7 +153,7 @@ const ProductClient = ({
                     )}
                     <div className="mt-8">
                         {
-                            product.sizes && (
+                            product.sizes && product.sizes[0]?.length > 0 && (
                                 <>
                                     <div><span className="font-bold text-[#3C4242] text-sm md:text-base xl:text-lg">Size</span> {selectedSize}</div>
                                     <div className="mt-3 flex items-center gap-4">

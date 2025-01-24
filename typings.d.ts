@@ -12,7 +12,7 @@ export type ProductType = {
     colors?: {
         [key: number]: string[]
     }
-    sizes: {
+    sizes?: {
         [key: number]: string[]
     }
     stars: number
