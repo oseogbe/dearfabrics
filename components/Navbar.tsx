@@ -11,7 +11,7 @@ import Container from "./Container"
 import Announcement from "./navbar/Announcement"
 import Logo from "./navbar/Logo"
 import Search from "./navbar/Search"
-import AccountButton from "./navbar/AccountButton"
+import AccountMenu from "./navbar/AccountMenu"
 import CartButton from "./navbar/CartButton"
 import MobileMenu from "./navbar/MobileMenu"
 
@@ -283,7 +283,7 @@ const Navbar: React.FC<NavbarProps> = ({
                                 <Search />
                             </Suspense>
                             <div className="flex flex-row gap-3">
-                                <AccountButton />
+                                <AccountMenu />
                                 <CartButton />
                             </div>
                         </div>

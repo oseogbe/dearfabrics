@@ -8,20 +8,20 @@ import MenuItem from "./MenuItem"
 
 import { FiUser } from "react-icons/fi"
 
-const AccountButton = () => {
+const AccountMenu = () => {
     const [isOpen, setIsOpen] = useState(false)
     const ref = useRef<HTMLDivElement>(null)
     const router = useRouter()
     const currentUser = false
 
     const toggleOpen = useCallback(() => {
-        setIsOpen(value => !value)
+        setIsOpen((value) => !value)
     }, [])
 
-    useOnClickOutside(ref, toggleOpen)
+    useOnClickOutside(ref, () => setIsOpen(false))
 
     return (
-        <div className="relative">
+        <div ref={ref} className="relative">
             <div
                 className="p-3 xl:p-4 bg-[#F6F6F6] rounded-lg cursor-pointer"
                 onClick={toggleOpen}
@@ -29,9 +29,8 @@ const AccountButton = () => {
                 <FiUser className="w-4 h-4 xl:w-5 xl:h-5 text-[#807D7E]" />
             </div>
 
-            {isOpen &&
+            {isOpen && (
                 <div
-                    ref={ref}
                     className="
                         bg-white 
                         w-[200px]
@@ -49,47 +48,41 @@ const AccountButton = () => {
                             <>
                                 <MenuItem
                                     label="Orders"
-                                    onClick={() => router.push('/orders')}
+                                    onClick={() => router.push("/orders")}
                                     className="font-semibold"
                                 />
                                 <MenuItem
                                     label="Wishlist"
-                                    onClick={() => router.push('/wishlist')}
+                                    onClick={() => router.push("/wishlist")}
                                     className="font-semibold"
                                 />
                                 <MenuItem
                                     label="Account"
-                                    onClick={() => router.push('/account')}
+                                    onClick={() => router.push("/account")}
                                     className="font-semibold"
                                 />
                                 <hr />
-                                <MenuItem
-                                    label="Help Center"
-                                    onClick={() => { }}
-                                />
+                                <MenuItem label="Help Center" onClick={() => { }} />
                                 <hr />
-                                <MenuItem
-                                    label="Logout"
-                                    onClick={() => { }}
-                                />
+                                <MenuItem label="Logout" onClick={() => { }} />
                             </>
                         ) : (
                             <>
                                 <MenuItem
                                     label="Login"
-                                    onClick={() => router.push('/login')}
+                                    onClick={() => router.push("/login")}
                                 />
                                 <MenuItem
                                     label="Sign up"
-                                    onClick={() => router.push('/signup')}
+                                    onClick={() => router.push("/signup")}
                                 />
                             </>
                         )}
                     </div>
                 </div>
-            }
+            )}
         </div>
     )
 }
 
-export default AccountButton
+export default AccountMenu
