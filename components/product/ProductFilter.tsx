@@ -86,7 +86,7 @@ const ProductFilter = ({
                     onInput={onPriceChange}
                 />
             </div>
-            <div className='flex flex-col gap-4'>
+            {/* <div className='flex flex-col gap-4'>
                 <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Colors</h4>
                 <div className='grid grid-cols-8 md:grid-cols-12 xl:grid-cols-4 gap-2 xl:gap-6'>
                     {
@@ -125,7 +125,7 @@ const ProductFilter = ({
                         ))
                     }
                 </div>
-            </div>
+            </div> */}
         </div>
     )
 }

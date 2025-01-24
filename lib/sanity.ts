@@ -77,16 +77,15 @@ async function fetchSubcategories(slug: string) {
 
 }
 
-async function fetchProductsByCategory(category: string, subcategory: string, page: number, pageSize: number) {
-  // Add noStore() here prevent the response from being cached.
-  // This is equivalent to in fetch(..., {cache: 'no-store'}).
+async function fetchProductsByCategory(category: string, subcategory: string, page: number, pageSize: number, minPrice?: number, maxPrice?: number) {
   noStore()
 
   const skip = (page - 1) * pageSize
 
   try {
+    const priceFilter = minPrice !== undefined && maxPrice !== undefined ? `&& price >= ${minPrice} && price <= ${maxPrice}` : ''
     const productsQuery = `*[_type == "product" && references(*[_type == "category" && isTopLevel == true && 
-    slug.current == '${category}']._id) && references(*[_type == "category" && slug.current == '${subcategory}']._id)] 
+    slug.current == '${category}']._id) && references(*[_type == "category" && slug.current == '${subcategory}']._id) ${priceFilter}] 
     | order(_created_at desc) [${skip}...${skip + pageSize}] {
       "id": _id,
       name,
@@ -104,7 +103,7 @@ async function fetchProductsByCategory(category: string, subcategory: string, pa
     const products = await client.fetch(productsQuery)
 
     const countQuery = `count(*[_type == "product" && references(*[_type == "category" && isTopLevel == true && 
-    slug.current == '${category}']._id) && references(*[_type == "category" && slug.current == '${subcategory}']._id)])`
+    slug.current == '${category}']._id) && references(*[_type == "category" && slug.current == '${subcategory}']._id) ${priceFilter}])`
     const total = await client.fetch(countQuery)
 
     return {

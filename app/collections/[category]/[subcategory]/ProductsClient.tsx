@@ -8,6 +8,8 @@ import ProductCard from "@/components/product/ProductCard"
 import Pagination from "@/components/Pagination"
 import Select from "@/components/Select"
 
+import { fetchProductsByCategory } from "@/lib/sanity"
+
 import { ProductType } from "@/typings"
 
 const ProductsClient = ({
@@ -41,27 +43,24 @@ const ProductsClient = ({
     const [selectedColors, setSelectedColors] = useState<string[]>([])
     const [selectedSizes, setSelectedSizes] = useState<string[]>([])
 
-    // Fetch products dynamically when filters or pagination changes
     useEffect(() => {
         const fetchData = async () => {
-            const queryParams = new URLSearchParams({
-                page: currentPage.toString(),
-                pageSize: pageSize.toString(),
-                minPrice: priceRange[0].toString(),
-                maxPrice: priceRange[1].toString(),
-            })
-
-            // TODO: function to fetch products by filter options
-
+            const { products, total } = await fetchProductsByCategory(category, subcategory, currentPage, pageSize, priceRange[0], priceRange[1])
             setProducts(products)
             setTotal(total)
         }
 
         fetchData()
-    }, [currentPage, pageSize, priceRange, category, subcategory])
+    }, [searchParams, category, subcategory, currentPage, pageSize, priceRange])
 
     const handlePriceChange = (values: number[]) => {
         setPriceRange(values)
+        setCurrentPage(1)
+        const params = new URLSearchParams(searchParams)
+        params.set('minPrice', values[0].toString())
+        params.set('maxPrice', values[1].toString())
+        params.set('page', '1')
+        replace(`/collections/${category}/${subcategory}?${params.toString()}`)
     }
 
     const handleColorChange = (color: string) => {
@@ -85,7 +84,10 @@ const ProductsClient = ({
     }
 
     const handlePageChange = (page: number) => {
+        const params = new URLSearchParams(searchParams)
+        params.set('page', page.toString())
         setCurrentPage(page)
+        replace(`/collections/${category}/${subcategory}?${params.toString()}`)
     }
 
     const clearFilters = () => {
@@ -116,7 +118,7 @@ const ProductsClient = ({
             <div className="w-full">
                 <h3 className="text-2xl md:text-3xl text-gray-900 font-bold capitalize my-4 md:my-6 xl:my-8">{subcategory.replace(/-/g, ' ')}</h3>
                 <div className="flex items-center justify-between">
-                    <div className="text-xs md:text-base text-gray-900">
+                    <div className="text-sm md:text-base text-gray-900">
                         Showing {pageSize * (currentPage - 1) + 1} -{" "}
                         {Math.min(pageSize * currentPage, total)} of {total} results
                     </div>
