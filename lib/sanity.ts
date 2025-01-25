@@ -194,7 +194,8 @@ async function fetchSales(): Promise<Sale[]> {
   noStore()
 
   try {
-    const query = `*[_type == 'sale'] {
+    const currentDate = new Date().toISOString()
+    const query = `*[_type == 'sale' && startDate <= $currentDate && endDate >= $currentDate] {
       "id": _id,
       name,
       startDate,
@@ -215,7 +216,7 @@ async function fetchSales(): Promise<Sale[]> {
         "colors": options[name=='colors'].values[]
       }
     }`
-    const data = await client.fetch(query)
+    const data = await client.fetch(query, { currentDate })
     return data
   } catch (error) {
     console.error('Database Error:', error)

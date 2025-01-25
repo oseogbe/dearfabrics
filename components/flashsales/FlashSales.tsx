@@ -2,14 +2,18 @@
 
 import { useRef } from "react"
 import Image from "next/image"
-
-import Countdown, { zeroPad } from 'react-countdown'
+import Countdown, { zeroPad } from "react-countdown"
+// import dynamic from "next/dynamic"  // import dynamic for client-side loading
+// import { zeroPad, type CountdownProps } from "react-countdown"
 
 import ProductCard from "../product/ProductCard"
 import ArrowLeft from "../ArrowLeft"
 import ArrowRight from "../ArrowRight"
 
 import { Sale } from "@/typings"
+
+// dynamically import Countdown and disable SSR
+// const Countdown = dynamic(() => import("react-countdown").then((mod) => mod.default as React.ComponentType<CountdownProps>))
 
 interface FlashSalesProps {
     sale: Sale
@@ -19,10 +23,6 @@ const FlashSales: React.FC<FlashSalesProps> = ({
     sale
 }) => {
     const saleProductsRef = useRef<HTMLDivElement>(null)
-
-    if (new Date(sale.startDate) > new Date() || new Date(sale.endDate) < new Date()) {
-        return null
-    }
 
     const handleScroll = (direction: 'left' | 'right') => {
         const container = saleProductsRef.current

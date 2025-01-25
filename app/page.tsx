@@ -134,7 +134,7 @@ const HomePage = async () => {
       <div className="pt-5 xl:pt-10">
         <Hero slides={slides} />
       </div>
-      <div className="w-full flex flex-col md:flex-row gap-4 xl:gap-8 mt-6 md:mt-12 xl:mt-[54px]">
+      <div className="w-full flex flex-col md:flex-row gap-4 lg:gap-8 mt-6 lg:mt-12">
         {
           adCardItems.map(item => (
             <AdCard
@@ -151,12 +151,12 @@ const HomePage = async () => {
           ))
         }
       </div>
-      <hr className="w-[95%] mx-auto my-6 md:my-12 xl:my-[54px]" />
-      <div className="flex flex-col gap-y-8 md:gap-y-12 mb-12 md:mb-16 xl:mb-24">
+      <hr className="w-[95%] mx-auto my-6 lg:my-12" />
+      {sales && sales.length > 0 && <div className="flex flex-col gap-y-8 md:gap-y-12 mb-12 lg:mb-16">
         {sales.map((sale, i) => (
           <FlashSales key={i} sale={sale} />
         ))}
-      </div>
+      </div>}
       <div className="flex flex-col gap-12 md:gap-16 xl:gap-24">
         <AnkaraCard />
         {/* <FeaturedCategories
