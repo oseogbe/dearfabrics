@@ -519,42 +519,6 @@ const CheckoutPage = () => {
                                                 <p id="credit-card-text" className="mt-1 text-xs font-normal text-gray-500">Pay with your credit card or debit card</p>
                                             </div>
                                         </div>
-
-                                        <div className="mt-4 flex items-center gap-2">
-                                            <button type="button" className="text-sm font-medium text-gray-500 hover:text-gray-900">Delete</button>
-
-                                            <div className="h-3 w-px shrink-0 bg-gray-200"></div>
-
-                                            <button type="button" className="text-sm font-medium text-gray-500 hover:text-gray-900">Edit</button>
-                                        </div>
-                                    </div>
-
-                                    <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 ps-4">
-                                        <div className="flex items-start">
-                                            <div className="flex h-5 items-center">
-                                                <input
-                                                    id="pay-on-delivery"
-                                                    aria-describedby="pay-on-delivery-text"
-                                                    type="radio"
-                                                    name="payment-method"
-                                                    value="pay-on-delivery"
-                                                    className="h-4 w-4 border-gray-300 bg-white text-df-yellow focus:ring-2 focus:ring-df-yellow"
-                                                />
-                                            </div>
-
-                                            <div className="ms-4 text-sm">
-                                                <label htmlFor="pay-on-delivery" className="font-medium leading-none text-gray-900 cursor-pointer"> Bank Transfer </label>
-                                                <p id="pay-on-delivery-text" className="mt-1 text-xs font-normal text-gray-500">Pay to a virtual bank account</p>
-                                            </div>
-                                        </div>
-
-                                        <div className="mt-4 flex items-center gap-2">
-                                            <button type="button" className="text-sm font-medium text-gray-500 hover:text-gray-900">Delete</button>
-
-                                            <div className="h-3 w-px shrink-0 bg-gray-200"></div>
-
-                                            <button type="button" className="text-sm font-medium text-gray-500 hover:text-gray-900">Edit</button>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
