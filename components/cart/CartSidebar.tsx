@@ -24,6 +24,16 @@ const CartSidebar = () => {
 
     useOnClickOutside(sidebarRef, () => cartSidebar.onClose())
 
+    const goToCartPage = () => {
+        cartSidebar.onClose()
+        router.push('/cart')
+    }
+
+    const goToCheckoutPage = () => {
+        cartSidebar.onClose()
+        router.push('/checkout')
+    }
+
     return (
         <>
             {cartSidebar.isOpen && (
@@ -69,12 +79,12 @@ const CartSidebar = () => {
                                         <Button
                                             label={`View Cart (${cartCount})`}
                                             type="secondary"
-                                            onClick={() => router.push('/cart')}
+                                            onClick={goToCartPage}
                                         />
                                         <Button
                                             label="Checkout"
                                             icon={FaLongArrowAltRight}
-                                            onClick={() => router.push('/checkout')}
+                                            onClick={goToCheckoutPage}
                                         />
                                     </div>
                                 </div>
