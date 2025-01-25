@@ -1,6 +1,7 @@
 import Link from "next/link"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
 import Logo from "./Logo"
+import { useRef } from "react"
 
 const navLinks = [
     {
@@ -180,9 +181,17 @@ const navLinks = [
 ]
 
 const MobileMenu = () => {
+    const checkboxRef = useRef<HTMLInputElement>(null)
+
+    const handleLinkClick = () => {
+        if (checkboxRef.current) {
+            checkboxRef.current.checked = false
+        }
+    }
+
     return (
-        <label className="md:hidden relative z-40 cursor-pointer pr-3" htmlFor="mobile-menu">
-            <input className="peer hidden" type="checkbox" id="mobile-menu" />
+        <label className="lg:hidden relative z-40 cursor-pointer pr-3" htmlFor="mobile-menu">
+            <input ref={checkboxRef} className="peer hidden" type="checkbox" id="mobile-menu" />
             <div
                 className="relative z-50 block h-[2px] w-5 bg-black bg-transparent content-[''] before:absolute before:top-[-0.35rem] before:z-50 before:block before:h-full before:w-full before:bg-black before:transition-all before:duration-200 before:ease-out before:content-[''] after:absolute after:right-0 after:bottom-[-0.35rem] after:block after:h-full after:w-full after:bg-black after:transition-all after:duration-200 after:ease-out after:content-[''] peer-checked:bg-transparent before:peer-checked:top-0 before:peer-checked:w-full before:peer-checked:rotate-45 before:peer-checked:transform after:peer-checked:bottom-0 after:peer-checked:w-full after:peer-checked:-rotate-45 after:peer-checked:transform"
             >
@@ -205,7 +214,7 @@ const MobileMenu = () => {
                                     <menu className="pl-6 space-y-4">
                                         {item.children?.map((child) => (
                                             <li key={child.label}>
-                                                <Link href={child.link} className="text-sm font-medium leading-none">{child.label}</Link>
+                                                <Link href={child.link} className="text-sm font-medium leading-none" onClick={handleLinkClick}>{child.label}</Link>
                                             </li>
                                         ))}
                                     </menu>
