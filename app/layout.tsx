@@ -69,6 +69,9 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${metropolis.variable} font-avenir`}>
+      <head>
+        <link rel="icon" href="/img/dfng-favicon.png" />
+      </head>
       <body>
         <MyCartProvider>
           <Navbar menuItems={navItems} />
