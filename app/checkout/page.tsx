@@ -176,7 +176,7 @@ const CheckoutPage = () => {
 
     return (
         <Container>
-            <div className="relative w-full max-w-7xl mx-auto lg:py-24 px-4 md:px-5 lg-6">
+            <div className="w-full max-w-7xl mx-auto pt-6 lg:py-24 px-4 md:px-5">
                 <h2 className="font-bold text-2xl lg:text-3xl leading-10 text-black mb-11">
                     Checkout
                 </h2>
