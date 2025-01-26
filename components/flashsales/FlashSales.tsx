@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import Image from "next/image"
 import Countdown, { zeroPad } from "react-countdown"
 // import dynamic from "next/dynamic"  // import dynamic for client-side loading
@@ -22,6 +22,7 @@ interface FlashSalesProps {
 const FlashSales: React.FC<FlashSalesProps> = ({
     sale
 }) => {
+    const [isClient, setIsClient] = useState(false)
     const saleProductsRef = useRef<HTMLDivElement>(null)
 
     const handleScroll = (direction: 'left' | 'right') => {
@@ -85,6 +86,12 @@ const FlashSales: React.FC<FlashSalesProps> = ({
             </>
         )
     }
+
+    useEffect(() => {
+        setIsClient(true)
+    }, [])
+
+    if (!isClient) return null
 
     return (
         <div>
