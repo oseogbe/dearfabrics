@@ -23,8 +23,8 @@ const CollectionPage = async ({ params }: { params: { category: string; subcateg
     const { products, total } = await fetchProductsByCategory(category, subcategory, currentPage, pageSize)
 
     const productPrices = products.map((product: ProductType) => product.price)
-    const minPrice = formatPrice(Math.min(...productPrices), "down")
-    const maxPrice = formatPrice(Math.max(...productPrices), "up")
+    const minPrice = productPrices.length > 0 ? formatPrice(Math.min(...productPrices), "down") : 0
+    const maxPrice = productPrices.length > 0 ? formatPrice(Math.max(...productPrices), "up") : 0
 
     return (
         <Container>
