@@ -24,6 +24,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "country-state-city": "^3.2.1",
+    "js-cookie": "^3.0.5",
     "lucide-react": "^0.360.0",
     "next": "^14.2.1",
     "next-sanity": "^8.4.6",
@@ -52,6 +53,7 @@
   },
   "devDependencies": {
     "@tailwindcss/forms": "^0.5.7",
+    "@types/js-cookie": "^3.0.6",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-color": "^3.0.12",
