@@ -66,13 +66,31 @@ const config: Config = {
 						opacity: '0',
 						transform: 'translateY(100px)'
 					}
+				},
+				'slideUp': {
+					from: {
+						height: '0',
+					},
+					to: {
+						height: 'var(--product-filter-modal-height)'
+					}
+				},
+				'slideDown': {
+					from: {
+						height: 'var(--product-filter-modal-height)'
+					},
+					to: {
+						height: '0'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
 				'accordion-up': 'accordion-up 0.2s ease-out',
 				'fade-in-up': 'fadeInUp 0.7s ease-out forwards',
-				'fade-out-down': 'fadeOutDown 0.7s ease-in forwards'
+				'fade-out-down': 'fadeOutDown 0.7s ease-in forwards',
+				'slide-up': 'slideUp 0.5s ease-out forwards',
+				'slide-down': 'slideDown 0.5s ease-in forwards'
 			}
 		}
 	},

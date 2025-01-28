@@ -12,6 +12,8 @@ import { fetchProductsByCategory } from "@/lib/sanity"
 
 import { ProductType } from "@/typings"
 
+import { IoFilter } from "react-icons/io5"
+
 const ProductsClient = ({
     initialProducts,
     initialTotal,
@@ -42,6 +44,11 @@ const ProductsClient = ({
     const [priceRange, setPriceRange] = useState([minPrice, maxPrice])
     const [selectedColors, setSelectedColors] = useState<string[]>([])
     const [selectedSizes, setSelectedSizes] = useState<string[]>([])
+    const [isFilterVisible, setIsFilterVisible] = useState(false)
+
+    const toggleFilterVisibility = () => {
+        setIsFilterVisible(!isFilterVisible)
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -98,22 +105,18 @@ const ProductsClient = ({
 
     return (
         <>
-            {/* Sidebar and filter options */}
-            <div className="hidden xl:block w-[280px] shrink-0">
-                <div className="p-8 border shadow-md rounded-lg">
-                    <ProductFilter
-                        priceRange={priceRange}
-                        minPrice={minPrice}
-                        maxPrice={maxPrice}
-                        selectedColors={selectedColors}
-                        selectedSizes={selectedSizes}
-                        onPriceChange={handlePriceChange}
-                        onColorChange={handleColorChange}
-                        onSizeChange={handleSizeChange}
-                    />
-                </div>
-            </div>
-
+            {/* Mobile and Desktop Product filters */}
+            <ProductFilter
+                priceRange={priceRange}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+                selectedColors={selectedColors}
+                selectedSizes={selectedSizes}
+                onPriceChange={handlePriceChange}
+                onColorChange={handleColorChange}
+                onSizeChange={handleSizeChange}
+                toggleVisibility={toggleFilterVisibility}
+            />
             {/* Product listing */}
             <div className="w-full">
                 <h3 className="text-2xl md:text-3xl text-gray-900 font-bold capitalize my-4 md:my-6 xl:my-8">{subcategory.replace(/-/g, ' ')}</h3>
@@ -122,7 +125,8 @@ const ProductsClient = ({
                         Showing {pageSize * (currentPage - 1) + 1} -{" "}
                         {Math.min(pageSize * currentPage, total)} of {total} results
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-3">
+                        <IoFilter height={26} className="text-gray-900 lg:hidden" onClick={toggleFilterVisibility} />
                         <Select
                             options={[
                                 "Default sorting",

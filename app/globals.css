@@ -18,6 +18,7 @@
   --foreground-rgb: 0, 0, 0;
   --swiper-navigation-size: 24px !important;
   --swiper-theme-color: #fff !important;
+  --product-filter-modal-height: 150px;
 }
 
 @media (prefers-color-scheme: dark) {
