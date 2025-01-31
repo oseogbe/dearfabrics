@@ -4,8 +4,6 @@ export type ProductType = {
     slug: string
     description?: string
     categories: string[]
-    oldPrice?: number
-    price: number
     currency: string
     quantity?: number
     images: string[]
@@ -15,11 +13,23 @@ export type ProductType = {
     sizes?: {
         [key: number]: string[]
     }
+    variants: ProductVariant[]
     stars: number
     ratings: number
     inStock?: boolean
     shipsIn?: string
     relatedProducts: string[]
+}
+
+export type ProductVariant = {
+    name: string
+    price: number
+    oldPrice: number
+    quantity: number
+    options: {
+        name: string
+        value: string
+    }[]
 }
 
 export type OrderItem = {
