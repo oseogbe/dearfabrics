@@ -40,8 +40,8 @@ export function formatCurrency(amount: number) {
 }
 
 export function getProductPrices(product: ProductType) {
-  const minOldPrice = Math.min(...(product.variants.map(v => v.oldPrice)))
-  const maxOldPrice = Math.max(...(product.variants.map(v => v.oldPrice)))
+  const minOldPrice = Math.min(...(product.variants.map(v => v.oldPrice || 0)))
+  const maxOldPrice = Math.max(...(product.variants.map(v => v.oldPrice || 0)))
   const minPrice = Math.min(...(product.variants.map(v => v.price)))
   const maxPrice = Math.max(...(product.variants.map(v => v.price)))
 

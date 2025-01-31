@@ -26,7 +26,7 @@ const ProductCard = ({
     return (
         <div className={`${containerStyles}`}>
             <div className="relative h-[200px] md:h-[280px] overflow-y-hidden w-full rounded group">
-                {minOldPrice && (
+                {minOldPrice > 0 && (
                     <div className="absolute top-3 left-3 px-3 py-1 bg-df-yellow text-white text-xs rounded">
                         {percentageDiscount(minOldPrice, minPrice)}% off
                     </div>
@@ -57,7 +57,7 @@ const ProductCard = ({
                             :
                             <div className="bg-df-gray p-2 rounded-lg font-bold text-gray-900">{formatCurrency(minPrice)} - {formatCurrency(maxPrice)}</div>
                         }
-                        {product.variants.length == 1 && minOldPrice && <div className="line-through text-gray-900">{formatCurrency(minOldPrice)}</div>}
+                        {product.variants.length == 1 && minOldPrice > 0 && <div className="line-through text-gray-900">{formatCurrency(minOldPrice)}</div>}
                     </div>
                 </Link>
                 <div className="mt-2">

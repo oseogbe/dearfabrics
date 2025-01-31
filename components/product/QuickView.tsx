@@ -90,7 +90,7 @@ const QuickView = ({
                                     {product.variants.length == 1 && (
                                         <div>
                                             {`${formatCurrency(minPrice)}`}
-                                            {minOldPrice && <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `${formatCurrency(minOldPrice)}` }}></span>}
+                                            {minOldPrice > 0 && <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `${formatCurrency(minOldPrice)}` }}></span>}
                                         </div>
                                     )}
                                     {product.variants.length > 1 && (
