@@ -1,3 +1,4 @@
+import { ProductType } from "@/typings"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { Product } from "use-shopping-cart/core"
@@ -36,6 +37,15 @@ export function formatCurrency(amount: number) {
     maximumFractionDigits: 0, // Don't display kobo (decimals)
     useGrouping: true,
   }).format(amount)
+}
+
+export function getProductPrices(product: ProductType) {
+  const minOldPrice = Math.min(...(product.variants.map(v => v.oldPrice)))
+  const maxOldPrice = Math.max(...(product.variants.map(v => v.oldPrice)))
+  const minPrice = Math.min(...(product.variants.map(v => v.price)))
+  const maxPrice = Math.max(...(product.variants.map(v => v.price)))
+
+  return { minOldPrice, maxOldPrice, minPrice, maxPrice }
 }
 
 export function percentageDiscount(oldPrice: number, price: number) {

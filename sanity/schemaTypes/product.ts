@@ -66,20 +66,6 @@ const product = defineType({
             validation: Rule => Rule.required(),
         }),
         defineField({
-            name: 'oldPrice',
-            title: 'Old Price (Optional)',
-            description: 'Old Price should be in naira',
-            type: 'number',
-            group: 'product',
-        }),
-        defineField({
-            name: 'price',
-            title: 'Price',
-            description: 'Price should be in naira',
-            type: 'number',
-            group: 'product',
-        }),
-        defineField({
             name: 'inStock',
             title: 'In Stock or Dropshipped?',
             type: 'boolean',
@@ -104,12 +90,6 @@ const product = defineType({
             type: 'string',
             group: 'product',
         }),
-        // defineField({
-        //     name: 'quantity',
-        //     title: 'Quantity',
-        //     type: 'number',
-        //     group: 'product',
-        // }),
         defineField({
             name: 'images',
             title: 'Images',
@@ -234,6 +214,19 @@ const product = defineType({
                             ],
                         }),
                         defineField({
+                            name: 'oldPrice',
+                            title: 'Old Price (Optional)',
+                            description: 'Old Price of product variant in naira',
+                            type: 'number',
+                        }),
+                        defineField({
+                            name: 'price',
+                            title: 'Price',
+                            description: 'Price of product variant in naira',
+                            type: 'number',
+                            initialValue: 0,
+                        }),
+                        defineField({
                             name: 'quantity',
                             title: 'Stock',
                             description: 'Set the quantity of available stock for this variant',
@@ -244,13 +237,14 @@ const product = defineType({
                     preview: {
                         select: {
                             title: 'variantName',
-                            subtitle: 'quantity',
+                            stock: 'quantity',
+                            price: 'price'
                         },
                         prepare(selection) {
-                            const { title, subtitle } = selection
+                            const { title, stock, price } = selection
                             return {
                                 title: title,
-                                subtitle: subtitle !== null ? `Stock: ${subtitle}` : 'No stock info',
+                                subtitle: stock !== null ? `Stock: ${stock}, Price: ${price}` : 'No stock info',
                                 icon: TagIcon,
                             }
                         },

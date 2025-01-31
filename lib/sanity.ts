@@ -83,7 +83,7 @@ async function fetchProductsByCategory(category: string, subcategory: string, pa
   const skip = (page - 1) * pageSize
 
   try {
-    const priceFilter = minPrice !== undefined && maxPrice !== undefined ? `&& price >= ${minPrice} && price <= ${maxPrice}` : ''
+    const priceFilter = minPrice !== undefined && maxPrice !== undefined ? `&& variants[price >= ${minPrice} && price <= ${maxPrice}]` : ''
     const productsQuery = `*[_type == "product" && references(*[_type == "category" && isTopLevel == true && 
     slug.current == '${category}']._id) && references(*[_type == "category" && slug.current == '${subcategory}']._id) ${priceFilter}] 
     | order(_created_at desc) [${skip}...${skip + pageSize}] {
@@ -93,12 +93,19 @@ async function fetchProductsByCategory(category: string, subcategory: string, pa
       "slug": slug.current,
       "categories": categories[]->slug.current,
       "images": images[].asset->url,
-      oldPrice,
-      price,
       "currency": "NGN",
       inStock,
       "sizes": options[name=='sizes'].values[],
-      "colors": options[name=='colors'].values[]
+      "colors": options[name=='colors'].values[],
+      variants[] {
+        "name": variantName,
+        price,
+        quantity,
+        options[] {
+          name,
+          value
+        }
+      }
     }`
     const products = await client.fetch(productsQuery)
 
@@ -120,33 +127,44 @@ async function fetchSingleProduct(productSlug: string) {
   noStore()
 
   try {
-    const query = `*[_type == 'product' && slug.current == '${productSlug}'][0] {
+    const query = `*[_type == 'product' && slug.current == $productSlug][0] {
       "id": _id,
       name,
       "slug": slug.current,
       description,
       "images": images[].asset->url,
-      oldPrice,
-      price,
       "currency": "NGN",
       "categories": categories[]->slug.current,
       inStock,
       delivery,
       "sizes": options[name=='sizes'].values[],
       "colors": options[name=='colors'].values[],
+      variants[] {
+        "name": variantName,
+        price,
+        quantity,
+        options[] {
+          name,
+          value
+        }
+      },
       relatedProducts[]->{
         _id,
         name,
         "slug": slug.current,
         "categories": categories[]->slug.current,
-        oldPrice,
-        price,
         "images": images[].asset->url,
         "sizes": options[name=='sizes'].values[],
-        "colors": options[name=='colors'].values[]
+        "colors": options[name=='colors'].values[],
+        variants[] {
+          "name": variantName,
+          oldPrice,
+          price,
+          quantity
+        },
       }
     }`
-    const data = await client.fetch(query)
+    const data = await client.fetch(query, { productSlug })
     return data
   } catch (error) {
     console.error('Database Error:', error)
@@ -167,12 +185,19 @@ async function searchProducts(term: string, page: number = 1, limit: number = 12
       "slug": slug.current,
       "categories": categories[]->slug.current,
       "images": images[].asset->url,
-      oldPrice,
-      price,
       "currency": "NGN",
       inStock,
       "sizes": options[name=='sizes'].values[],
-      "colors": options[name=='colors'].values[]
+      "colors": options[name=='colors'].values[],
+      variants[] {
+        "name": variantName,
+        price,
+        quantity,
+        options[] {
+          name,
+          value
+        }
+      }
     }`
     const params = { term: `*${term}*`, offset, limit }
     const products = await client.fetch(query, params)
@@ -206,14 +231,18 @@ async function fetchSales(): Promise<Sale[]> {
         "slug": slug.current,
         description,
         "images": images[].asset->url,
-        oldPrice,
-        price,
         "currency": "NGN",
         "categories": categories[]->slug.current,
         inStock,
         delivery,
         "sizes": options[name=='sizes'].values[],
-        "colors": options[name=='colors'].values[]
+        "colors": options[name=='colors'].values[],
+        variants[] {
+          "name": variantName,
+          oldPrice,
+          price,
+          quantity
+        },
       }
     }`
     const data = await client.fetch(query, { currentDate })

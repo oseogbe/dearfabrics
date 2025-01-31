@@ -10,13 +10,14 @@ import { toast } from "sonner"
 import ProductStars from "@/components/product/ProductStars"
 import Tabs from "@/components/Tabs"
 
+import { urlFor } from "@/lib/sanity"
+import { cn, formatCurrency, getProductPrices, setCartItem } from "@/lib/utils"
+
+import { ProductType } from "@/typings"
+
 import { FaMinus, FaPlus } from "react-icons/fa6"
 import { IoCartOutline } from "react-icons/io5"
 import { FaRegHeart } from "react-icons/fa"
-
-import { cn, formatCurrency, setCartItem } from "@/lib/utils"
-import { ProductType } from "@/typings"
-import { urlFor } from "@/lib/sanity"
 
 const ProductClient = ({
     product
@@ -25,13 +26,26 @@ const ProductClient = ({
 }) => {
     const [selectedImage, setSelectedImage] = useState(product.images[0])
     const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes?.[0]?.[0])
+    const [selectedSize, setSelectedSize] = useState<string | null>(null)
+    const [selectedPrice, setSelectedPrice] = useState<number | null>(null)
     const [quantity, setQuantity] = useState(1)
 
     const shoppingCart = useShoppingCart()
 
+    const { minOldPrice, minPrice, maxOldPrice, maxPrice } = getProductPrices(product)
+
+    const selectSize = (size: string) => {
+        setSelectedSize(size)
+        const variant = product.variants.find(variant => variant.options.some(option => option.name === 'sizes' && option.value === size))
+        setSelectedPrice(variant ? variant.price : null)
+    }
+
     const handleAddItem = () => {
-        const { item, count } = setCartItem(product, selectedColor, selectedSize, quantity)
+        if (!selectedSize || !selectedPrice) {
+            toast("Select a size", { duration: 1500 })
+            return
+        }
+        const { item, count } = setCartItem({ ...product, price: selectedPrice }, selectedColor, selectedSize, quantity)
         shoppingCart.addItem(item, { count })
         setQuantity(1)
         toast("Added to cart", { duration: 1500 })
@@ -99,13 +113,18 @@ const ProductClient = ({
                     <div className="text-xs xl:text-base text-[#807D7E] uppercase">{product.categories?.[0]}</div>
                     <div className="mt-4 md:mt-8 text-xl md:text-2xl xl:text-4xl text-[#3C4242] font-bold">{product.name}</div>
                     <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] lg:text-3xl text-[#3C4242] font-medium">
-                        {product.oldPrice ? (
-                            <div>
-                                {`${formatCurrency(product.price)}`}
-                                <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `${formatCurrency(product.oldPrice)}` }}></span>
-                            </div>
-                        ) : (
-                            `${formatCurrency(product.price)}`
+                        {selectedPrice ? formatCurrency(selectedPrice) : (
+                            <>
+                                {product.variants.length == 1 && (
+                                    <div>
+                                        {`${formatCurrency(minPrice)}`}
+                                        {minOldPrice && <span className="ml-3 text-[#848485] line-through" dangerouslySetInnerHTML={{ __html: `${formatCurrency(minOldPrice)}` }}></span>}
+                                    </div>
+                                )}
+                                {product.variants.length > 1 && (
+                                    `${formatCurrency(minPrice)} - ${formatCurrency(maxPrice)}`
+                                )}
+                            </>
                         )}
                     </div>
                     <div className="mt-4 flex items-center">
@@ -164,7 +183,7 @@ const ProductClient = ({
                                                     "px-3 py-2 flex items-center justify-center text-sm text-[#3C4242] border rounded-md cursor-pointer",
                                                     selectedSize === size && 'bg-df-gray'
                                                 )}
-                                                onClick={() => setSelectedSize(size)}
+                                                onClick={() => selectSize(size)}
                                             >{size}</div>
                                         ))}
                                     </div>

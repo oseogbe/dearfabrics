@@ -4,14 +4,15 @@ import { lazy } from "react"
 import Image from "next/image"
 import Link from "next/link"
 
-import ProductStars from "./ProductStars"
-// import ViewProduct from "./ViewProduct"
-
-import { formatCurrency, percentageDiscount } from "@/lib/utils"
-import { ProductType } from "@/typings"
-const QuickView = lazy(() => import("./QuickView"))
 import AddToFavorite from "./AddToFavorite"
+import ProductStars from "./ProductStars"
+
 import { urlFor } from "@/lib/sanity"
+import { formatCurrency, getProductPrices, percentageDiscount } from "@/lib/utils"
+
+import { ProductType } from "@/typings"
+
+const QuickView = lazy(() => import("./QuickView"))
 
 const ProductCard = ({
     containerStyles,
@@ -20,12 +21,14 @@ const ProductCard = ({
     containerStyles: string,
     product: ProductType
 }) => {
+    const { minOldPrice, minPrice, maxPrice } = getProductPrices(product)
+
     return (
         <div className={`${containerStyles}`}>
             <div className="relative h-[200px] md:h-[280px] overflow-y-hidden w-full rounded group">
-                {product.oldPrice && (
+                {minOldPrice && (
                     <div className="absolute top-3 left-3 px-3 py-1 bg-df-yellow text-white text-xs rounded">
-                        {percentageDiscount(product.oldPrice, product.price)}% off
+                        {percentageDiscount(minOldPrice, minPrice)}% off
                     </div>
                 )}
                 <Image
@@ -49,8 +52,12 @@ const ProductCard = ({
                         {product.name}
                     </h4>
                     <div className="flex items-center gap-2 text-sm md:text-base">
-                        <div className="bg-df-gray p-2 rounded-lg font-bold text-gray-900">{formatCurrency(product.price)}</div>
-                        {product.oldPrice && <div className="line-through text-gray-900">{formatCurrency(product.oldPrice)}</div>}
+                        {product.variants.length == 1 ?
+                            <div className="bg-df-gray p-2 rounded-lg font-bold text-gray-900">{formatCurrency(minPrice)}</div>
+                            :
+                            <div className="bg-df-gray p-2 rounded-lg font-bold text-gray-900">{formatCurrency(minPrice)} - {formatCurrency(maxPrice)}</div>
+                        }
+                        {product.variants.length == 1 && minOldPrice && <div className="line-through text-gray-900">{formatCurrency(minOldPrice)}</div>}
                     </div>
                 </Link>
                 <div className="mt-2">

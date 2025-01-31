@@ -1,7 +1,7 @@
 import { fetchProductsByCategory } from "@/lib/sanity"
 import Container from "@/components/Container"
 import ProductsClient from "./ProductsClient"
-import { ProductType } from "@/typings"
+import { ProductType, ProductVariant } from "@/typings"
 
 const formatPrice = (num: number, upOrDown: 'up' | 'down') => {
     const magnitude = Math.floor(Math.log10(num))
@@ -22,7 +22,7 @@ const CollectionPage = async ({ params }: { params: { category: string; subcateg
 
     const { products, total } = await fetchProductsByCategory(category, subcategory, currentPage, pageSize)
 
-    const productPrices = products.map((product: ProductType) => product.price)
+    const productPrices = products.flatMap((p: ProductType) => p.variants).map((v: ProductVariant) => v.price)
     const minPrice = productPrices.length > 0 ? formatPrice(Math.min(...productPrices), "down") : 0
     const maxPrice = productPrices.length > 0 ? formatPrice(Math.max(...productPrices), "up") : 0
 
