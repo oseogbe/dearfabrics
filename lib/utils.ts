@@ -1,4 +1,4 @@
-import { ProductType } from "@/typings"
+import { ProductType, ProductVariant } from "@/typings"
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
 import { Product } from "use-shopping-cart/core"
@@ -67,17 +67,17 @@ export function generateRandomString(length: number) {
   return randomString.toLowerCase()
 }
 
-export function setCartItem(product: Product, selectedColor: string | undefined, selectedSize: string | undefined, quantity: number) {
+export function setCartItem(product: ProductType, variant: ProductVariant, quantity: number) {
   return {
     item: {
       id: product.id,
       name: product.name,
       slug: product.slug,
-      price: product.price,
+      price: variant.price,
       currency: "NGN",
       image: product.images[0],
-      color: selectedColor,
-      size: selectedSize,
+      color: variant.options.find(option => option.name == 'colors')?.value,
+      size: variant.options.find(option => option.name == 'sizes')?.value,
       categories: product.categories,
       inStock: product.inStock,
       shipsIn: product.shipsIn,

@@ -13,7 +13,7 @@ import Tabs from "@/components/Tabs"
 import { urlFor } from "@/lib/sanity"
 import { cn, formatCurrency, getProductPrices, setCartItem } from "@/lib/utils"
 
-import { ProductType } from "@/typings"
+import { ProductType, ProductVariant } from "@/typings"
 
 import { FaMinus, FaPlus } from "react-icons/fa6"
 import { IoCartOutline } from "react-icons/io5"
@@ -27,7 +27,7 @@ const ProductClient = ({
     const [selectedImage, setSelectedImage] = useState(product.images[0])
     const [selectedColor, setSelectedColor] = useState(product.colors?.[0]?.[0])
     const [selectedSize, setSelectedSize] = useState<string | null>(null)
-    const [selectedPrice, setSelectedPrice] = useState<number | null>(null)
+    const [selectedVariant, setSelectedVariant] = useState<ProductVariant | null>(null)
     const [quantity, setQuantity] = useState(1)
 
     const shoppingCart = useShoppingCart()
@@ -37,15 +37,15 @@ const ProductClient = ({
     const selectSize = (size: string) => {
         setSelectedSize(size)
         const variant = product.variants.find(variant => variant.options.some(option => option.name === 'sizes' && option.value === size))
-        setSelectedPrice(variant ? variant.price : null)
+        setSelectedVariant(variant!)
     }
 
     const handleAddItem = () => {
-        if (!selectedSize || !selectedPrice) {
+        if (!selectedVariant) {
             toast("Select a size", { duration: 1500 })
             return
         }
-        const { item, count } = setCartItem({ ...product, price: selectedPrice }, selectedColor, selectedSize, quantity)
+        const { item, count } = setCartItem(product, selectedVariant, quantity)
         shoppingCart.addItem(item, { count })
         setQuantity(1)
         toast("Added to cart", { duration: 1500 })
@@ -113,7 +113,7 @@ const ProductClient = ({
                     <div className="text-xs xl:text-base text-[#807D7E] uppercase">{product.categories?.[0]}</div>
                     <div className="mt-4 md:mt-8 text-xl md:text-2xl xl:text-4xl text-[#3C4242] font-bold">{product.name}</div>
                     <div className="mt-3 md:mt-6 text-[18px] md:text-[22px] lg:text-3xl text-[#3C4242] font-medium">
-                        {selectedPrice ? formatCurrency(selectedPrice) : (
+                        {selectedVariant ? formatCurrency(selectedVariant.price) : (
                             <>
                                 {product.variants.length == 1 && (
                                     <div>
