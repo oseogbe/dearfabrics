@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useCallback } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 import ProductFilter from "@/components/product/ProductFilter"
@@ -46,9 +46,9 @@ const ProductsClient = ({
     const [selectedSizes, setSelectedSizes] = useState<string[]>([])
     const [isFilterVisible, setIsFilterVisible] = useState(false)
 
-    const toggleFilterVisibility = () => {
-        setIsFilterVisible(!isFilterVisible)
-    }
+    const toggleFilterVisibility = useCallback(() => {
+        setIsFilterVisible(isFilterVisible => !isFilterVisible)
+    }, [])
 
     useEffect(() => {
         const fetchData = async () => {
@@ -115,6 +115,7 @@ const ProductsClient = ({
                 onPriceChange={handlePriceChange}
                 onColorChange={handleColorChange}
                 onSizeChange={handleSizeChange}
+                isVisible={isFilterVisible}
                 toggleVisibility={toggleFilterVisibility}
             />
             {/* Product listing */}

@@ -27,8 +27,9 @@ const ProductFilter = ({
     onPriceChange,
     onColorChange,
     onSizeChange,
+    isVisible,
     toggleVisibility
-}: ProductFilterProps & { toggleVisibility: () => void }) => {
+}: ProductFilterProps & { isVisible: boolean, toggleVisibility: () => void }) => {
     const [step, setStep] = useState(0)
 
     useEffect(() => {
@@ -139,6 +140,7 @@ const ProductFilter = ({
                     minPrice={minPrice}
                     maxPrice={maxPrice}
                     onPriceChange={onPriceChange}
+                    isVisible={isVisible}
                     toggleVisibility={toggleVisibility}
                 />
             </div>
@@ -151,10 +153,9 @@ const MobileProductFilter = ({
     minPrice,
     maxPrice,
     onPriceChange,
+    isVisible,
     toggleVisibility
-}: ProductFilterProps & { toggleVisibility: () => void }) => {
-    const [isVisible, setIsVisible] = useState(false)
-
+}: ProductFilterProps & { isVisible: boolean, toggleVisibility: () => void }) => {
     const modalRef = useRef<HTMLDivElement>(null)
 
     // useOnClickOutside(modalRef, () => setIsVisible(false))
@@ -174,10 +175,6 @@ const MobileProductFilter = ({
             setStep(100000)
         }
     }, [maxPrice])
-
-    useEffect(() => {
-        setIsVisible(isVisible => !isVisible)
-    }, [toggleVisibility])
 
     return (
         <>
