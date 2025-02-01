@@ -156,6 +156,7 @@ const MobileProductFilter = ({
     isVisible,
     toggleVisibility
 }: ProductFilterProps & { isVisible: boolean, toggleVisibility: () => void }) => {
+    const [closing, setClosing] = useState(false)
     const modalRef = useRef<HTMLDivElement>(null)
 
     // useOnClickOutside(modalRef, () => setIsVisible(false))
@@ -176,9 +177,21 @@ const MobileProductFilter = ({
         }
     }, [maxPrice])
 
+    useEffect(() => {
+        if (!isVisible) {
+            setClosing(true) // start closing animation
+            setTimeout(() => setClosing(false), 300) // remove after animation
+        }
+    }, [isVisible]);
+
     return (
         <>
-            {isVisible && <div ref={modalRef} className={`fixed left-0 bottom-0 bg-white z-10 w-full h-[var(--product-filter-modal-height)] flex flex-col items-center justify-center p-8 border-t rounded-t-3xl shadow-lg ${isVisible ? 'animate-slide-up' : 'animate-slide-down'}`}>
+            <div
+                ref={modalRef}
+                className={`fixed left-0 bottom-0 bg-white z-10 w-full h-[var(--product-filter-modal-height)] flex flex-col items-center justify-center p-8 border-t rounded-t-3xl shadow-lg transition-transform duration-300 ${isVisible && !closing ? "translate-y-0 animate-slide-up" : "translate-y-full animate-slide-down"
+                    }`}
+                style={{ display: closing ? "block" : isVisible ? "block" : "none" }} // ensures it's removed after animating out
+            >
                 <div className='w-full space-y-10'>
                     <div className='flex flex-col gap-4'>
                         <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Price Range</h4>
@@ -193,7 +206,7 @@ const MobileProductFilter = ({
                         />
                     </div>
                 </div>
-            </div>}
+            </div>
         </>
     )
 }
