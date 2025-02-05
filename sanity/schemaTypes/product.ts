@@ -67,21 +67,13 @@ const product = defineType({
         }),
         defineField({
             name: 'inStock',
-            title: 'In Stock or Dropshipped?',
+            title: 'In stock',
             type: 'boolean',
-            description: 'Indicate whether the product is in stock (on) or dropshipped (off)',
+            description: 'Indicate whether the product is in stock (on) or sold out (off)',
             options: {
-                layout: 'switch', // Optional: 'switch' is another option for boolean
+                layout: 'switch',
             },
-            initialValue: true, // Set the default value
-            group: 'product',
-        }),
-        defineField({
-            name: 'delivery',
-            title: 'Delivery',
-            type: 'string',
-            description: 'ex. item ships within 8 days',
-            hidden: ({ parent }) => parent.inStock === true,
+            initialValue: true,
             group: 'product',
         }),
         defineField({

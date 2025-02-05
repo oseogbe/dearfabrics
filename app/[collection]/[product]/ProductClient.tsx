@@ -45,6 +45,10 @@ const ProductClient = ({
             toast("Select a size", { duration: 1500 })
             return
         }
+        if (!product.inStock) {
+            toast("Sorry, item has sold out", { duration: 1500 })
+            return
+        }
         const { item, count } = setCartItem(product, selectedVariant, quantity)
         shoppingCart.addItem(item, { count })
         setQuantity(1)
@@ -132,9 +136,13 @@ const ProductClient = ({
                             stars={product.stars}
                             ratings={product.ratings}
                         />
-                        {product.inStock && (
+                        {product.inStock ? (
                             <div className="px-3 py-1 text-xs text-white bg-green-500 rounded-full">
                                 In Stock
+                            </div>
+                        ) : (
+                            <div className="px-3 py-1 text-xs text-white bg-red-500 rounded-full">
+                                Sold Out
                             </div>
                         )}
                     </div>

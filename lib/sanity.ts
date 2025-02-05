@@ -136,7 +136,6 @@ async function fetchSingleProduct(productSlug: string) {
       "currency": "NGN",
       "categories": categories[]->slug.current,
       inStock,
-      delivery,
       "sizes": options[name=='sizes'].values[],
       "colors": options[name=='colors'].values[],
       variants[] {
@@ -234,7 +233,6 @@ async function fetchSales(): Promise<Sale[]> {
         "currency": "NGN",
         "categories": categories[]->slug.current,
         inStock,
-        delivery,
         "sizes": options[name=='sizes'].values[],
         "colors": options[name=='colors'].values[],
         variants[] {

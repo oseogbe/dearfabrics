@@ -5,16 +5,16 @@ import Image from "next/image"
 import Link from "next/link"
 
 import { useShoppingCart } from "use-shopping-cart"
+import { Product } from "use-shopping-cart/core"
 import { motion } from "framer-motion"
 
 import Container from "@/components/Container"
 import OrderSummary from "@/components/cart/OrderSummary"
 
-import { CheckCircleIcon, Clock3Icon } from "lucide-react"
-import { FaRegSadTear } from "react-icons/fa"
 import { formatCurrency } from "@/lib/utils"
 import { urlFor } from "@/lib/sanity"
-import { Product } from "use-shopping-cart/core"
+
+import { FaRegSadTear } from "react-icons/fa"
 
 const CartPage = () => {
     const { cartDetails, cartCount, incrementItem, decrementItem, removeItem } =
@@ -108,20 +108,14 @@ const CartPage = () => {
                                                     {formatCurrency(product.price)}
                                                 </h6>
                                                 <div className="flex items-center gap-x-2 text-sm text-gray-500 mt-4 xl:mt-12">
-                                                    {product?.inStock && (
-                                                        <>
-                                                            <CheckCircleIcon
-                                                                size={18}
-                                                                className="text-green-500"
-                                                            />{" "}
-                                                            In stock
-                                                        </>
-                                                    )}
-                                                    {product?.shipsIn && (
-                                                        <>
-                                                            <Clock3Icon size={18} className="text-gray-500" />{" "}
-                                                            Ships in {product.shipsIn}
-                                                        </>
+                                                    {product.inStock ? (
+                                                        <div className="px-3 py-1 text-xs text-white bg-green-500 rounded-full">
+                                                            In Stock
+                                                        </div>
+                                                    ) : (
+                                                        <div className="px-3 py-1 text-xs text-white bg-red-500 rounded-full">
+                                                            Sold Out
+                                                        </div>
                                                     )}
                                                 </div>
                                             </div>
