@@ -28,7 +28,7 @@ const CollectionPage = async ({ params }: { params: { category: string; subcateg
 
     return (
         <Container>
-            <div className="pt-5 flex xl:gap-8 xl:pt-10">
+            <div className="pt-5 flex lg:gap-8 lg:pt-10">
                 <ProductsClient
                     initialProducts={products}
                     initialTotal={total}

@@ -77,11 +77,11 @@ const ProductFilter = ({
 
     return (
         <>
-            <div className="hidden lg:block w-[190px] xl:w-[280px] p-8 shrink-0 border shadow-md rounded-lg">
+            <div className="hidden lg:block w-[230px] xl:w-[280px] p-8 shrink-0 border shadow-md rounded-lg">
                 <div className='space-y-10'>
                     <div className='flex flex-col gap-4'>
-                        <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Price Range</h4>
-                        <div className='text-sm xl:text-base text-gray-900'>{formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}</div>
+                        <h4 className='text-[#807D7E] text-xl font-semibold'>Price Range</h4>
+                        <div className='text-base text-gray-900'>{formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}</div>
                         <RangeSlider
                             id="range-slider-yellow"
                             min={minPrice}
@@ -194,8 +194,8 @@ const MobileProductFilter = ({
             >
                 <div className='w-full space-y-10'>
                     <div className='flex flex-col gap-4'>
-                        <h4 className='text-[#807D7E] text-base xl:text-xl font-semibold'>Price Range</h4>
-                        <div className='text-sm xl:text-base text-gray-900'>{formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}</div>
+                        <h4 className='text-[#807D7E] font-semibold'>Price Range</h4>
+                        <div className='text-sm text-gray-900'>{formatCurrency(priceRange[0])} - {formatCurrency(priceRange[1])}</div>
                         <RangeSlider
                             id="range-slider-yellow"
                             min={minPrice}
