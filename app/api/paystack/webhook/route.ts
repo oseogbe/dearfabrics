@@ -3,6 +3,10 @@ export const dynamic = 'force-dynamic'
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
 import { updateOrderStatus } from '@/lib/sanity'
+import { Resend } from "resend"
+import OrderCompletedEmail from "@/emails/order-completed-email"
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 // POST handler for webhook
 export async function POST(req: NextRequest) {
@@ -28,6 +32,18 @@ export async function POST(req: NextRequest) {
             await updateOrderStatus(paymentData.metadata.order_id, paymentData.reference, 'completed')
 
             console.log('Payment successful:', paymentData)
+
+            // Send email notification
+            try {
+                await resend.emails.send({
+                    from: `DearFabrics.ng <${process.env.RESEND_FROM_EMAIL}>`,
+                    to: ["dearfabricsng@gmail.com"],
+                    subject: "New Order Completed",
+                    react: OrderCompletedEmail({ orderId: paymentData.metadata.order_id, reference: paymentData.reference })
+                })
+            } catch (error) {
+                console.error("Failed to send email:", error)
+            }
 
             // Respond with a success acknowledgment
             return NextResponse.json({ status: 'success' })
