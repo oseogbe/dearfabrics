@@ -23,7 +23,7 @@ const Client = ({ order }: { order: OrderData }) => {
                 </h2>
                 <h6 className="font-medium text-xl leading-8 text-black mb-3">Hello, {order.customerName}</h6>
                 <p className="font-normal text-lg leading-8 text-gray-500 mb-11">
-                    Your order has been received and will be prepared for delivery within the next 3-10 days.
+                    Your order has been received and will be prepared for delivery within the next 3 to 10 days.
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-8 py-6 border-y border-gray-100 mb-6">
                     <div className="box group">
@@ -62,9 +62,9 @@ const Client = ({ order }: { order: OrderData }) => {
                                     <p className="font-normal text-xl leading-8 text-gray-500">
                                         Quantity : <span className="text-black font-semibold">{quantity}</span>
                                     </p>
-                                    <p className="font-normal text-xl leading-8 text-gray-500">
+                                    {color && <p className="font-normal text-xl leading-8 text-gray-500">
                                         Color : <span className="text-black font-semibold">{color}</span>
-                                    </p>
+                                    </p>}
                                     <p className="font-normal text-xl leading-8 text-gray-500">
                                         Size : <span className="text-black font-semibold">{size}</span>
                                     </p>
@@ -102,7 +102,7 @@ const Client = ({ order }: { order: OrderData }) => {
                 </div>
                 <div className="data">
                     <p className="font-normal text-lg leading-8 text-gray-500 mb-11">
-                        We&apos;ll be sending a shipping confirmation email when the items are shipped successfully.
+                        You&apos;ll receive an order confirmation email shortly.
                     </p>
                     <h6 className="font-bold text-2xl leading-9 text-black mb-3">
                         Thank you for shopping with us!
