@@ -42,7 +42,7 @@ const RelatedProducts = ({
                     {
                         products?.map(product => (
                             <div
-                                key={product.id}
+                                key={product.slug}
                                 className="w-[230px] md:w-[250px] flex-shrink-0"
                             >
                                 <ProductCard

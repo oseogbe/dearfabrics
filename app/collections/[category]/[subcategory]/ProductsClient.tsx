@@ -63,7 +63,7 @@ const ProductsClient = ({
     const handlePriceChange = (values: number[]) => {
         setPriceRange(values)
         setCurrentPage(1)
-        const params = new URLSearchParams(searchParams)
+        const params = new URLSearchParams(searchParams!)
         params.set('minPrice', values[0].toString())
         params.set('maxPrice', values[1].toString())
         params.set('page', '1')
@@ -91,7 +91,7 @@ const ProductsClient = ({
     }
 
     const handlePageChange = (page: number) => {
-        const params = new URLSearchParams(searchParams)
+        const params = new URLSearchParams(searchParams!)
         params.set('page', page.toString())
         setCurrentPage(page)
         replace(`/collections/${category}/${subcategory}?${params.toString()}`)

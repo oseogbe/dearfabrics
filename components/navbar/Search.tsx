@@ -22,7 +22,7 @@ const Search = () => {
     // }, 300)
 
     const handleChange = (term: string) => {
-        const params = new URLSearchParams(searchParams)
+        const params = new URLSearchParams(searchParams!)
         if (term) {
             params.set('query', term)
         } else {
@@ -32,14 +32,14 @@ const Search = () => {
 
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            const term = e.currentTarget.value;
-            const params = new URLSearchParams(searchParams);
+            const term = e.currentTarget.value
+            const params = new URLSearchParams(searchParams!)
             if (term) {
-                params.set('query', term);
+                params.set('query', term)
             } else {
-                params.delete('query');
+                params.delete('query')
             }
-            replace(`/search-results?${params.toString()}`);
+            replace(`/search-results?${params.toString()}`)
         }
     }
 
@@ -54,7 +54,7 @@ const Search = () => {
                         handleChange(e.target.value)
                     }}
                     onKeyDown={handleKeyDown}
-                    defaultValue={searchParams.get('query')?.toString()}
+                    defaultValue={searchParams?.get('query')?.toString()}
                 />
 
                 <IoSearch className="absolute top-3.5 left-5 w-5 h-5 text-[#807D7E]" />
@@ -77,7 +77,7 @@ const MobileSearch = () => {
     useOnClickOutside(ref, () => setIsOpen(false))
 
     const handleChange = (term: string) => {
-        const params = new URLSearchParams(searchParams)
+        const params = new URLSearchParams(searchParams!)
         if (term) {
             params.set('query', term)
         } else {
@@ -87,14 +87,14 @@ const MobileSearch = () => {
 
     const handleKeyDown = async (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            const term = e.currentTarget.value;
-            const params = new URLSearchParams(searchParams);
+            const term = e.currentTarget.value
+            const params = new URLSearchParams(searchParams!)
             if (term) {
-                params.set('query', term);
+                params.set('query', term)
             } else {
-                params.delete('query');
+                params.delete('query')
             }
-            replace(`/search-results?${params.toString()}`);
+            replace(`/search-results?${params.toString()}`)
         }
     }
 
@@ -132,7 +132,7 @@ const MobileSearch = () => {
                                     handleChange(e.target.value)
                                 }}
                                 onKeyDown={handleKeyDown}
-                                defaultValue={searchParams.get('query')?.toString()}
+                                defaultValue={searchParams?.get('query')?.toString()}
                             />
                         </div>
                     </div>

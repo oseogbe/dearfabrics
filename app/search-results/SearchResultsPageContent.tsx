@@ -18,11 +18,11 @@ const SearchResultsPageContent = () => {
     const { replace } = useRouter()
     const searchParams = useSearchParams()
     const [data, setData] = useState<{ total: number, products: ProductType[] }>({ total: 0, products: [] })
-    const [page, setPage] = useState(parseInt(searchParams.get('page') || '1', 10))
+    const [page, setPage] = useState(parseInt(searchParams?.get('page') || '1', 10))
 
     useEffect(() => {
         const fetchData = async () => {
-            const result = await searchProducts(String(searchParams.get('query')), page)
+            const result = await searchProducts(String(searchParams?.get('query')), page)
             setData(result)
         }
 
@@ -30,13 +30,13 @@ const SearchResultsPageContent = () => {
     }, [searchParams, page])
 
     const handlePageChange = (newPage: number) => {
-        const params = new URLSearchParams(searchParams)
+        const params = new URLSearchParams(searchParams!)
         params.set('page', newPage.toString())
         setPage(newPage)
         replace(`/search-results?${params.toString()}`)
     }
 
-    if (!searchParams.has('query')) {
+    if (!searchParams?.has('query')) {
         return (
             <Container>
                 <section className="relative w-full pt-16 h-[75dvh] animate-fadeIn">
