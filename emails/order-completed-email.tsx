@@ -9,7 +9,8 @@ import {
     Preview,
 } from "@react-email/components"
 
-import { formatCurrency } from "@/lib/utils"
+import { formatCurrency, formatDate } from "@/lib/utils"
+
 interface OrderCompletedEmailProps {
     customerName: string
     orderId: string
@@ -37,7 +38,7 @@ export const OrderCompletedEmail = ({
         <Body style={main}>
             <Container style={container}>
                 <Img
-                    src="/img/dfng-logo.png"
+                    src="https://dearfabrics.com/img/dfng-logo.png"
                     alt="dearfabrics logo"
                     width="150"
                     height="61"
@@ -50,6 +51,9 @@ export const OrderCompletedEmail = ({
                 </Text>
                 <Text style={paragraph}>
                     <strong>Order ID:</strong> {orderId}
+                </Text>
+                <Text style={paragraph}>
+                    <strong>Order Date:</strong> {formatDate(new Date().toDateString())}
                 </Text>
                 <table style={table}>
                     <thead>

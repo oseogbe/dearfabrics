@@ -23,7 +23,7 @@ export const ContactFormEmail = ({
         <Body style={main}>
             <Container style={container}>
                 <Img
-                    src="/img/dfng-logo.png"
+                    src="https://dearfabrics.com/img/dfng-logo.png"
                     alt="dearfabrics logo"
                     width="150"
                     height="61"

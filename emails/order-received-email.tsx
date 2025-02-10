@@ -8,7 +8,7 @@ import {
     Preview,
 } from "@react-email/components"
 
-import { formatCurrency } from "@/lib/utils"
+import { formatCurrency, formatDate } from "@/lib/utils"
 
 interface OrderReceivedEmailProps {
     orderId: string
@@ -45,7 +45,7 @@ export const OrderReceivedEmail = ({
         <Body style={main}>
             <Container style={container}>
                 <Img
-                    src="/img/dfng-logo.png"
+                    src="https://dearfabrics.com/img/dfng-logo.png"
                     alt="dearfabrics logo"
                     width="150"
                     height="61"
@@ -70,6 +70,9 @@ export const OrderReceivedEmail = ({
                 </Text>
                 <Text style={paragraph}>
                     <strong>Address:</strong> {customerAddress}
+                </Text>
+                <Text style={paragraph}>
+                    <strong>Date:</strong> {formatDate(new Date().toDateString())} at {new Date().toLocaleTimeString()}
                 </Text>
                 <table style={table}>
                     <thead>
