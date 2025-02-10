@@ -108,6 +108,19 @@ const CheckoutPage = () => {
         try {
             const orderId = generateOrderId()
 
+            if (!cartDetails) return
+
+            const line_items = Object.values(cartDetails).flatMap(
+                product => ({
+                    productId: product.id,
+                    name: product.name,
+                    size: product.size,
+                    color: product.color,
+                    quantity: product.quantity,
+                    price: product.price
+                })
+            )
+
             const response = await fetch('/api/paystack/initialize', {
                 method: 'POST',
                 headers: {
@@ -115,25 +128,26 @@ const CheckoutPage = () => {
                 },
                 body: JSON.stringify({
                     email: values.email,
+                    shipping: shippingRate,
+                    tax: taxRate,
+                    discount,
                     amount: Math.round(grandTotal * 100),
-                    order_id: orderId
+                    customer: {
+                        name: values.name,
+                        email: values.email,
+                        phone: `${values.phoneCode}${values.phoneNo}`,
+                        address: `${values.streetAddress}, ${values.city} ${values.zipCode}, ${state}, ${country}`
+                    },
+                    order: {
+                        id: orderId,
+                        line_items
+                    }
                 })
             })
 
             const data = await response.json()
 
             if (data.status) {
-                if (!cartDetails) return
-                const line_items = Object.values(cartDetails).flatMap(
-                    product => ({
-                        productId: product.id,
-                        size: product.size,
-                        color: product.color,
-                        quantity: product.quantity,
-                        price: product.price
-                    })
-                )
-
                 const orderData = {
                     id: orderId,
                     customerName: formData.name,
@@ -141,7 +155,7 @@ const CheckoutPage = () => {
                     billingAddress: formData.billingStreetAddress ? `${formData.billingStreetAddress}, ${formData.billingCity}, ${formData.billingState} ${formData.billingZipCode}, ${formData.billingCountry}` : `${formData.streetAddress}, ${formData.city}, ${formData.state} ${formData.zipCode}, ${formData.country}`,
                     shippingAddress: `${formData.streetAddress}, ${formData.city}, ${formData.state} ${formData.zipCode}, ${formData.country}`,
                     phone: `${formData.phoneCode}${formData.phoneNo}`,
-                    items: line_items,
+                    items: line_items.map(({ name, ...rest }) => ({ ...rest })),
                     subtotal: totalPrice,
                     shipping: shippingRate,
                     tax: taxRate,
