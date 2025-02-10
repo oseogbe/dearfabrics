@@ -19,7 +19,7 @@ const PaymentCallbackPage = async ({
         if (data.status) {
             verificationStatus = 'Payment successful'
 
-            const orderId = data.data.metadata.order_id
+            const orderId = data.data.metadata.order.id
 
             redirect(`/orders/${orderId}`)
         } else {

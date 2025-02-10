@@ -2,7 +2,6 @@ import {
     Body,
     Container,
     Head,
-    Hr,
     Html,
     Img,
     Preview,
@@ -26,8 +25,8 @@ export const ContactFormEmail = ({
                 <Img
                     src="/img/dfng-logo.png"
                     alt="dearfabrics logo"
-                    width="170"
-                    height="50"
+                    width="150"
+                    height="61"
                     style={logo}
                 />
                 <Text style={paragraph}>Hi DearFabrics.ng,</Text>
@@ -39,10 +38,6 @@ export const ContactFormEmail = ({
                 </Text>
                 <Text style={paragraph}>
                     {name} ({email})
-                </Text>
-                <Hr style={hr} />
-                <Text style={footer}>
-                    Suite C11,12, 2XL Mall, Plot 111, Christiana Ajayi Okunuga Street, Gwarinpa, Abuja
                 </Text>
             </Container>
         </Body>
@@ -59,31 +54,28 @@ ContactFormEmail.PreviewProps = {
 export default ContactFormEmail
 
 const main = {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#f4f4f4",
     fontFamily:
         '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif',
+    padding: "20px",
 }
 
 const container = {
+    backgroundColor: "#ffffff",
     margin: "0 auto",
-    padding: "20px 0 48px",
+    padding: "20px",
+    borderRadius: "8px",
+    boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+    maxWidth: "600px",
 }
 
 const logo = {
-    margin: "0 auto",
+    display: "block",
+    margin: "0 auto 40px",
 }
 
 const paragraph = {
     fontSize: "16px",
     lineHeight: "26px",
-}
-
-const hr = {
-    borderColor: "#cccccc",
-    margin: "20px 0",
-}
-
-const footer = {
-    color: "#8898aa",
-    fontSize: "12px",
+    margin: "10px 0",
 }

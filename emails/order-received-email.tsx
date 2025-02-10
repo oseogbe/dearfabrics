@@ -1,4 +1,3 @@
-import { CSSProperties } from "react"
 import {
     Body,
     Container,
@@ -10,9 +9,14 @@ import {
 } from "@react-email/components"
 
 import { formatCurrency } from "@/lib/utils"
-interface OrderCompletedEmailProps {
-    customerName: string
+
+interface OrderReceivedEmailProps {
     orderId: string
+    reference: string
+    customerName: string
+    customerEmail: string
+    customerPhone: string
+    customerAddress: string
     items: { name: string, size: string, quantity: number, price: number }[]
     shipping: number
     tax: number
@@ -20,19 +24,23 @@ interface OrderCompletedEmailProps {
     total: number
 }
 
-export const OrderCompletedEmail = ({
-    customerName,
+export const OrderReceivedEmail = ({
     orderId,
+    reference,
+    customerName,
+    customerEmail,
+    customerPhone,
+    customerAddress,
     items,
     shipping,
     tax,
     discount,
     total
-}: OrderCompletedEmailProps) => (
+}: OrderReceivedEmailProps) => (
     <Html>
         <Head />
         <Preview>
-            Your Order is Completed
+            New Order Received
         </Preview>
         <Body style={main}>
             <Container style={container}>
@@ -43,13 +51,25 @@ export const OrderCompletedEmail = ({
                     height="61"
                     style={logo}
                 />
-                <Text style={header}>Order Confirmation</Text>
-                <Text style={paragraph}>Hi {customerName},</Text>
+                <Text style={paragraph}>Hi DearFabrics.ng,</Text>
                 <Text style={paragraph}>
-                    Your order has been completed successfully. Here are the details:
+                    A new order has been received with Paystack reference code <i>{reference}</i>. <br />
+                    Here are the details:
                 </Text>
                 <Text style={paragraph}>
                     <strong>Order ID:</strong> {orderId}
+                </Text>
+                <Text style={paragraph}>
+                    <strong>Name:</strong> {customerName}
+                </Text>
+                <Text style={paragraph}>
+                    <strong>Email:</strong> {customerEmail}
+                </Text>
+                <Text style={paragraph}>
+                    <strong>Phone:</strong> {customerPhone}
+                </Text>
+                <Text style={paragraph}>
+                    <strong>Address:</strong> {customerAddress}
                 </Text>
                 <table style={table}>
                     <thead>
@@ -72,7 +92,7 @@ export const OrderCompletedEmail = ({
                             </tr>
                         ))}
                         {shipping > 0 && <tr>
-                            <td style={tableData}>Shipping Cost</td>
+                            <td style={tableData}>Delivery Charge</td>
                             <td style={tableData}></td>
                             <td style={tableData}></td>
                             <td style={tableData}></td>
@@ -102,7 +122,7 @@ export const OrderCompletedEmail = ({
                     </tbody>
                 </table>
                 <Text style={paragraph}>
-                    Thank you for shopping with us!
+                    Please process this order as soon as possible.
                 </Text>
                 <Text style={paragraph}>
                     Regards,
@@ -115,7 +135,7 @@ export const OrderCompletedEmail = ({
     </Html>
 )
 
-export default OrderCompletedEmail
+export default OrderReceivedEmail
 
 const main = {
     backgroundColor: "#f4f4f4",
@@ -133,20 +153,18 @@ const container = {
     maxWidth: "600px",
 }
 
-const header: CSSProperties = {
-    fontSize: "24px",
-    fontWeight: "bold",
-    marginBottom: "20px",
-    textAlign: "center" as "center",
-}
-
 const paragraph = {
     fontSize: "16px",
     lineHeight: "26px",
     margin: "10px 0",
 }
 
-const table: CSSProperties = {
+const logo = {
+    display: "block",
+    margin: "0 auto 40px",
+}
+
+const table = {
     width: "100%",
     borderCollapse: "collapse" as "collapse",
     marginTop: "20px",
@@ -164,15 +182,4 @@ const tableData = {
     borderBottom: "1px solid #dddddd",
     padding: "10px",
     fontSize: "16px",
-}
-
-const totalText = {
-    fontSize: "18px",
-    fontWeight: "bold",
-    marginTop: "20px",
-}
-
-const logo = {
-    display: "block",
-    margin: "0 auto 40px",
 }

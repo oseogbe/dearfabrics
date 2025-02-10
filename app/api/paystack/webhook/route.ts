@@ -2,9 +2,12 @@ export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
 import crypto from 'crypto'
-import { updateOrderStatus } from '@/lib/sanity'
 import { Resend } from "resend"
+
+import OrderReceivedEmail from "@/emails/order-received-email"
 import OrderCompletedEmail from "@/emails/order-completed-email"
+
+import { updateOrderStatus } from '@/lib/sanity'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
@@ -29,20 +32,52 @@ export async function POST(req: NextRequest) {
             const paymentData = event.data
 
             // Process payment data (e.g., save to the database or mark order as paid)
-            await updateOrderStatus(paymentData.metadata.order_id, paymentData.reference, 'completed')
+            await updateOrderStatus(paymentData.metadata.order.id, paymentData.reference, 'completed')
 
             console.log('Payment successful:', paymentData)
 
-            // Send email notification
+            // Send email notification to customer
+            try {
+                await resend.emails.send({
+                    from: `DearFabrics.ng <${process.env.RESEND_FROM_EMAIL}>`,
+                    to: [paymentData.customer.email],
+                    subject: "Your Order is Completed",
+                    react: OrderCompletedEmail({
+                        customerName: paymentData.metadata.customer.name,
+                        orderId: paymentData.metadata.order.id,
+                        items: paymentData.metadata.order.line_items,
+                        shipping: paymentData.metadata.shipping,
+                        tax: paymentData.metadata.tax,
+                        discount: paymentData.metadata.discount,
+                        total: paymentData.amount / 100
+                    })
+                })
+            } catch (error) {
+                console.error("Failed to send email to customer:", error)
+            }
+
+            // Send email notification to admin
             try {
                 await resend.emails.send({
                     from: `DearFabrics.ng <${process.env.RESEND_FROM_EMAIL}>`,
                     to: ["dearfabricsng@gmail.com"],
-                    subject: "New Order Completed",
-                    react: OrderCompletedEmail({ orderId: paymentData.metadata.order_id, reference: paymentData.reference })
+                    subject: "New Order Recieved",
+                    react: OrderReceivedEmail({
+                        orderId: paymentData.metadata.order.id,
+                        reference: paymentData.reference,
+                        customerName: paymentData.metadata.customer.name,
+                        customerEmail: paymentData.metadata.customer.email,
+                        customerPhone: paymentData.metadata.customer.phone,
+                        customerAddress: paymentData.metadata.customer.address,
+                        items: paymentData.metadata.order.line_items,
+                        shipping: paymentData.metadata.shipping,
+                        tax: paymentData.metadata.tax,
+                        discount: paymentData.metadata.discount,
+                        total: paymentData.amount / 100
+                    })
                 })
             } catch (error) {
-                console.error("Failed to send email:", error)
+                console.error("Failed to send email to admin:", error)
             }
 
             // Respond with a success acknowledgment
