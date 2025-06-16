@@ -159,7 +159,7 @@ const HomePage = async () => {
       </div>}
       <div className="flex flex-col gap-12 md:gap-16 xl:gap-24">
         <AnkaraCard />
-        {/* <FeaturedCategories
+        <FeaturedCategories
           name="Categories For Women"
           categories={categoriesForWomen}
         />
@@ -172,7 +172,7 @@ const HomePage = async () => {
         />
         <Testimonials
           testimonials={testimonials}
-        /> */}
+        />
       </div>
     </Container>
   )
