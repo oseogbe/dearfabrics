@@ -45,6 +45,17 @@ const ProductCard = ({
                         <QuickView product={product} />
                     </div>
                 </div>
+                <div className="absolute top-2 right-2">
+                    {product.inStock ? (
+                        <div className="px-3 py-1 text-xs text-white bg-green-500 rounded-full">
+                            In Stock
+                        </div>
+                    ) : (
+                        <div className="px-3 py-1 text-xs text-white bg-red-500 rounded-full">
+                            Sold Out
+                        </div>
+                    )}
+                </div>
             </div>
             <div className="mt-3">
                 <Link href={`/${product.categories[0]}/${product.slug}`} className="flex flex-col gap-2">
